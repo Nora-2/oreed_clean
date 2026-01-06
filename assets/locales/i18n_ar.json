@@ -1,0 +1,1309 @@
+{
+  "login_title": "تسجيل الدخول",
+  "create_account": "إنشاء حساب",
+  "phone_number": "رقم الهاتف",
+  "country_code": "+966",
+  "phone_hint": "5xxxxxxxx",
+  "login_subtitle": "أدخل رقم جوالك وكلمة المرور لتبدأ تصفح وشراء الإعلانات بسهولة.",
+  "register": "إنشاء حساب",
+  "password_label": "كلمة المرور",
+  "password_hint": "********",
+  "forgot_password": "نسيت كلمة المرور؟",
+  "login_button": "دخول الحساب",
+  "confirmation_dialog_title": "تم تسجيل الدخول!",
+  "confirmation_dialog_subtitle": "حسابك تم الدخول بنجاح، جاهز لتصفح الإعلانات وإدارة حسابك بسهولة.",
+  "ok_button": "تأكيد",
+  "home_title": "هلا ومرحبا",
+  "wave_hand": "👋",
+  "home_subtitle": "عرض أغراضك واشتري اللي تحتاجه بدون تعب.",
+  "search_hint": "ابحث عن سيارات، عقارات، إلكترونيات...",
+  "special_ads": "إعلانات مميزة",
+  "discover_sections": "اكتشف الأقسام",
+  "cars": "سيارات",
+  "real_estate": "عقارات",
+  "view_all": "الكل",
+  "specific": "مميز",
+  "pinned": "مثبت",
+  "price_coin": "د.ك",
+  "required_field": "هذا الحقل مطلوب",
+  "invalid_phone": "رقم الهاتف غير صحيح",
+  "invalid_email": "البريد الإلكتروني غير صحيح",
+  "invalid_price": "السعر غير صحيح",
+  "loading": "جاري التحميل...",
+  "no_results": "لا توجد نتائج",
+  "error": "حدث خطأ",
+  "success": "تمت العملية بنجاح",
+  "try_again": "حاول مرة أخرى",
+  "retry": "إعادة المحاولة",
+  "view_ad": "عرض الاعلان",
+  "days_ago": "منذ {days} أيام",
+  "guest": "ضيف",
+  "filter.price": "السعر",
+  "filter.area": "المساحة",
+  "filter.rooms": "الغرف",
+  "filter.baths": "الحمّامات",
+  "filter.floor": "الدور",
+  "filter.ground_floor": "أرضي",
+  "filter.year_made": "سنة الصنع",
+  "filter.year": "سنة",
+  "filter.test_certificate": "شهادة الفحص",
+  "filter.search_hint": "ابحث عن اعلان… سيارة، عقار، مدينة، سعر",
+  "error.select_governorate_first": "يرجى اختيار المحافظة أولاً",
+  "location.governorate": "المحافظة",
+  "location.area": "المنطقة",
+  "select.select_governorate": "اختر المحافظة",
+  "select.search_governorate": "ابحث عن المحافظة",
+  "select.select_governorate_subtitle": "اختر محافظتك لعرض الاعلانات والخدمات.",
+  "select.select_area": "اختر المنطقة",
+  "select.search_area": "ابحث عن المنطقة",
+  "select.select_area_subtitle": "اختر المنطقة التابعة للمحافظة المختارة.",
+  "select.select_model": "اختر الموديل",
+  "select.select_model_subtitle": "اختر موديل السيارة حسب الماركة المختارة",
+  "select.year_subtitle": "حدد سنة الموديل لعرض مواصفاته الصحيحة.",
+  "select.search_year": "ابحث عن السنة",
+  "filter.min_price": "أدنى سعر",
+  "filter.max_price": "أعلى سعر",
+  "filter.brand": "الماركة",
+  "filter.model": "الموديل",
+  "filter.year.recent": "حديث:",
+  "filter.year.mid": "متوسطة:",
+  "filter.year.old": "قديمة:",
+  "filter.year.classic": "كلاسيكي:",
+  "common.search_what_you_want": "ابحث عن ما تريد",
+  "common.search_anything": "ابحث عن أي شيء",
+  "common.properties": "العقارات",
+  "common.try_again": "حاول مرة أخرى",
+  "category.property_sections": "أقسام العقارات",
+  "category.apartments_rent": "شقق إيجار",
+  "category.apartments_sale": "شقق بيع",
+  "category.offices": "مكاتب",
+  "category.villas": "فيلات",
+  "category.lands": "أراضي",
+  "category.shops": "محلات تجارية",
+  "ad_details.error_occurred": "حدث خطأ: ",
+  "ad_details.not_found": "لم يتم العثور على الاعلان",
+  "ad_details.call": "اتصال",
+  "ad_details.whatsapp": "واتساب",
+  "ad_details.price_on_contact": "السعر عند التواصل",
+  "ad_details.inspection_certificate": "شهادة الفحص",
+  "ad_details.no_description": "لا يوجد وصف متاح",
+  "ad_details.ad_id": "رقم الاعلان:",
+  "ad_details.car_marka": "الماركة",
+  "ad_details.model": "الموديل",
+  "ad_details.color": "اللون",
+  "ad_details.year": "السنة",
+  "ad_details.fuel_type": "نوع الوقود",
+  "ad_details.transmission": "ناقل الحركة",
+  "ad_details.condition": "الحالة",
+  "ad_details.engine_size": "قوة المحرك",
+  "ad_details.kilometers": "الكيلومترات",
+  "ad_details.section": "القسم",
+  "ad_details.rooms": "عدد الغرف",
+  "ad_details.bathrooms": "عدد الحمامات",
+  "ad_details.area": "المساحة",
+  "ad_details.floor": "الطابق",
+  "ad_details.type": "النوع",
+  "ad_details.sub_category": "القسم الفرعي",
+  "ad_details.price_before_discount": "السعر قبل الخصم",
+  "ad_details.new_or_used": "الحالة",
+  "ad_details.size": "الحجم",
+  "ad_details.age": "العمر",
+  "ad_details.title_car": "تفاصيل السيارة",
+  "ad_details.title_property": "تفاصيل العقار",
+  "ad_details.title_technician": "تفاصيل الفني",
+  "ad_details.title_default": "تفاصيل الاعلان",
+  "ad_details.social_title": "حسابات المعلن على التواصل:",
+  "ad_details.social_cta": "اضغط هنا لمشاهدة حسابات المعلن",
+  "ad_details.whatsapp_greeting": "السلام عليكم 👋",
+  "ad_details.whatsapp_interested": "أنا مهتم بالاعلان التالي على تطبيق *Oreed* 📱",
+  "ad_details.whatsapp_price": "💰 السعر:",
+  "ad_details.whatsapp_location": "📍 الموقع:",
+  "ad_details.whatsapp_desc": "📝 الوصف:",
+  "ad_details.whatsapp_link": "🔗 رابط الاعلان:",
+  "ad_details.whatsapp_more_details": "من فضلك أرسل لي مزيدًا من التفاصيل 🙏",
+  "company_types.title": "أنواع الشركات",
+  "company_types.companies_of": "شركات",
+  "company_types.searchHint": "ابحث عن نوع الشركة...",
+  "company_types.no_available": "لا توجد شركات متاحة حاليًا",
+  "company_types.no_results": "لا توجد نتائج للبحث",
+  "company_types.no_companies_in_section": "لا توجد شركات متاحة في هذا القسم الآن.",
+  "company_types.no_companies_match": "لم نجد شركات تطابق بحثك",
+  "common.explore_ads": "استكشاف الاعلانات",
+  "currency_kwd": "د.ك",
+  "select.select_city": "اختر المنطقة",
+  "select.search_city": "ابحث عن المنطقة",
+  "select.select_city_subtitle": "اختر منطقتك لعرض الاعلانات والخدمات.",
+  "filter.price_hint_1": "100 د.ك",
+  "filter.price_hint_2": "300 د.ك",
+  " ---- contact us -----": "",
+  "---- search result---": "",
+  "-----register----": "",
+  "----create service---": "-----",
+  "----favorites----": "------",
+  "----more---": "-----",
+  "----mybalance----": "------",
+  "----profile---": "-----",
+  "---search---": "------",
+  "--newwords --": "-----",
+  "--newwords for curve--": "-----",
+  "A new version of the app is available.": "يوجد إصدار جديد من التطبيق.",
+  "AddToCart": "أضف إلى السلة",
+  "Current Version": "الإصدار الحالي",
+  "FindService": "ابحث عن خدمة",
+  "I agree to the terms and policy": "أوافق على الشروط والأحكام",
+  "Image View": "عرض الصورة",
+  "Later": "لاحقًا",
+  "Listofworkers": "نتائج البحث",
+  "Please update to the latest version to continue using the app.": "يرجى التحديث إلى أحدث إصدار لمتابعة استخدام التطبيق.",
+  "Previoustransactions": "المعاملات السابقة",
+  "SelectCity": "اختر المنطقة",
+  "SelectCountry": "اختر المنطقة",
+  "SelectDistrict": "اختر المنطقة",
+  "Share App": "مشاركة التطبيق",
+  "Technicalsupport": "الدعم الفني",
+  "Theamounttobewithdrawn": "المبلغ المراد سحبه",
+  "Update Now": "حدّث الآن",
+  "Update Required": "مطلوب التحديث",
+  "Yourpaymentdone": "تمت عملية الدفع بنجاح",
+  "_comment": "------ الخدمات -------",
+  "_comment1": "------ السلة -------",
+  "_comment3": "------ الطلب -------",
+  "_comment4": "------ تنبيه التسجيل -------",
+  "_comment5": "------ التسجيل -------",
+  "_comment6": "------ نسيت كلمة المرور -------",
+  "_comment7": "------ الملف الشخصي -------",
+  "_comment8": "------ خدمة جديدة -------",
+  "_comment9": "------ الصفحات التعريفية -------",
+  "about": "عن التطبيق",
+  "accountDeleted": "تم حذف حسابك بنجاح.",
+  "accountExist": "لا يوجد مستخدم بهذا الهاتف",
+  "account_info": "معلومات الحساب",
+  "verification_success": "تم التحقق من الهاتف!",
+  "something_went_wrong": "حدث خطأ ما",
+  "unexpected_error": "حدث خطأ غير متوقع",
+  "action.cancel": "إلغاء",
+  "action.confirm_publish": "تأكيد ونشر",
+  "action.delete": "حذف",
+  "action.done": "تم",
+  "action.previous": "السابق",
+  "action.replace": "استبدال",
+  "action.review": "مراجعة",
+  "action.save_ad": "حفظ الاعلان",
+  "action.save_changes": "حفظ",
+  "action.select": "اختيار",
+  "action.sending": "جاري الإرسال...",
+  "action.share_ad": "مشاركة الاعلان",
+  "action.view_all": "عرض الكل",
+  "step.desc_media": "الوصف والوسائط",
+  "check_out_this_ad": "شاهد هذا الاعلان",
+  "ad_link": "رابط الاعلان",
+  "open_in_app": "افتح في التطبيق",
+  "or_view_online": "أو اعرض على الإنترنت",
+  "activated": "ساري",
+  "addServiceprovider": "إضافة مقدم خدمة",
+  "addToCart": "أضف إلى السلة",
+  "addUMsgHere": "أضف رسالتك هنا",
+  "add_ad": "إضافة اعلان",
+  "add_ad_tooltip": "اضغط هنا لإضافة اعلان جديد",
+  "add_image": "إضافة صورة",
+  "add_your_ad": "أضف اعلانك",
+  "addressName": "اسم العنوان",
+  "ads.empty": "لا توجد اعلانات بعد",
+  "ads.load_error": "حدث خطأ أثناء تحميل الاعلانات",
+  "ads.loading": "جاري التحميل...",
+  "ads.no_title": "بدون عنوان",
+  "no_ads_available": "لا توجد اعلانات متاحة",
+  "no_ads_description": "لا توجد اعلانات للعرض حالياً.\nتحقق لاحقاً للاطلاع على قوائم جديدة!",
+  "refresh": "تحديث",
+  "ad_type.featured": "مميز",
+  "ad_type.free": "مجاني",
+  "ad_type.pinned": "مثبت",
+  "agree": "موافقة",
+  "all": "الكل",
+  "allRates": "التقييم الكلي",
+  "amountdeposit": "تمت إضافة مبلغ إلى الرصيد",
+  "amountwithdrawn": "تم سحب هذا المبلغ",
+  "appBalance": "رصيد التطبيق",
+  "appPercentage": "نسبة التطبيق",
+  "app_title": "Asshal",
+  "apply": "تطبيق",
+  "arEnterSomeDetails": "أدخل التفاصيل بالعربية",
+  "aruserName": "اسم المستخدم بالعربية",
+  "auth.create_company_account": "تسجيل حساب شركة",
+  "auth.create_personal_account": "تسجيل حساب شخصي",
+  "back": "رجوع",
+  "back_identity_image": "صورة البطاقة الوجه الخلفى",
+  "brief": "نبذة",
+  "building_number": "رقم المبنى",
+  "call": "اتصال",
+  "callNote": "لإتمام تسليم طلبك، سوف نتصل بك على رقمك",
+  "cancel": "إلغاء",
+  "cancelOder": "إلغاء الطلب",
+  "cars": "سيارات",
+  "phones": "هواتف",
+  "cart": "السلة",
+  "certificates": "الشهادات",
+  "change": "تغيير",
+  "changeCountry": "تغيير الدولة",
+  "changeImage": "تغيير الصورة",
+  "changeLang": "تغيير اللغة",
+  "change_language": "تغيير اللغة",
+  "change_logo": "تغيير الشعار",
+  "change_password": "تغيير كلمة المرور",
+  "choose": " اختر",
+  "chooseCategory": "اختر القسم",
+  "chooseServiceNote": "برجاء اختيار نوع الخدمة التي تود البحث عنها",
+  "choose_country": "اختر الدولة",
+  "choose_country_first": "اختر الدولة أولًا",
+  "choose_featured_plan_title": "اختر خطة التمييز",
+  "choose_governorate": "اختر المحافظة",
+  "choose_logo": "اضغط لاختيار الشعار",
+  "choose_main_section": "اختر القسم الرئيسي",
+  "choose_pinned_plan_title": "اختر خطة التثبيت",
+  "choose_plan_intro": "اختر الخطة المناسبة لزيادة ظهور اعلانك.",
+  "choose_plan_title": "اختر خطتك المميزة",
+  "choose_sub_section": "اختر القسم الفرعي",
+  "city": "المنطقة",
+  "clear_all": "مسح الكل",
+  "clickHere": "اضغط هنا",
+  "clickToViewBusinessFile": "اضغط لرؤية ملف الأعمال الخاص بي",
+  "close": "إغلاق",
+  "codeValidity": "مدة صلاحية الرمز",
+  "code_invalid": "رمز غير صالح",
+  "code_required": "يرجى إدخال الرمز",
+  "code_sent": "تم إرسال الرمز",
+  "code_sent_to": "تم إرسال الرمز إلى",
+  "comment11": "------- --------",
+  "comment12": "------- استعادة كلمة المرور --------",
+  "comment13": "------- اختيار نوع الحساب --------",
+  "comment14": "------- تسجيل الحساب --------",
+  "comment15": "------- التحقق --------",
+  "comment16": "------- الرئيسية --------",
+  "common.clear": "مسح",
+  "common.loadError": "حدث خطأ أثناء تحميل البيانات",
+  "common.noResults": "لم نجد نتائج مطابقة لبحثك",
+  "common.retry": "إعادة المحاولة",
+  "common.selected": "تم الاختيار",
+  "common.select_from_list": "يرجى اختيار قيمة من القائمة أدناه",
+  "commonEllipsis": "…",
+  "commonError": "خطأ",
+  "commonLoading": "جاري التحميل...",
+  "commonNoResults": "لا توجد نتائج مطابقة",
+  "commonRetry": "إعادة المحاولة",
+  "companies.title": "الشركات",
+  "companyTypes.searchHint": "ابحث عن نوع الشركة...",
+  "companyTypes.title": "أنواع الشركات",
+  "company_info": "معلومات الشركة",
+  "company_logo": "شعار الشركة",
+  "company_name": "اسم الشركة",
+  "company_name_hint": "أكتب أسم شركتك",
+  "company_name_label": "اسم الشركة",
+  "company_name_required": "يرجى إدخال اسم الشركة",
+  "company_not_found": "الشركة غير موجودة",
+  "company_phone": "هاتف الشركة",
+  "company_profile": "ملف الشركة",
+  "company_details.ads_count": "عدد الاعلانات",
+  "company_details.company_type": "نوع الشركة",
+  "company_details.no_ads_subtitle": "لم تقم الشركة بنشر أي اعلانات حتى الآن.",
+  "confirm": "تأكيد",
+  "confirm.delete": "تأكيد",
+  "confirm.delete_image": "هل تريد حذف هذه الصورة؟",
+  "confirmOder": "تأكيد الطلب",
+  "confirm_password": "تأكيد كلمة المرور",
+  "confirmation": "تأكيد",
+  "contactUsNote": "نحن سعداء بتلقي استفساراتكم",
+  "contact_us": "اتصل بنا",
+  "contact_us_note1": "في حال واجهت أي مشكلة، تواصل معنا",
+  "support_phones": "أرقام الدعم",
+  "primary_phone": "الرقم الأساسي",
+  "number_copied": "تم نسخ الرقم",
+  "tap_to_call": "اضغط للاتصال",
+  "tap_and_hold_to_copy": "اضغط مطولاً للنسخ",
+  "continueText": "متابعة",
+  "conversation": "واتساب",
+  "correctcode": "رمز صحيح",
+  "country": "الدولة",
+  "country_code_kw": "+965",
+  "country_label": "الدولة",
+  "createdAtdate": "تاريخ الإنشاء",
+  "currency": "دينار كويتي",
+  "currentBalance": "الرصيد الحالي",
+  "days": "أيام",
+  "days_left": "الأيام المتبقية",
+  "dearCustomer": "عميلنا العزيز، ",
+  "delete": "حذف",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountConfirm": "هل أنت متأكد أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه.",
+  "deleteAccountFailed": "فشل حذف حسابك. يرجى المحاولة لاحقًا.",
+  "delete_all": "حذف الكل",
+  "delivery_date": "تاريخ التسليم",
+  "description": "الوصف",
+  "detectlocation": "تحديد الموقع",
+  "directRequest": "طلب مباشر",
+  "distinctive": "مميز",
+  "district": "المنطقة",
+  "district_count": "المنطقة ({count})",
+  "doSearch": "بحث",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "downloadAppStore": "حمل التطبيق من App Store",
+  "downloadGooglePlay": "حمل التطبيق من Google Play",
+  "edit": "تعديل",
+  "editCountryFirst": "لا يمكنك التعديل قبل تغيير الدولة إلى دولتك الأصلية.",
+  "editDone": "تم التحديث بنجاح",
+  "editDoneWaitingreview": "تم رفع التعديل، بياناتك قيد المراجعة",
+  "editPass": "تعديل كلمة المرور",
+  "editProductToCart": "تعديل في السلة",
+  "editProfile": "تعديل الملف الشخصي",
+  "edit_company_profile": "تعديل ملف الشركة",
+  "edit_profile": "تعديل الملف الشخصي",
+  "elevatorsNote": "صيانة المصاعد",
+  "email": "البريد الإلكتروني",
+  "emptyCart": "السلة فارغة",
+  "emptySearch": "لا توجد نتائج بحث",
+  "enEnterSomeDetails": "أدخل التفاصيل بالإنجليزية",
+  "eng": "إنجليزي",
+  "engineer": "مهندس",
+  "engineerBalance": "رصيد المهندس",
+  "enter": "إدخال",
+  "enterCode": "أدخل الرمز",
+  "enterConfirmpassweord": "أدخل تأكيد كلمة المرور",
+  "enterCorrectPhone": "أدخل رقم هاتف صحيح",
+  "enterEmail": "أدخل البريد الإلكتروني",
+  "enterName": "أدخل الاسم",
+  "enterNewPass": "أدخل كلمة المرور الجديدة",
+  "enterPass": "يرجى إدخال كلمة المرور",
+  "enterPassword": "أدخل كلمة المرور",
+  "enterPasswordToDelete": "أدخل كلمة المرور لتأكيد الحذف:",
+  "enterPhone": "أدخل رقم الهاتف",
+  "enterPhone2Note": "يرجى إدخال رقم هاتفك الثاني",
+  "enterPhoneNote": "يرجى إدخال رقم هاتفك",
+  "enterValidDate": "أدخل تاريخًا صحيحًا",
+  "enterValidLink": "أدخل رابطًا صحيحًا",
+  "enterValidNum": "أدخل رقمًا صحيحًا",
+  "enterValidateEmail": "أدخل بريدًا إلكترونيًا صحيحًا",
+  "enterVerCode": "يرجى إدخال رمز التحقق",
+  "enterWhatsApp": "أدخل رقم الواتساب",
+  "enter_code": "أدخل الرمز",
+  "enter_company_name": "أدخل اسم الشركة",
+  "enter_company_phone": "أدخل رقم هاتف الشركة",
+  "enter_name": "أدخل اسمك",
+  "enter_new_password": "أدخل كلمة مرور جديدة",
+  "enter_old_password": "أدخل كلمة المرور القديمة",
+  "enter_old_password_note": "يرجى إدخال كلمة المرور القديمة",
+  "enter_phone": "أدخل رقم هاتفك",
+  "enteraddress": "أدخل العنوان",
+  "enuserName": "اسم المستخدم بالإنجليزية",
+  "enuserNameEnter": "اسم المستخدم",
+  "error": "خطأ",
+  "error.delete_failed": "فشل حذف الصورة",
+  "error.failed_load_cities": "فشل تحميل المدن",
+  "error.failed_load_states": "فشل تحميل المحافظات",
+  "error.fetch_image": "فشل تحميل الصورة",
+  "error.max_images": "لقد وصلت للحد الأقصى للصور (12)",
+  "error.no_cities_for_state": "لا توجد مدن لهذه المحافظة",
+  "error.publish_exception": "فشل نشر الاعلان",
+  "error.publish_failed": "فشل نشر الاعلان",
+  "error.select_country_first": "اختر المحافظة أولاً",
+  "error.select_state_first": "اختر المحافظة أولًا",
+  "error.update_password": "فشل تحديث كلمة المرور. حاول مرة أخرى",
+  "error.submit_failed": "حدث خطأ أثناء الإرسال",
+  "error.user_not_found": "لم يتم العثور على بيانات المستخدم. يرجى تسجيل الدخول مرة أخرى",
+  "errorOccured": "حدث خطأ ما",
+  "experienceYears": "عدد سنوات الخبرة",
+  "experienceandskills": "الخبرة والمهارات",
+  "expired": "منتهي",
+  "failed_load_ads": "فشل تحميل الاعلانات، يرجى المحاولة مرة أخرى.",
+  "favorites": "المفضلة",
+  "favorites.empty": "لا توجد مفضلة بعد",
+  "favorites.empty_hint": "احفظ اعلانًا باستخدام القلب ♥ وسيظهر هنا",
+  "favorites_empty": "لا توجد مفضلة بعد",
+  "favorites_hint": "عندما تحفظ اعلانًا بالقلب ♥ سيظهر هنا",
+  "field.address": "العنوان",
+  "field.area": "المساحة",
+  "field.baths": "الحمامات",
+  "field.brand": "العلامة التجارية",
+  "field.city": "المنطقة",
+  "field.color": "اللون",
+  "field.condition": "الحالة",
+  "field.country": "الدولة",
+  "field.description": "الوصف",
+  "field.engine_size": "سعة المحرك",
+  "field.floor": "الطابق",
+  "field.fuel": "نوع الوقود",
+  "field.gear": "ناقل الحركة",
+  "field.km": "الكيلومترات",
+  "field.model": "الموديل",
+  "field.name": "الاسم",
+  "field.paint": "حالة الطلاء",
+  "field.phone": "الهاتف",
+  "field.price": "السعر",
+  "field.rooms": "الغرف",
+  "field.state": "المحافظة",
+  "field.title": "العنوان",
+  "field.type": "نوع العقار",
+  "field.whatsapp": "واتساب",
+  "field.year": "السنة",
+  "filter": "تصفية",
+  "step.specs_price": "المواصفات والسعر",
+  "finishingNote": "التشطيب، سعر المتر يبدأ من",
+  "first": "الأول",
+  "floors": "عدد الطوابق",
+  "forgetPass": "نسيت كلمة المرور؟",
+  "forgetPassNote": "سيتم إرسال رمز من 4 أرقام إلى رقمك",
+  "forgetPassSubtitle": "استعد كلمة مرورك بسهولة عن طريق إدخال رقم هاتفك",
+  "from": "من",
+  "front_identity_image": "صورة البطاقة الوجه الأمامي",
+  "good": "جيد",
+  "governorate": "المحافظة",
+  "governorate_count": "المحافظة ({count})",
+  "governorate_label": "المحافظة",
+  "graduationYear": "سنة التخرج",
+  "hasHewAccount": "حساب جديد",
+  "hasnotpaymentStatusText": "غير مدفوع",
+  "haspaymentStatusText": "مدفوع",
+  "haveAccount": "هل لديك حساب؟",
+  "hide": "إخفاء",
+  "highlight_your_ad": "ميز اعلانك",
+  "hint.area": "أدخل المساحة بالأرقام",
+  "hint.car_example": "مثال: تويوتا كورولا 2020",
+  "hint.clear_address": "مسح العنوان",
+  "hint.clear_name": "الاسم واضح",
+  "hint.description": "اكتب تفاصيل عن الخدمة / المنتج...",
+  "hint.km_counter": "عداد الكيلومترات (اختياري)",
+  "hint.name": "أدخل الاسم",
+  "hint.phone": "الهاتف",
+  "hint.price_example": "0.0 دينار كويتي",
+  "hint.title": "اكتب عنوانًا واضحًا",
+  "hint.whatsapp": "واتساب",
+  "homeHello": "سجّل الدخول الآن",
+  "hours": "س",
+  "image_added": "تمت إضافة الصورة",
+  "images": "الصور",
+  "imgFromCamera": "التقاط صورة",
+  "imgFromGallery": "من المعرض",
+  "infraction_image": "صورة للمخالفة",
+  "infraction_level": "مسطح المخالفة",
+  "invalidCode": "رمز غير صحيح",
+  "invalid_phone": "رقم هاتف غير صالح",
+  "largeSize": "كبير",
+  "leavecomment": "اترك تعليقًا",
+  "license_image": "صورة الترخيص",
+  "license_type": "نوع الرخصة",
+  "loading": "جاري التحميل...",
+  "loading.loading": "جاري التحميل...",
+  "loading_error_company_profile": "حدث خطأ أثناء تحميل البيانات",
+  "loggingIn": "جاري تسجيل الدخول...",
+  "login": "تسجيل الدخول",
+  "login_subtitle": "أدخل رقم جوالك وكلمة المرور لتبدأ تصفح وشراء الاعلانات بسهولة",
+  "login_success_title": "تم تسجيل الدخول!",
+  "login_success_msg": "حسابك تم الدخول بنجاح، جاهز لتصفح الاعلانات وإدارة حسابك بسهولة.",
+  "login_button": "دخول الحساب",
+  "loginFailed": "فشل تسجيل الدخول",
+  "loginPhoneHint": "5XXXXXXX",
+  "mainSpecialization": "التخصص الرئيسي",
+  "main_category_label": "القسم الرئيسي",
+  "mark_all_read": "تعيين الكل كمقروء",
+  "mark_as_read": "تعيين كمقروء",
+  "mark_as_unread": "تعيين كغير مقروء",
+  "marketName": "اسم السوق",
+  "maxImagesNum": "الحد الأقصى هو 10 صور.",
+  "message": "الرسالة",
+  "midSize": "متوسط",
+  "minutes": "د",
+  "mobileMmustDigits": "رقم الجوال يجب أن يكون أرقامًا",
+  "mobileNumberDigitsError": "رقم الهاتف يجب أن يكون 11 رقمًا",
+  "mobileNumberTaken": "رقم الهاتف أو الواتساب مستخدم من قبل.",
+  "mobileRequired": "رقم الجوال مطلوب",
+  "more": "الحساب",
+  "msgHasSent": "تم إرسال رسالتك بنجاح",
+  "msgRegister": "ستقوم إدارة التطبيق بالتواصل معك.",
+  "msgType": "نوع الرسالة",
+  "myCart": "طلباتي",
+  "myProfile": "ملفي الشخصي",
+  "mybalance": "رصيدي",
+  "name": "الاسم",
+  "nameDoneBtn": "تم",
+  "nameNextBtn": "التالي",
+  "nameSkipBtn": "تخطي",
+  "nationalIDCard": "صورة بطاقة الرقم القومي",
+  "needsInCall": "أخبرنا باحتياجاتك عند الاتصال بك",
+  "netError": "مشكلة في اتصال الإنترنت، حاول مرة أخرى",
+  "newAccount": "إنشاء حساب",
+  "new_password": "كلمة مرور جديدة",
+  "no": "لا",
+  "no_ads": "لا توجد اعلانات",
+  "no_ads_for_company": "لا توجد اعلانات حاليًا لهذه الشركة.",
+  "no_categories": "لا توجد أقسام متاحة حاليًا",
+  "no_categories_tooltip": "لا توجد أقسام",
+  "no_changes": "لا توجد تغييرات للحفظ",
+  "no_favorites_yet": "لا توجد مفضلة بعد",
+  "no_notifications": "لا توجد إشعارات بعد",
+  "no_sections_available": "لا توجد أقسام متاحة حاليًا",
+  "no_subcategories": "لا توجد أقسام فرعية متاحة حاليًا",
+  "no_subsections": "لا توجد أقسام فرعية متاحة",
+  "no_unread_notifications": "لا توجد إشعارات غير مقروءة",
+  "noresult": "لم يتم العثور على نتائج. حاول مرة أخرى مع تغيير البيانات",
+  "notHasData": "لا توجد بيانات",
+  "notMatchedPassword": "كلمتا المرور غير متطابقتين",
+  "notRegister": "أنت غير مسجل لدينا",
+  "not_specified": "غير محدد",
+  "noteRciveMsg": "لم يتم إرسال الرمز؟",
+  "notifications": "الإشعارات",
+  "notifications.open": "فتح الإشعارات",
+  "notifications.title": "الإشعارات",
+  "notifications.unread": "{count} إشعار(ات)",
+  "now": "الآن",
+  "ok": "حسنًا",
+  "old_password": "كلمة المرور القديمة",
+  "opt.condition.new": "جديد",
+  "opt.condition.used": "مستعمل",
+  "opt.fuel.diesel": "ديزل",
+  "opt.fuel.electric": "كهرباء",
+  "opt.fuel.hybrid": "هجين",
+  "opt.fuel.mild_hybrid": "هجين خفيف",
+  "opt.fuel.petrol": "بنزين",
+  "opt.fuel.plugin_hybrid": "هجين قابل للشحن",
+  "opt.gear.automatic": "أوتوماتيك",
+  "opt.gear.manual": "عادي",
+  "opt.paint.agency": "صبغ وكالة",
+  "opt.paint.fully_painted": "مصبوغة كليا",
+  "opt.paint.partially_painted": "مصبوغة جزئيا",
+  "options.color.beige": "بيج",
+  "options.color.black": "أسود",
+  "options.color.blue": "أزرق",
+  "options.color.bronze": "برونزي",
+  "options.color.brown": "بني",
+  "options.color.cement": "رمادي إسمنتي",
+  "options.color.gold": "ذهبي",
+  "options.color.gray": "رمادي",
+  "options.color.green": "أخضر",
+  "options.color.light_blue": "أزرق فاتح",
+  "options.color.navy": "كحلي",
+  "options.color.olive": "زيتي",
+  "options.color.orange": "برتقالي",
+  "options.color.petrol": "أزرق بترولي",
+  "options.color.pink": "وردي",
+  "options.color.purple": "بنفسجي",
+  "options.color.red": "أحمر",
+  "options.color.silver": "فضي",
+  "options.color.tan": "تان",
+  "options.color.turquoise": "فيروزي",
+  "options.color.white": "أبيض",
+  "options.color.wine": "خمري",
+  "options.color.yellow": "أصفر",
+  "options.condition.new": "جديد",
+  "options.condition.used": "مستعمل",
+  "options.condition.very_new": "جديد جدًا",
+  "options.condition.excellent": "ممتاز",
+  "options.condition.very_good": "جيد جدًا",
+  "options.condition.good": "جيد",
+  "options.condition.average": "متوسط",
+  "options.count.plus10": "+10",
+  "options.engine.0_499": "0 - 499 سي سي",
+  "options.engine.1000_1600": "1000 - 1600 سي سي",
+  "options.engine.1700_2200": "1700 - 2200 سي سي",
+  "options.engine.2300_2999": "2300 - 2999 سي سي",
+  "options.engine.3000_3999": "3000 - 3999 سي سي",
+  "options.engine.4000_4999": "4000 - 4999 سي سي",
+  "options.engine.5000_5999": "5000 - 5999 سي سي",
+  "options.engine.500_999": "500 - 999 سي سي",
+  "options.floor.gt20": "أعلى من 20",
+  "options.fuel.diesel": "ديزل",
+  "options.fuel.electric": "كهرباء",
+  "options.fuel.hybrid": "هجين",
+  "options.fuel.mild_hybrid": "هجين خفيف",
+  "options.fuel.petrol": "بنزين",
+  "options.fuel.plugin_hybrid": "هجين قابل للشحن",
+  "options.gear.automatic": "أوتوماتيك",
+  "options.gear.manual": "عادي",
+  "options.paint.agency": "صبغ وكالة",
+  "options.paint.fully_painted": "مصبوغة كليا",
+  "options.paint.partially_painted": "مصبوغة جزئيا",
+  "options.property_type.commercial": "تجاري",
+  "options.property_type.residential": "سكني",
+  "or": "أو",
+  "orderAccept": "قبول الطلب",
+  "orderCancled": "إلغاء الطلب",
+  "orderDetails": "تفاصيل الطلب",
+  "orderHasAccepted": "تم قبول الطلب",
+  "orderHasCancled": "تم إلغاء الطلب",
+  "orderHasCompleted": "تم استكمال الطلب",
+  "orderNote": "سيكون طلبك جاهزًا قريبًا",
+  "orderSendSuccess": "تم إرسال طلبك بنجاح",
+  "orderTime": "وقت الطلب",
+  "orderType": "نوع الطلب",
+  "orders": "الطلبات",
+  "ordersSubmit": "إرسال الطلبات",
+  "page.empty": "",
+  "page.enter_anything_details": "أدخل التفاصيل",
+  "page.enter_car_details": "معلومات السيارة الأساسية",
+  "page.enter_property_details": "أدخل تفاصيل العقار",
+  "page.enter_technician_details": "أدخل تفاصيل اعلانك",
+  "page1Note": "سنتصل بك ونؤكد طلبك",
+  "page2Note": "اطلب احتياجاتك بسهولة",
+  "page3Note": "تستلم جميع طلباتك بسرعة",
+  "page4Note": "يمكنك التسجيل كمندوب توصيل",
+  "passShortValidator": "كلمة مرور قصيرة",
+  "password": "كلمة المرور",
+  "passwordHintShort": "اختر كلمة مرور قوية لحماية حسابك.",
+  "passwordRecovery": "استعادة كلمة المرور",
+  "passwordRequired": "كلمة المرور مطلوبة!",
+  "passwordStrength": "قوة كلمة المرور",
+ 
+  "password_label": "كلمة المرور",
+  "password_min_length": "يجب ألا تقل كلمة المرور عن 6 أحرف",
+  "password_rule_note": "ملاحظة: يجب ألا تقل كلمة المرور عن 8 أحرف.",
+  "passwords_not_match": "كلمتا المرور غير متطابقتين",
+  "password_mismatch": "كلمات المرور غير متطابقة",
+  "password_required": "كلمة المرور مطلوبة",
+  "password_too_short": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+  "password_reset_success": "تم تغيير كلمة المرور بنجاح",
+  "reset_password": "إعادة تعيين كلمة المرور",
+  "reset_password_instruction": "أدخل رقم الهاتف وكلمة المرور الجديدة",
+  "enter_phone_to_reset": "أدخل رقم الهاتف لإرسال رمز التحقق",
+  "send_code": "إرسال الكود",
+  "enter_otp_and_new_password": "أدخل رمز التحقق وكلمة المرور الجديدة",
+  "code_too_short": "الرمز يجب أن يكون 4 أرقام",
+  "update_password": "تحديث كلمة المرور",
+  "reset_password_button": "تحقق من رقم هاتفك",
+  "phone_too_short": "رقم الهاتف قصير جداً",
+  "payment": "الدفع",
+  "paymentDetails": "تفاصيل الدفع",
+  "paymentStatus": "حالة الدفع",
+  "paymentWay": "طريقة الدفع",
+  "personalData": "البيانات الشخصية",
+  "personalinformation": "المعلومات الشخصية",
+  "phone": "الهاتف",
+  "phone1": "الهاتف",
+  "phone2": "الهاتف 2",
+  "phoneZero": "رقم الهاتف يجب أن يبدأ بـ 01",
+  "phone_change_note": "سيتم إرسال رمز لتأكيد الرقم الجديد",
+  "phone_change_requires_verification": "تغيير الهاتف يتطلب التحقق قبل الحفظ",
+  "phone_label": "رقم الهاتف",
+  "phone_required": "يرجى إدخال رقم الهاتف",
+  "photos.add_image": "إضافة صورة",
+  "photos.car_images": "صور السيارة",
+  "photos.cert_hint": "قم برفع صور شهادة الفحص هنا إن وجدت",
+  "photos.cert_images": "شهادة الفحص",
+  "photos.cert_title": "شهادة الفحص (صور)",
+  "photos.front": "أمامية",
+  "photos.image": "صورة",
+  "photos.image_label": "صورة",
+  "photos.limit_reached": "تم الوصول للحد الأقصى للصور (12)",
+  "photos.main": "رئيسية",
+  "photos.main_label": "الصورة الرئيسية (الأمامية)",
+  "photos.options": "اختر إجراءً:",
+  "photos.primary_image": "الصورة (الغلاف)",
+  "photos.set_main": "تعيين كرئيسية",
+  "photos.title": "الصور",
+  "photos.gallery": "صور المعرض",
+  "photos.certificate_optional": " شهادة الفحص (اختياري)",
+  "photos.cert_documents": "الشهادات / المستندات",
+  "photos.main_header": "الصورة الرئيسية",
+  "photos.image_none": "لا توجد صور",
+  "social_accounts_title": "حسابات المعلن على التواصل",
+  "social_accounts_cta": "اضغط هنا لمشاهدة حسابات المعلن",
+  "social_accounts_empty": "لا توجد حسابات تواصل متاحة",
+  "success.image_deleted": "تم حذف الصورة",
+  "success.image_replaced": "تم استبدال الصورة",
+  "success.set_main": "تم تعيين الصورة كرئيسية",
+  "pin_your_ad": "ثبّت اعلانك",
+  "please": "من فضلك",
+  "pleaseWait": "يرجى الانتظار،",
+  "pleaseWaitConnect": "برجاء الانتظار وسيتم التواصل معكم",
+  "pleaseaddthisdata": "برجاء إرفاق البيانات التالية لاستكمال الطلب",
+  "portfolio_link": "رابط ملف الأعمال",
+  "preessHere": "اضغط هنا",
+  "press_to_choose": "اضغط للاختيار",
+  "press_to_select": "اضغط للتحديد",
+  "price": "السعر",
+  "product_details": "تفاصيل المنتج",
+  "products": "المنتجات",
+  "profile": "الملف الشخصي",
+  "profile.guest": "زائر",
+  "profile.loading_name": "جاري التحميل...",
+  "quantity": "الكمية",
+  "quickOrder": "طلب سريع",
+  "rateService": "تقييم الخدمة",
+  "rates": "التقييمات",
+  "rePassword": "إعادة كتابة كلمة المرور",
+  "real_estate": "عقارات",
+  "reenter_new_password": "أعد إدخال كلمة المرور الجديدة",
+  "refineYourSearch": "حسّن نتائج بحثك",
+  "register": "إنشاء حساب",
+  "register.create_account": "إنشاء حساب",
+  "registerAlertNote": "يرجى التسجيل لتأكيد طلبك",
+  "registerNewAccount": "إنشاء حساب جديد",
+  "registerTab": "مقدم خدمة",
+  "register_create_account": "انشاء حساب شخصي",
+  "register_name": "الاسم",
+  "register_name_error": "يرجى إدخال الاسم",
+  "register_name_hint": "أدخل اسمك",
+  "update.headline": "تحديث التطبيق",
+  "register_office_category": "الفئة",
+  "register_office_category_error": "اختر الفئة",
+  "register_office_company_error": "يرجى إدخال اسم الشركة",
+  "register_office_company_hint": "مثال: النجاح للنقل",
+  "register_office_company_name": "اسم الشركة",
+  "register_office_district": "المنطقة",
+  "register_office_district_error": "اختر المنطقة",
+  "register_office_failed": "حدث خطأ أثناء التسجيل",
+  "register_office_governorate": "المحافظة",
+  "register_office_governorate_error": "اختر المحافظة",
+  "register_office_incomplete": "يرجى استكمال جميع الحقول المطلوبة",
+  "register_office_logo": "اضغط لاختيار الشعار",
+  "register_office_phone": "رقم الهاتف",
+  "register_office_phone_error": "يرجى إدخال رقم الهاتف",
+  "register_office_submit": "إنشاء حساب",
+  "register_office_success": "تم إنشاء الحساب بنجاح 🎉",
+  "register_office_title": "انشاء حساب شركه",
+  "register_office_whatsapp": "رقم الواتساب",
+  "register_office_whatsapp_error": "يرجى إدخال رقم الواتساب",
+  "register_password": "كلمة المرور",
+  "register_password_error": "يجب ألا تقل كلمة المرور عن 6 أحرف",
+  "register_password_hint": "أدخل كلمة المرور",
+  "register_phone": "رقم الهاتف",
+  "register_phone_error": "يرجى إدخال رقم الهاتف",
+  "register_phone_hint": "أدخل رقم هاتفك",
+  "register_submit": "إنشاء حساب",
+  "registeration": "التسجيل",
+  "relatedResultsCount": "{count} اعلان",
+  "renew_now": "جدد الآن",
+  "renew_subscription": "تجديد الاشتراك",
+  "renew_subscription_now": "جدد اشتراكك الآن",
+  "reports": "التقارير",
+  "republish": "إعادة نشر",
+  "republish_tooltip": "إعادة نشر الاعلان",
+  "reqAtLeast8": "على الأقل 8 أحرف",
+  "reqLower": "حرف صغير واحد على الأقل (a-z)",
+  "reqNumber": "رقم واحد على الأقل (0-9)",
+  "reqSpecial": "رمز خاص واحد على الأقل (! @ # ...)",
+  "reqUpper": "حرف كبير واحد على الأقل (A-Z)",
+  "request_sent_msg": "ستقوم إدارة التطبيق بالتواصل معك قريبًا",
+  "request_sent_title": "تم إرسال طلبك بنجاح",
+  "verify_phone_number": "تحقق من رقم هاتفك",
+  "image_license": "صورة الترخيص",
+  "image_cr": "السجل التجاري",
+  "upload_hint_1": "اختر ملفاً أو JPG, PNG .. وأفلته هنا",
+  "upload_hint_2": "بحجم لا يتجاوز 10 ميجابايت، JPG أو PNG أو PDF",
+  "company_register_subtitle": "فعّل وجود شركتك على اريد وقدّم خدماتك .",
+  "company_logo_subtitle": "اللوجو",
+  "company_logo_title": "شعار الشركة",
+  "license_title": "ترخيص الشركه",
+  "cr_title": "السجل التجاري",
+  "required": "هذا الحقل مطلوب",
+  "resend": "إعادة الإرسال",
+  "resend_code": "إعادة إرسال الرمز",
+  "resend_in": "إعادة الإرسال لال",
+  "retry": "إعادة المحاولة",
+  "review.basics": "الأساسيات",
+  "review.specs": "المواصفات",
+  "review.location": "الموقع",
+  "review.images": "الصور",
+  "review.car_edit_page_title": "مراجعة تعديل اعلان السيارة",
+  "review.car_page_title": "مراجعة اعلان السيارة",
+  "review.details": "التفاصيل",
+  "sections": "الأقسام",
+  "search_category_hint": "ابحث عن قسم...",
+  "search_anything": "ابحث عن أي شيء",
+  "browse_section": "تصفح القسم",
+  "browse_and_search": "تصفح وابحث",
+  "search.static_prefix": "ابحث في اريد عن ",
+  "search.suggestion.estate": "عقاراتك",
+  "search.suggestion.cars": "سياراتك",
+  "search.suggestion.services": "خدماتك",
+  "search.suggestion.devices": "أجهزتك",
+  "sub_sections": "الأقسام الفرعية",
+  "tab_home": "الرئيسية",
+  "unknown": "غير معروف",
+  "success.car_updated": "تم تحديث الاعلان بنجاح ✅",
+  "success.property_updated": "تم تحديث اعلان العقار بنجاح ✅",
+  "success.technician_updated": "تم تحديث الاعلان بنجاح ✅",
+  "validation.fill_all_fields": "يرجى ملء جميع الحقول المطلوبة",
+  "validation.required_fields": "يرجى ملء جميع الحقول المطلوبة",
+  "validation.select_location": "يرجى اختيار المحافظة والمنطقة",
+  "value": "القيمة",
+  "valueShouldBebiggerThan": "يجب أن تكون القيمة أكبر من",
+  "verificationTitle": "حسنًا",
+  "verify_phone": "تأكيد رقم الهاتف",
+  "view": "المشاهدات",
+  "view.grid": "شبكة",
+  "view.list": "قائمة",
+  "view_all": "عرض الكل",
+  "visitor": "زائر",
+  "visitorsRates": "تقييمات الزوار",
+  "waitingAccept": "قيد المراجعة",
+  "weak": "ضعيفة",
+  "weak_password": "يجب ألا تقل كلمة المرور عن 8 أحرف",
+  "welcome": "مرحبًا بك في Oreed",
+  "whatsappPhone": "واتساب",
+  "whatsapp_hint": "أدخل رقم الواتساب",
+  "whatsapp_label": "رقم الواتساب",
+  "whatsapp_required": "يرجى إدخال رقم الواتساب",
+  "whoUs": "من نحن",
+  "withdraw": "سحب رصيد",
+  "withdrawError": "يجب أن يكون الرقم مساويًا أو أكبر من",
+  "workAgencies": "الجهات التي يعمل بها",
+  "workcost": "تكلفة العمل",
+  "works": "الأعمال",
+  "writeYourNeeds": "اكتب أي احتياجات تريدها",
+  "yes": "نعم",
+  "yesterday": "أمس",
+  "you_can_resend_now": "يمكنك إعادة الإرسال الآن",
+  "youdonothave": "لا تملك",
+  "youdonothaveFavorites": "لا يوجد لديك مفضلات",
+  "youdonothaveorders": "لا توجد لديك طلبات",
+  "yourBalance": "رصيدك",
+  "yourInfo": "معلوماتك",
+  "yourOrderHasChanged": "تم إعادة إرسال طلبك إلى المهندس",
+  "yourRateIsAdded": "تم إضافة تقييمك",
+  "select.choose_brand": "اختر العلامه التجاريه",
+  "select.choose_model": "اختر الموديل",
+  "select.choose_condition": "اختر الحالة",
+  "select.choose_color": "اختر اللون",
+  "select.choose_year": "اختر السنة",
+  "select.choose_fuel": "اختر نوع الوقود",
+  "select.choose_gear": "اختر ناقل الحركة",
+  "select.choose_engine_subtitel": "سعة المحرك توضح قوة السيارة للمشترين.",
+  "select.choose_paint": "اختر حالة الطلاء",
+  "select.choose_state": "اختر المحافظة",
+  "select.choose_city": "اختر المنطقة",
+  "select_brand_first": "اختر الماركة أولاً",
+  "validation.optional_specs_title": "إكمال مواصفات السيارة؟",
+  "validation.optional_specs_message": "لم تقُم بإدخال بعض تفاصيل السيارة مثل سنة الصنع، عدد الكيلومترات، سعة المحرك، الحالة، ناقل الحركة، نوع الوقود، حالة الطلاء واللون. هذه الحقول اختيارية، لكن تعبئتها يساعد اعلانك على الظهور بشكل أفضل في نتائج البحث ويجعل اعلانك أكثر احترافية.",
+  "validation.optional_specs_fill": "إكمال البيانات الآن",
+  "validation.optional_specs_skip": "المتابعة بدونها",
+  "error.fill_required_fields": "يرجى تعبئة جميع الحقول المطلوبة",
+  "photos.main_image": "الصورة الرئيسية",
+  "select.choose": "اختر",
+  "select.country": "اختر الدولة",
+  "select.state": "اختر المحافظة",
+  "select.choose_type": "اختر النوع",
+  "select.choose_floor": "اختر الطابق",
+  "select.choose_baths": "اختر عدد الحمامات",
+  "select.choose_rooms": "اختر عدد الغرف",
+  "photos.add_gallery": "إضافة صور للمعرض",
+  "sponsored": "اعلان ممول",
+  "subcategories.title": "الأقسام",
+  "tabs.ads": "الاعلانات",
+  "photos.add_main_image": "إضافة الصورة الرئيسية",
+  "signOut": "تسجيل الخروج",
+  "save_changes": "حفظ",
+  "signOutQuestion": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "review.technician_page_title": "مراجعة اعلان الفني",
+  "review.technician_edit_page_title": "مراجعة تعديل اعلان الفني",
+  "action.confirm_save": "تأكيد وحفظ",
+  "car_photo": "اضف صورة السيارة ",
+  "inspection_certificate": "شهادة الفحص ",
+  "car_details": "تفاصيل السيارة ",
+  "property_details": "تفاصيل العقار",
+  "technician_details": "تفاصيل الفني",
+  "ad_details": "تفاصيل الاعلان",
+  "app_settings_title": "إعدادات التطبيق",
+  "send": "إرسال",
+  "sending": "جاري الإرسال...",
+  "userName": "اسم المستخدم",
+
+  "common.view_more": "عرض المزيد",
+  "thank_you_message": "شكرًا لك! تم إرسال طلبك بنجاح.",
+  "subscription_expired": "انتهى الاشتراك",
+  "subscription_active": "الاشتراك فعال",
+  "expiring_soon": "سينتهي قريبًا",
+  "subscription_expired_message": "انتهى اشتراكك. يرجى التجديد لمواصلة استخدام جميع المميزات.",
+  "subscription_expired_title": "انتهاء الاشتراك",
+  "subscription_expired_company_only": "الاعلانات الخاصة بالشركة معلقة",
+  "subscription_expired_company_ads_message": "قم بتجديد اشتراكك للاستمرار في إضافة وإدارة اعلانات الشركة. اعلاناتك الشخصية ستبقى متاحة.",
+  "add_company_ad": "أضف اعلان الشركة",
+  "subscription_required_tooltip": "يتطلب اشتراك نشط لإضافة اعلانات الشركة",
+  "action_not_available": "الإجراء غير متاح",
+  "expired_on": "انتهى في",
+  "location": "الموقع",
+  "company_ads": "اعلانات الشركة",
+  "personal_ads": "الاعلانات الشخصية",
+  "expires_on": "ينتهي في",
+  "unread": "غير مقروءة",
+  "delete_all_notifications_confirm": "هل أنت متأكد أنك تريد حذف جميع الإشعارات؟",
+  "technicians": "الفنيين",
+  "search.companies": "البحث عن الشركات",
+  "search.categories": "البحث في الأقسام",
+  "search.title": "البحث",
+  "review.page_title": "مراجعة",
+  "settings": "الاعدادات",
+  "my_ads": "اعلاناتي",
+  "preferences": "التفضيلات",
+  "support_help": "الدعم والمساعدة",
+  "privacy": "الخصوصية",
+  "company_subscription_expired_warning": "انتهى اشتراك شركتك، ولا يمكنك نشر اعلانات الشركة حالياً، لكن يمكنك النشر كفرد بشكل طبيعي.",
+  "renew_subscription_action": "جدد اشتراكك الان",
+  "days_remaining_count": "باقي {days} أيام",
+  "since_date": "منذ {date}",
+  "expires_in_date": "ينتهي في {date}",
+  "powered_by": "تم التطوير بواسطة ",
+  "added_to_favorites": "تمت إضافة الاعلان للمفضلة",
+  "removed_from_favorites": "تمت إزالته من المفضلة",
+  "distance": "المسافة",
+  "views_count": "مشاهدة",
+  "id_label": "ID",
+  "country_kuwait": "الكويت",
+  "language": "اللغه",
+  "account_type_agency": "وكالة عقارية",
+  "account_type_personal": "حساب شخصي",
+  "location_placeholder": "الكويت، السالمية",
+  "guest_header_message": "سجّل حسابك لتتمكن من نشر اعلاناتك وتتابع كل نشاطك في مكان واحد.",
+  "guest_name": "ضيف",
+  "welcome_message": "هلا ومرحبا {name} 👋",
+  "home_subtitle": "عرض أغراضك واشتري اللي تحتاجه بدون تعب.",
+  "discover_sections": "اكتشف الأقسام",
+  "related_ads": "اعلانات ذات صلة",
+  "action.view_ad": "عرض الاعلان",
+  "search.hint_home": "ابحث عن سيارات، عقارات، إلكترونيات...",
+  "search.hint_property": "ابحث عن عقار… نوع، حي، مدينة، سعر",
+  "common.no_data_available": "لا توجد بيانات متاحة حالياً",
+  "please_login": "يرجى تسجيل الدخول لعرض اعلاناتك",
+  "delete_ad_confirm_title": "تأكيد الحذف",
+  "delete_ad_confirm_message": "هل أنت متأكد أنك تريد حذف هذا الاعلان؟ لا يمكن التراجع بعد الحذف.",
+  "add_new_ad": "إضافة اعلان جديد",
+  "delete_ad_question": "هل تريد حذف الاعلان؟",
+  "delete_ad_warning": "سيتم حذف الاعلان بشكل نهائي ولن يكون متاحًا مرة أخرى.",
+  "yes_delete": "نعم، احذف",
+  "ads.delete_success": "تم حذف الاعلان بنجاح",
+  "ads.empty_sub": "لا توجد اعلانات بعد",
+  "set_ad_priority": "تعيين أولوية الاعلان",
+  "choose_priority_to_increase_visibility": "اختر مستوى الأولوية لزيادة ظهور اعلانك",
+  "very_high_priority": "أولوية عالية جداً",
+  "maximum_visibility": "أقصى ظهور للاعلان",
+  "high_priority": "أولوية عالية",
+  "featured_visibility": "ظهور متميز",
+  "medium_priority": "أولوية متوسطة",
+  "good_visibility": "ظهور جيد",
+  "normal_priority": "أولوية عادية",
+  "standard_visibility": "الظهور القياسي",
+  "low_priority": "أولوية منخفضة",
+  "basic_visibility": "ظهور أساسي",
+  "highlight_your_ad_btn": "ميز اعلانك",
+  "pin_your_ad_btn": "ثبت اعلانك",
+  "confirm": "تأكيد",
+  "active_until": "نشط حتي",
+  "expired": "منتهي الصلاحية",
+  "pending_approval": "بانتظار الموافقة",
+  "first_rank": "الأول",
+  "first_rank_desc": "يظهر اعلانك في أعلى الصفحة",
+  "second_rank": "الثاني",
+  "second_rank_desc": "يظهر بعد الاعلان الأول",
+  "third_rank": "الثالث",
+  "third_rank_desc": "يظهر بعد الاعلان الثاني",
+  "choose_ad_visibility_order": "اختر ترتيب ظهور هذا الاعلان للزوار",
+  "visibility_order_company_page": "ترتيب الظهور في صفحة الشركة",
+  "choose_language": "أختر اللغة",
+  "english": "الإنجليزية",
+  "arabic": "العربية",
+  "please_login_first": "يرجى تسجيل الدخول أولاً",
+  "msgHasSent": "تم إرسال الرسالة بنجاح",
+  "somethingWrong": "حدث خطأ ما، يرجى المحاولة مرة أخرى",
+  "msgType": "نوع الرسالة",
+  "new_contracts": "طلب اشتراك جديد",
+  "complaints_suggestions": "شكاوى واقتراحات",
+  "select_type": "اختر النوع",
+  "please_select_appropriate_type": "برجاء اختيار النوع المناسب",
+  "send_request_message": "أرسل لنا طلبك وسنرد عليك",
+  "your_message": "رسالتك",
+
+  "contact_us_support_message": "نحن هنا لمساعدتك — اختر طريقة التواصل المناسبة لك",
+  "whatsapp": "واتساب",
+
+  "new_same_old": "كلمة المرور الجديدة لا يجب أن تطابق القديمة",
+  "saved_successfully": "تم الحفظ بنجاح",
+  "something_wrong": "حدث خطأ ما، حاول لاحقًا",
+
+  "current_password": "كلمة المرور الحالية",
+ 
+  "set_password": "تعيين كلمة المرور",
+
+  "empty_favorites": "المفضلة فارغة",
+  "empty_favorites_subtitle": "لم تقم بإضافة أي عناصر إلى المفضلة بعد.",
+
+  "no_notifications_desc": "لا توجد إشعارات جديدة الآن",
+  "confirm_delete": "تأكيد الحذف",
+  "delete_notification_confirm": "هل أنت متأكد من حذف هذا الإشعار؟",
+
+  "error_loading": "خطأ في تحميل الإشعارات",
+  "search.color": "ابحث عن اللون",
+  "search.hint": "بحث...",
+  "search_results_companies": "نتائج البحث في الشركات",
+  "search_results_categories": "نتائج البحث في الأقسام",
+  "no_results_found": "لا توجد نتائج",
+  "no_results_subtitle": "لم نعثر على نتائج مطابقة لبحثك.",
+  "choose_main_section_for_ad": "اختر القسم الرئيسي لاعلانك",
+  "main_section": "القسم الرئيسي",
+  "add_ad_search_hint": "ابحث عن سيارات، عقارات، إلكترونيات...",
+  "no_sections": "لا توجد أقسام",
+  "no_results": "لا توجد نتائج",
+  "please_select_main_section_first": "يرجى اختيار القسم الرئيسي أولاً",
+  "complete_sub_section": "أكمل القسم الفرعي",
+  "choose_sub_category_for_ad": "اختر القسم الفرعي لاعلانك",
+  "search_for_sub_category": "ابحث عن القسم الفرعي",
+  "sub_category": "القسم الفرعي",
+  "complete_ad_details": "أكمل تفاصيل الأعلان",
+  "no_search_results": "لا توجد نتائج بحث",
+  "no_categories_available": "لا توجد أقسام متاحة حالياً",
+
+  "error.something_went_wrong": "حدث خطأ ما، يرجى المحاولة مرة أخرى.",
+
+  "shareAppMessage": "تحقق من هذا التطبيق المذهل Oreed!",
+
+  "common.confirm": "تأكيد",
+  "common.yes": "نعم",
+  "common.no": "لا",
+  "common.back": "رجوع",
+  "auth.login_required_action": "يرجى تسجيل الدخول لإجراء هذه العملية",
+  "photos.delete_success": "تم حذف الصورة بنجاح",
+  "photos.delete_failed": "فشل حذف الصورة",
+ 
+  "photos.certificate": "شهادة الفحص",
+
+  "photos.image_deleted": "تم حذف الصورة بنجاح",
+
+  "validation.enter_name": "برجاء إدخال الاسم",
+
+  "error.data_refresh_failed": "خطأ في تحديث البيانات",
+
+  "error.cannot_delete_main_image": "لا يمكن حذف الصورة الرئيسية. يمكنك تغيير الصورة الرئيسية بدلاً من الحذف.",
+
+  "payment.failed": "فشل الدفع، حاول مجدداً",
+
+  "page.car_specs_price": "المواصفات والسعر",
+  "page.car_desc_media": "الوصف والوسائط",
+
+  "hint.select_state": "أختر محافظتك",
+  "hint.search_state": "ابحث عن المحافظة",
+  "hint.select_city": "أختر منطقتك",
+  "hint.search_city": "ابحث عن المنطقة",
+  
+  "hint.cert_image_optional": "( صورة لشهادة الفحص اختياري )",
+ 
+  "field.state_city": "المحافظة / المنطقة",
+
+  "select.choose_engine": "اختر سعة المحرك",
+  "subtitle.select_brand": "عشان نعرض موديلات السيارة المناسبة لك",
+  "subtitle.select_state": "اختر محافظتك لعرض الاعلانات والخدمات .",
+  "subtitle.select_city": "اختر منطقتك لعرض الاعلانات والخدمات .",
+  "subtitle.select_color": "اختر اللون اللي يناسب حالة سيارتك",
+  "subtitle.select_model": "اختر الموديل اللي يناسب ماركتك عشان نكمل باقي التفاصيل.",
+  "review.basics_location": "المعلومات الأساسية والموقع",
+
+  "action.next_specs": "التالي : المواصفات والسعر",
+  "action.next_desc": "التالي : الوصف والوسائط",
+  "action.review_data": "مراجعة كافة البيانات",
+ 
+  "options.color.champagne": "شامبين",
+  "options.color.maroon": "مارون",
+  "options.color.copper": "نحاسي",
+  "options.color.mauve": "موف",
+  "options.color.dark_turquoise": "تركواز غامق",
+  "options.color.lemon": "ليموني",
+  "options.color_cat.basic": "الألوان الأساسية",
+  "options.color_cat.extra": "ألوان إضافية / فاخرة",
+  "options.color_cat.sports": "ألوان خاصة",
+  "options.year_cat.recent": "حديث:",
+  "options.year_cat.mid": "متوسطة:",
+  "options.year_cat.old": "قديمة:",
+  "options.year_cat.classic": "كلاسيكي:",
+ 
+  "success.anything_updated": "تم تحديث الاعلان بنجاح",
+ 
+  "validation.at_least_one_image": "يرجى إضافة صورة واحدة على الأقل",
+
+  "photos.current_image": "الصورة الحالية",
+  "photos.image_exists": "موجودة على الخادم",
+  "photos.current_images": "الصور الحالية",
+  "photos.images_on_server": "صورة على الخادم",
+  "photos.confirm_delete": "هل تريد حذف هذه الصورة؟",
+  "photos.drag_drop_hint": "اختر ملفاً أو JPG, PNG .. وأفلته هنا",
+  "photos.size_limit_hint": "بحجم لا يتجاوز 10 ميجابايت، JPG أو PNG أو PDF",
+  "photos.image_added": "تمت إضافة الصورة",
+
+  "error.complete_step_one": "يرجى إدخال: عنوان (5 أحرف), سعر, دولة, محافظة, عدد الغرف, الحمامات, المساحة, الدور",
+  "error.complete_step_two": "يرجى إدخال وصف (20 حرف) وإضافة صورة واحدة على الأقل",
+  "error.fetch_image": "خطأ في جلب الصورة",
+  "review.anything_page_title": "مراجعة اعلان أي شيء",
+  "review.property_page_title": "مراجعة اعلان العقار",
+  "action.change": "تغيير",
+  "action.delete": "حذف",
+  "field.ad_title": "العنوان",
+  "field.currency": "العملة",
+  "hint.description": "أكتب تفاصيل عن الخدمة / المنتج",
+  "validation.title_too_short": "يرجى إدخال عنوان الاعلان (على الأقل 5 أحرف)",
+  "validation.price_required": "يرجى إدخال السعر",
+  "validation.description_too_short": "يرجى إدخال وصف الاعلان (20 حرف على الأقل)",
+  "page.enter_ad_details": "أدخل تفاصيل اعلانك",
+
+  "select.search_state": "ابحث عن المحافظة",
+  "select.state_subtitle": "اختر محافظتك لعرض الاعلانات والخدمات .",
+  "select.city_subtitle": "اختر منطقتك لعرض الاعلانات والخدمات .",
+  "payment.cancelled": "تم إلغاء الدفع",
+  "payment.success": "تم الدفع بنجاح",
+  "payment.title": "الدفع",
+  "success.ad_published": "تم نشر اعلانك بنجاح! 🎉",
+  "success.review_process_desc_company": "سنقوم بمراجعة اعلانك خلال 24 ساعة للتأكد من مطابقته لمعايير النشر، وبمجرد الموافقة عليه سيظهر مباشرة للمستخدمين المهتمين. 🚀",
+  "success.review_process_desc_user": "سنقوم بمراجعة اعلانك خلال 24 ساعة للتأكد من مطابقته لمعايير النشر، وبمجرد الموافقة عليه سيظهر مباشرة للمستخدمين المهتمين. يمكنك اختيار باقة مميزة لزيادة انتشار اعلانك والحصول على أفضل النتائج! 🚀",
+  "action.home": "الصفحه الرئيسيه",
+  "action.choose_package": "اختر باقة الاعلان",
+  "select.choose_rooms_subtitle": "اختر عدد الغرف المناسب لك",
+  "select.choose_baths_subtitle": "اختر عدد الحمامات المناسب لك",
+  "action.choose": "اختر",
+  "photos.options": "اختر إجراءً:",
+  "page.enter_property_details": "أدخل تفاصيل العقار",
+  "field.property_type": "نوع العقار",
+  "property_type.residential": "سكني",
+  "property_type.commercial": "تجاري",
+  "pin_choice.ready_to_publish": "!اعلانك جاهز للنشر",
+  "pin_choice.choose_view_method": "اختر طريقة عرض اعلانك ليصل لأكبر عدد من المهتمين",
+  "pin_choice.most_popular": "الاكثر شيوعا",
+  "pin_choice.choose_duration": "اختر المدة التي تناسبك",
+  "pin_choice.free.feature1": "ينشر في قائمة الاعلانات العادية بدون إبراز",
+  "pin_choice.free.feature2": "نشر اعلان مجاني",
+  "pin_choice.common.validity_30_days": "صلاحية 30 يوم",
+  "pin_choice.pinned.feature1": "يثبت أعلى القسم لفترة محددة لزيادة الزيارات",
+  "pin_choice.pinned.feature2": "يتم تثبيت اعلانك في القسم",
+  "pin_choice.featured.feature1": "إبراز بلون وشارة لزيادة المشاهدات",
+  "pin_choice.featured.feature2": "نشر اعلان مميز",
+  "photos.camera": "كاميرا",
+  "photos.gallery_source": "معرض الصور",
+  "review.screen_title": "راجع اعلانك قبل النشر",
+  "review.please_agree": "يرجى الموافقة قبل النشر",
+  "review.publish_error": "حصل خطأ أثناء النشر، حاول مرة أخرى",
+  "action.confirm_publish": "تأكيد ونشر",
+  "auth.select_account_type": "حدّد نوع حسابك",
+  "auth.select_account_type_subtitle": "اختر الطريقة اللي تناسب استخدامك في “اريد”",
+  "auth.error_select_type": "من فضلك اختر نوع الحساب",
+  "auth.confirm": "تأكيد",
+  "auth.personal_account": "حساب الأفراد",
+  "auth.personal_account_subtitle": "بيع وشراء بكل سهولة",
+  "auth.company_account": "حساب الشركات",
+  "auth.company_account_subtitle": "إدارة احترافية لاعلاناتك",
+  "onboarding.1.title": "اكتشف كل اللي \"تريد\" بسهولة",
+  "onboarding.1.desc": "بيع، شراء، أو عرض خدماتك ومنتجاتك بكل سهولة—للأفراد والشركات.",
+  "onboarding.2.title": "تصفح آلاف الاعلانات في ثواني",
+  "onboarding.2.desc": "كل الفئات بين إيدك: ملابس، إكسسوارات، إلكترونيات، خدمات.. واللي تبيه تلاقه بسرعة.",
+  "onboarding.3.title": "كل شغلك.. في لوحة واحدة",
+  "onboarding.3.desc": "تابع اعلاناتك، عدد مشاهداتها، وتفاصيلها بسهولة سواء كنت فرد أو شركة.",
+  "common.skip": "تخطّي",
+  "common.next": "التالي",
+  "common.create_account": "إنشاء حساب",
+  "enter_verification_code": "أدخل رمز التحقق",
+  "otp_enter_it": "أدخله لإكمال التسجيل.",
+  "enter_full_code": "يرجى إدخال رمز التحقق كاملاً",
+  "invalid_otp": "رمز التحقق غير صحيح",
+  "verification_success": "تم التحقق بنجاح",
+  "verification_done_message": "تم التحقق من الرمز بنجاح، يمكنك المتابعة.",
+  "resend_after": "لم يصلك الرمز؟ يمكنك إعادة الإرسال بعد قليل.",
+  "otp_resent": "تم إرسال رمز تحقق جديد",
+  "resend_error": "حدث خطأ أثناء إعادة الإرسال",
+  "payment_error": "تعذر فتح صفحة الدفع، حاول مرة أخرى لاحقًا",
+  "choose_plan": "اختر باقتك المميزة",
+  "choose_plan_desc": "اختر الخطة المناسبة لزيادة ظهور اعلانك",
+  "otp_sent_to": "أرسلنا لك رمز تحقق على",
+  "verification_success_message": "كودك مضبوط… وحسابك جاهز يكمل التسجيل.",
+  "otp_sent_to_phone": "رسلنا لك رمز على {phone} … دخّله علشان نكمّل تسجيلك.",
+  "resend_instruction": "إذا ما وصلك؟ تقدر تطلب إرسال مرّة ثانية بعد 30 ثانية.",
+  "select_account_type_title": "حدّد نوع حسابك",
+  "select_account_type_subtitle": "اختر الطريقة اللي تناسب استخدامك في “اريد”",
+  "select_account_type_error": "من فضلك اختر نوع الحساب",
+  "account_personal_title": "حساب الأفراد",
+  "account_personal_subtitle": "بيع وشراء بكل سهولة",
+  "account_company_title": "حساب الشركات",
+  "account_company_subtitle": "إدارة احترافية لاعلاناتك",
+  "upload_license_error": "يرجى رفع صورة الترخيص",
+  "search_main_section_hint": "ابحث عن القسم الرئيسي الخاص بشركتك",
+  "select_main_section_subtitle": "اختر نشاط شركتك لعرض خدماتك واعلاناتك بشكل مناسب.",
+  "company_main_section_title": "القسم الرئيسي لشركتك",
+  "search_sub_section_hint": "ابحث عن القسم الفرعي",
+  "select_sub_section_subtitle": "اختر القسم الفرعي لنشاط شركتك.",
+  "sub_section_title": "القسم الفرعي",
+  "choose_country_subtitle": "اختر محافظتك لعرض الاعلانات والخدمات القريبة منك.",
+  "onboarding_title_1": "اكتشف كل اللي \"تريد\" بسهولة",
+  "onboarding_desc_1": "بيع، شراء، أو عرض خدماتك ومنتجاتك بكل سهولة—للأفراد والشركات.",
+  "onboarding_title_2": "تصفح آلاف الاعلانات في ثواني",
+  "onboarding_desc_2": "كل الفئات بين إيدك: ملابس، إكسسوارات، إلكترونيات، خدمات.. واللي تبيه تلاقه بسرعة.",
+  "onboarding_title_3": "كل شغلك.. في لوحة واحدة",
+  "onboarding_desc_3": "تابع اعلاناتك، عدد مشاهداتها، وتفاصيلها بسهولة سواء كنت فرد أو شركة.",
+  "onboarding_skip": "تخطّي",
+  "onboarding_next": "التالي",
+  "onboarding_register": "إنشاء حساب",
+  "onboarding_login": "تسجيل دخول",
+  "choose_your_plan_title": "اختر باقتك",
+  "no_plans_available": "لا توجد باقات حالياً",
+  "subscribe_now": "اشترك الآن",
+  "most_popular": "الاكثر طلبا",
+  "day_unit": "يوم",
+  "filter.section_governorate": "المحافظة",
+  "filter.section_area_city": "المنطقة",
+  "filter.section_price": "السعر",
+  "filter.section_space": "المساحة",
+  "filter.section_rooms": "عدد الغرف",
+  "filter.section_baths": "الحمامات",
+  "filter.section_floor": "الدور",
+  "filter.section_brand": "الماركة",
+  "filter.section_model": "الموديل",
+  "filter.section_year": "سنة الصنع",
+  "filter.section_inspection": "شهادة الفحص",
+  "filter.title": "تصفية النتائج",
+  "filter.highest_price": "أعلي سعر",
+  "filter.lowest_price": "أدني سعر",
+  "filter.choose_year": "اختر السنة",
+  "filter.area_lt_50": "أقل من 50 م²",
+  "filter.area_50_80": "من 50 - 80 م²",
+  "filter.area_80_120": "من 80 - 120 م²",
+  "filter.area_120_150": "من 120 - 150 م²",
+  "filter.area_150_200": "من 150 - 200 م²",
+  "filter.area_200_300": "من 200 - 300 م²",
+  "filter.area_gt_300": "أكثر من 300 م²",
+  "filter.room_1": "غرفة",
+  "filter.room_2": "غرفتين",
+  "filter.room_3": "3 غرف",
+  "filter.room_4": "4 غرف",
+  "filter.room_5_plus": "غرف 5+",
+  "filter.bath_1": "1 حمّام",
+  "filter.bath_2": "2 حمّامات",
+  "filter.bath_3": "3 حمّامات",
+  "filter.bath_4": "4 حمّامات",
+  "filter.bath_5_plus": "+5 حمّامات",
+  "filter.floor_ground": "أرضي",
+  "filter.floor_low": "مرتفع بسيط (1-2)",
+  "filter.floor_mid": "متوسط (3-4)",
+  "filter.floor_high": "عالي (+5)",
+  "filter.inspection_included": "يشمل شهادة فحص",
+  "filter.inspection_all": "الكل",
+  "range.subtitle": "حدّد النطاق علشان نعرض لك أفضل الخيارات.",
+  "error.invalid_numbers": "من فضلك أدخل أرقامًا صحيحة",
+  "filter.choose_price": "أختر السعر",
+  "common.reset": "إعادة تعيين",
+  "to": "إلى",
+  "error.invalid_years": "من فضلك أدخل سنوات صحيحة",
+  "filter.show_results": "إظهار النتائج",
+  "unit_cc": "سي سي",
+  "account_type.page_title": "أين تريد نشر اعلانك؟",
+  "account_type.page_subtitle": "اختر أين تريد عرض اعلانك.",
+  "account_type.select_error": "من فضلك اختر نوع الحساب",
+  "account_type.individual_title": "اعلان عادي",
+  "account_type.individual_subtitle": "مع اعلانات المستخدمين",
+  "account_type.company_title": "اعلان شركة",
+  "account_type.company_subtitle": "داخل صفحة شركتك",
+  "download_app_from": "تحميل التطبيق من",
+  "shared_link": "الرابط المشارك",
+  "or_open_in_browser": "أو افتح في المتصفح",
+  "update.title": "تحديث جديد متاح",
+  "update.required_title": "تحديث إلزامي",
+  "update.msg": "اصدار جديد من التطبيق حدث الان",
+  "update.required_msg": "لازم تحدّث التطبيق علشان تقدر تكمل.",
+  "update.current_version": "الحالي",
+  "update.latest_version": "الأحدث",
+  "update.update_now": "تحديث الآن",
+  "update.later": "لاحقاً",
+  "update.required_hint": "لن تتمكن من استخدام التطبيق بدون تحديث.",
+  "update.store_open_failed": "تعذّر فتح رابط المتجر",
+  "maintenance_title": "التطبيق تحت الصيانة",
+  "maintenance_desc": "نقوم حالياً بأعمال صيانة لتحسين تجربتك.\nسنعود قريباً بإذن الله.",
+  "maintenance_hint": "شكراً لتفهمك"
+
+}

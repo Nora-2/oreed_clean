@@ -1,0 +1,47 @@
+﻿Analyzing features...                                           
+
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\datasources\home_remote_datasource.dart:33:50 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\datasources\home_remote_datasource.dart:34:32 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\datasources\home_remote_datasource.dart:35:86 - curly_braces_in_flow_control_structures
+   info - Use 'rethrow' to rethrow a caught exception - lib\features\home\data\datasources\home_remote_datasource.dart:46:7 - use_rethrow_when_possible
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\datasources\home_remote_datasource.dart:92:50 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\datasources\home_remote_datasource.dart:93:32 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\datasources\home_remote_datasource.dart:94:86 - curly_braces_in_flow_control_structures
+   info - Use 'rethrow' to rethrow a caught exception - lib\features\home\data\datasources\home_remote_datasource.dart:105:7 - use_rethrow_when_possible
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\models\category_model.dart:18:31 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\models\category_model.dart:19:39 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\features\home\data\models\category_model.dart:20:39 - curly_braces_in_flow_control_structures
+warning - Unused import: 'package:oreed_clean/core/error/failures.dart' - lib\features\home\presentation\cubit\home_cubit.dart:10:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\home\presentation\pages\home_screen.dart:287:43 - deprecated_member_use
+  error - Undefined name 'context' - lib\features\home\presentation\pages\home_screen.dart:346:36 - undefined_identifier
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\pages\home_screen.dart:362:19 - deprecated_member_use
+   info - Use a 'SizedBox' to add whitespace to a layout - lib\features\home\presentation\pages\home_screen.dart:395:12 - sized_box_for_whitespace
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\home\presentation\pages\home_screen.dart:420:33 - deprecated_member_use
+  error - Methods can't be invoked in constant expressions - lib\features\home\presentation\pages\home_screen.dart:490:25 - const_eval_method_invocation
+  error - Undefined name 'context' - lib\features\home\presentation\pages\home_screen.dart:490:44 - undefined_identifier
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\pages\home_screen.dart:527:25 - deprecated_member_use
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\pages\home_screen.dart:574:23 - deprecated_member_use
+  error - Undefined name 'context' - lib\features\home\presentation\pages\home_screen.dart:586:77 - undefined_identifier
+  error - Methods can't be invoked in constant expressions - lib\features\home\presentation\pages\home_screen.dart:610:23 - const_eval_method_invocation
+  error - Undefined name 'context' - lib\features\home\presentation\pages\home_screen.dart:610:42 - undefined_identifier
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\widgets\bottomnav.dart:46:21 - deprecated_member_use
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\widgets\bottomnav.dart:48:21 - deprecated_member_use
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\widgets\bottomnav.dart:52:21 - deprecated_member_use
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\widgets\bottomnav.dart:54:21 - deprecated_member_use
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\widgets\bottomnav.dart:58:21 - deprecated_member_use
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\home\presentation\widgets\bottomnav.dart:60:21 - deprecated_member_use
+warning - The receiver can't be null, so the null-aware operator '?.' is unnecessary - lib\features\login\data\datasources\auth_remote_data_source.dart:18:49 - invalid_null_aware_operator
+warning - Unused import: '../../domain/entities/user_entity.dart' - lib\features\login\data\models\login_response.dart:1:8 - unused_import
+   info - Use the null-aware operator '?.' rather than an explicit 'null' comparison - lib\features\login\data\models\user_model.dart:56:18 - prefer_null_aware_operators
+   info - Use the null-aware operator '?.' rather than an explicit 'null' comparison - lib\features\login\data\models\user_model.dart:57:22 - prefer_null_aware_operators
+   info - Use the null-aware operator '?.' rather than an explicit 'null' comparison - lib\features\login\data\models\user_model.dart:58:15 - prefer_null_aware_operators
+   info - Use the null-aware operator '?.' rather than an explicit 'null' comparison - lib\features\login\data\models\user_model.dart:59:16 - prefer_null_aware_operators
+   info - Use the null-aware operator '?.' rather than an explicit 'null' comparison - lib\features\login\data\models\user_model.dart:60:18 - prefer_null_aware_operators
+   info - Don't invoke 'print' in production code - lib\features\login\data\repositories\auth_repo_impl.dart:34:7 - avoid_print
+   info - Invalid use of a private type in a public API - lib\features\login\presentation\pages\login_screen.dart:16:3 - library_private_types_in_public_api
+warning - This function has a nullable return type of 'String?', but ends without returning a value - lib\features\login\presentation\pages\login_screen.dart:213:26 - body_might_complete_normally_nullable
+   info - 'color' is deprecated and shouldn't be used. Use colorFilter instead - lib\features\login\presentation\widgets\custom_apptextfield.dart:103:13 - deprecated_member_use
+warning - Unused import: 'package:flutter_bloc/flutter_bloc.dart' - lib\features\login\presentation\widgets\custom_button_login.dart:2:8 - unused_import
+warning - The value of the field '_phoneController' isn't used - lib\features\login\presentation\widgets\custom_button_login.dart:21:31 - unused_field
+warning - The value of the field '_passwordController' isn't used - lib\features\login\presentation\widgets\custom_button_login.dart:22:31 - unused_field
+

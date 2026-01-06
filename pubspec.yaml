@@ -1,0 +1,83 @@
+name: oreed_clean
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.8
+  cached_network_image: ^3.3.1
+  carousel_slider: ^5.0.0
+  country_code_picker: ^3.0.0
+  country_flags:
+  fluttertoast: ^8.2.2
+  animated_notch_bottom_bar: ^1.0.3 
+  intl:
+  phone_numbers_parser: ^9.0.0
+  shared_preferences: ^2.2.3
+  url_launcher: ^6.2.6
+  intl_phone_field:
+  flutter_svg:
+  smooth_page_indicator: ^1.2.0
+  get_it:
+  dio: ^5.9.0
+  equatable:
+  shimmer: ^3.0.0
+  flutter_bloc: ^9.1.1
+  bloc: ^9.2.0
+  flutter_screenutil: ^5.9.3
+  flutter_localizations:
+    sdk: flutter 
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.1
+
+flutter_native_splash:
+  color: "ffffff"              # نفس لون الخلفية اللي تحبه
+  image: assets/images/logo_icon-removebg.png
+  android_12:
+    color: "#ffffff"
+    image: assets/images/logo_icon-removebg.png
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/locales/
+
+
+  fonts:
+    - family: Almarai
+      fonts:
+        - asset: assets/fonts/Almarai-Regular.ttf
+        
+
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
