@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/pages/home_screen.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/pages/login_screen.dart';
+import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_cubit.dart';
+import 'package:oreed_clean/features/mainlayout/presentation/pages/mainlayout.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
 import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
@@ -36,7 +37,15 @@ class AppRouter {
         create: (context) => sl<HomeCubit>()..loadHomeData(),
         child: HomeScreen(),
       ),
-        );   
+        ); 
+         case Routes.homelayout:
+       return MaterialPageRoute(
+          builder: (_) => BlocProvider<HomelayoutCubit>(
+  create: (_) => HomelayoutCubit(),
+  child: const Homelayout(),
+)
+
+        );  
     }
     return null;
   }

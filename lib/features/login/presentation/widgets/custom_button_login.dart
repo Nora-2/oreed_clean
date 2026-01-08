@@ -36,7 +36,7 @@ class CustomloginButton extends StatelessWidget {
                 //    "956${_phoneController.text}",
                 //       _passwordController.text,
                 //     );
-                Navigator.pushNamed(context, Routes.home);
+                Navigator.pushNamed(context, Routes.homelayout);
               },
         child: Container(
           width: double.infinity,

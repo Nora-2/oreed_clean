@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:oreed_clean/core/app_shared_prefs.dart';
+import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
+
 import 'package:oreed_clean/features/on_boarding/domain/entities/onboarding_page_entity.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/widgets/onboarding_slide.dart';
 
@@ -103,11 +105,9 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   Future<void> _completeAndGoHome() async {
     await _completeOnboarding();
-    // Navigator.of(context).pushReplacement(
-    //   MaterialPageRoute(
-    //     builder: (_) => const Home(),
-    //   ),
-    // );
+    Navigator.of(context).pushReplacementNamed(
+     Routes.homelayout
+    );
   }
 
   Future<void> _completeOnboarding() async {

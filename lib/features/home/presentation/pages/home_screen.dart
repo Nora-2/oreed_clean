@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
-import 'package:oreed_clean/features/home/presentation/widgets/bottomnav.dart';
 import 'package:oreed_clean/features/home/presentation/widgets/error_state.dart';
 import 'package:oreed_clean/features/home/presentation/widgets/home_back.dart';
 import 'package:oreed_clean/features/home/presentation/widgets/home_contant.dart';
@@ -45,7 +44,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const CustomBottomNavBar(),
+     
     );
   }
 }
