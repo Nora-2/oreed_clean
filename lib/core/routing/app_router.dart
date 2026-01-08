@@ -6,6 +6,7 @@ import 'package:oreed_clean/features/home/presentation/pages/home_screen.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/pages/login_screen.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
+import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
 import 'routes.dart';
 class AppRouter {
@@ -22,6 +23,11 @@ class AppRouter {
          case Routes.onboarding:
        return MaterialPageRoute(
           builder: (_) =>   OnboardingPage(),
+      
+        );
+          case Routes.splash:
+       return MaterialPageRoute(
+          builder: (_) =>   SplashScreen(),
       
         );
        case Routes.home:
