@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.login,
+      initialRoute: Routes.onboarding,
       onGenerateRoute: appRouter.generateRoute,
 
       // 🌍 Localization

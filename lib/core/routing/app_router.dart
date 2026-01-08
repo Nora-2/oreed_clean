@@ -5,6 +5,7 @@ import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/pages/home_screen.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/pages/login_screen.dart';
+import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
 import 'routes.dart';
 class AppRouter {
@@ -17,6 +18,11 @@ class AppRouter {
         create: (context) => sl<AuthCubit>(),
         child: LoginScreen(),
       ),
+        );
+         case Routes.onboarding:
+       return MaterialPageRoute(
+          builder: (_) =>   OnboardingPage(),
+      
         );
        case Routes.home:
        return MaterialPageRoute(

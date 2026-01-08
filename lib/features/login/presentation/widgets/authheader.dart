@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oreed_clean/features/login/presentation/widgets/circelback.dart';
+import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/shared_widgets/circelback.dart';
 
 class AuthHeader extends StatelessWidget {
   final String title;
@@ -22,7 +23,7 @@ class AuthHeader extends StatelessWidget {
         children: [
            Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [CircleBack(context: context,)],
+            children: [CircleBack(context: context,background_color: AppColors.whiteColor,)],
           ),
           Text(
             title,

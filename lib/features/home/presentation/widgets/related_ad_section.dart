@@ -1,7 +1,6 @@
-// // lib/view/screens/details_ads/widgets/related_ads_section.dart
+
 // import 'package:flutter/material.dart';
-// import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
-// /// Model representing a related advertisement
+// import 'package:oreed_clean/core/utils/shared_widgets/related_ad_card.dart';
 // class RelatedAd {
 //   final String image;
 //   final String id;
