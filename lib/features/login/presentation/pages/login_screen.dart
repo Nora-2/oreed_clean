@@ -35,61 +35,58 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
      final size = MediaQuery.of(context).size;
     final isMobile = size.width <= 600;
-    return Directionality(
-      
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(Appimage.loginBack), fit: BoxFit.fill),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              
-              AuthHeader(
-                title: AppTranslations.of(context)!.text(AppString.loginTitle),
-                subtitle: AppTranslations.of(context)!.text(AppString.loginSubtitle),
-                isMobile: isMobile,
-              ),
-              
-           // Pushes content to bottom
-             
-              Expanded(
-                child: AuthCardContainer(
-                  horizontalPadding: isMobile ? 20 : size.width * 0.2,
-                  child: Column(
-                    children: [
-                      // 3. Reusable Toggle
-                      AuthToggleSelector(
-                        leftLabel: AppTranslations.of(context)!.text(AppString.register),
-                        rightLabel: AppTranslations.of(context)!.text(AppString.loginTitle),
-                        isLeftSelected: _isLoginSelected,
-                        isMobile: isMobile,
-                        onToggle: (val) => setState(() => _isLoginSelected = val),
-                      ),
-                      const SizedBox(height: 20),
-                      
-                      // 4. Form Fields
-                      _buildForm(isMobile),
-                      
-                       SizedBox(height: size.height*.4),
-                   
-                      CustomloginButton(
-                        phoneController: _phoneController,
-                        passwordController: _passwordController,
-                        state: context.watch<AuthCubit>().state,
-                        isMobile: isMobile,
-                      ),
-                    ],
-                  ),
+    return Scaffold(
+    body: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(Appimage.loginBack), fit: BoxFit.fill),
+      ),
+      child: SafeArea(
+        child: Column(
+          children: [
+            
+            AuthHeader(
+              title: AppTranslations.of(context)!.text(AppString.loginTitle),
+              subtitle: AppTranslations.of(context)!.text(AppString.loginSubtitle),
+              isMobile: isMobile,
+            ),
+            
+         // Pushes content to bottom
+           
+            Expanded(
+              child: AuthCardContainer(
+                horizontalPadding: isMobile ? 20 : size.width * 0.2,
+                child: Column(
+                  children: [
+                    // 3. Reusable Toggle
+                    AuthToggleSelector(
+                      leftLabel: AppTranslations.of(context)!.text(AppString.register),
+                      rightLabel: AppTranslations.of(context)!.text(AppString.loginTitle),
+                      isLeftSelected: _isLoginSelected,
+                      isMobile: isMobile,
+                      onToggle: (val) => setState(() => _isLoginSelected = val),
+                    ),
+                    const SizedBox(height: 20),
+                    
+                    // 4. Form Fields
+                    _buildForm(isMobile),
+                    
+                     SizedBox(height: size.height*.4),
+                 
+                    CustomloginButton(
+                      phoneController: _phoneController,
+                      passwordController: _passwordController,
+                      state: context.watch<AuthCubit>().state,
+                      isMobile: isMobile,
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    ));
+    ),
+        );
   }
   
   Widget _buildForm(bool isMobile) {

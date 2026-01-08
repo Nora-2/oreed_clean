@@ -123,6 +123,7 @@ class _BannerItem extends StatelessWidget {
         fit: BoxFit.cover,
         width: double.infinity,
         errorBuilder: (_, __, ___) => Container(
+          width: double.infinity,
           color: Colors.grey.shade200,
           child: const Icon(Icons.image, size: 40),
         ),

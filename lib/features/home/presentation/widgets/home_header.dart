@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
-import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/appstring/app_string.dart';
@@ -14,6 +14,15 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final appTrans = AppTranslations.of(context);
+      final prefs = AppSharedPreferences();
+    final String displayName = (prefs.userNameAr?.trim().isNotEmpty == true
+            ? prefs.userNameAr!
+            : (prefs.userName?.trim().isNotEmpty == true
+                ? prefs.userName!
+                : (AppTranslations.of(context)?.text('guest_name') ?? 'ضيف')))
+        .split(' ') // in case of full name, take first part
+        .first;
     return Padding(
       padding: EdgeInsets.all(isTablet ? 20 : 16),
       child: Column(
@@ -32,12 +41,17 @@ class HomeHeader extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            '${AppTranslations.of(context)!.text(AppString.homeTitle)} '
-            '${AppTranslations.of(context)!.text(AppString.guest)} '
-            '${AppTranslations.of(context)!.text(AppString.waveHand)}',
-            style: const TextStyle(color: Colors.white70),
-          ),
+         Text(
+                                    (appTrans?.text('welcome_message') ??
+                                            'هلا ومرحبا {name} 👋')
+                                        .replaceAll('{name}', displayName),
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white70,
+                                      height: 1.25,
+                                    ),
+                                  ),
           const SizedBox(height: 8),
           Text(
             AppTranslations.of(context)!.text(AppString.homeSubtitle),

@@ -15,6 +15,7 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     final AppRouter appRouter = AppRouter();
@@ -23,8 +24,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.login,
       onGenerateRoute: appRouter.generateRoute,
-      
-      // Localization configuration
+
+      // 🌍 Localization
       localizationsDelegates: const [
         AppTranslationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -32,16 +33,28 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('en', ''),
-        Locale('ar', ''),
+        Locale('en'),
+        Locale('ar'),
       ],
-      locale: const Locale('ar', ''), // Default to Arabic
-    
-      theme: ThemeData(fontFamily:Constants.fontFamily,
-          
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      primary: AppColors.primary,
-      ),)
+      locale: const Locale('ar'), 
+
+      builder: (context, child) {
+        final locale = Localizations.localeOf(context);
+
+        return Directionality(
+          textDirection: locale.languageCode == 'ar'
+              ? TextDirection.rtl
+              : TextDirection.ltr,
+          child: child!,
+        );
+      },
+
+      theme: ThemeData(
+        fontFamily: Constants.fontFamily,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: AppColors.primary,
+        ),
+      ),
     );
   }
 }

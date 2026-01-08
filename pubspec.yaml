@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_localizations:
     sdk: flutter 
+  skeletonizer: ^2.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
