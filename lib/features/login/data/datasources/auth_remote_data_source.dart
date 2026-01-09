@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:oreed_clean/networking/api_provider.dart';
 import '../../../../networking/optimized_api_client.dart';
 import '../models/login_response.dart';
 import '../models/user_model.dart';
@@ -15,7 +16,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel> login({required String phone, required String password, String? fcmToken}) async {
     // Guard: ensure baseUrl is configured (not the placeholder)
-    final base = apiProvider.dio.options.baseUrl?.toLowerCase() ?? '';
+    final base = ApiProvider.baseUrl;
     if (base.contains('example.com') || base.trim().isEmpty) {
       throw DioException(
         requestOptions: RequestOptions(path: '/api/login'),

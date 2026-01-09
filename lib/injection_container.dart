@@ -35,7 +35,7 @@ Future<void> init() async {
       ));
 
   // API client wrapper
-  sl.registerLazySingleton<OptimizedApiClient>(() => OptimizedApiClient(sl()));
+  sl.registerLazySingleton<OptimizedApiClient>(() => OptimizedApiClient());
 
   // SharedPreferences initialization
   final prefs = await SharedPreferences.getInstance();
