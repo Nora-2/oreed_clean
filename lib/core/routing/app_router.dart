@@ -6,46 +6,52 @@ import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/pages/login_screen.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_cubit.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/pages/mainlayout.dart';
+import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
+import 'package:oreed_clean/features/notification/presentation/pages/notification_screen.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
 import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
 import 'routes.dart';
+
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-     
       case Routes.login:
-       return MaterialPageRoute(
-          builder: (_) =>  BlocProvider(
-        create: (context) => sl<AuthCubit>(),
-        child: LoginScreen(),
-      ),
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<AuthCubit>(),
+            child: LoginScreen(),
+          ),
         );
-         case Routes.onboarding:
-       return MaterialPageRoute(
-          builder: (_) =>   OnboardingPage(),
-      
+      case Routes.onboarding:
+        return MaterialPageRoute(builder: (_) => OnboardingPage());
+      case Routes.splash:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
+      case Routes.home:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<HomeCubit>()..loadHomeData(),
+            child: HomeScreen(),
+          ),
         );
-          case Routes.splash:
-       return MaterialPageRoute(
-          builder: (_) =>   SplashScreen(),
-      
-        );
-       case Routes.home:
-       return MaterialPageRoute(
-          builder: (_) =>  BlocProvider(
-        create: (context) => sl<HomeCubit>()..loadHomeData(),
-        child: HomeScreen(),
-      ),
-        ); 
-         case Routes.homelayout:
-       return MaterialPageRoute(
+      case Routes.homelayout:
+        return MaterialPageRoute(
           builder: (_) => BlocProvider<HomelayoutCubit>(
-  create: (_) => HomelayoutCubit(),
-  child: const Homelayout(),
-)
+            create: (_) => HomelayoutCubit(),
+            child: const Homelayout(),
+          ),
+        );
+        
+         case Routes.notification:
+  return MaterialPageRoute(
+    builder: (_) => BlocProvider<NotificationsCubit>(
+      create: (_) => sl<NotificationsCubit>(),
+      child: NotificationsScreen (),
+    ),
+  );
 
-        );  
+         
+
     }
     return null;
   }

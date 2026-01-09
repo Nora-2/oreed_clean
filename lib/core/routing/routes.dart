@@ -4,5 +4,6 @@ class Routes {
   static const String home = '/home';
     static const String homelayout = '/homelayout';
   static const String onboarding = '/onboarding';
+   static const String notification = '/notification';
   
 }

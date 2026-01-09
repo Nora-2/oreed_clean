@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
+import 'package:oreed_clean/features/notification/data/datasources/notification_remote_data_source.dart';
+import 'package:oreed_clean/features/notification/data/repositories/notification_repo.dart';
+import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:oreed_clean/networking/optimized_api_client.dart';
 import 'package:oreed_clean/features/home/data/datasources/home_remote_datasource.dart';
 import 'package:oreed_clean/features/home/data/repositories/home_repo_impelement.dart';
@@ -37,7 +40,27 @@ Future<void> init() async {
   // SharedPreferences initialization
   final prefs = await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => prefs);
+// ================== Notifications ==================
 
+// Cubit
+sl.registerFactory(
+  () => NotificationsCubit(
+    repository: sl(),
+    prefs: sl(),
+  ),
+);
+
+// Repository
+sl.registerLazySingleton<NotificationsRepository>(
+  () => NotificationsRepository(
+    remoteDataSource: sl(),
+  ),
+);
+
+// Remote Data Source
+sl.registerLazySingleton<NotificationsRemoteDataSource>(
+  () => NotificationsRemoteDataSourceImpl(),
+);
   // ================== Auth ==================
   // Cubit
   sl.registerFactory(() => AuthCubit(sl()));
