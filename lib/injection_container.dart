@@ -11,6 +11,11 @@ import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubi
 import 'package:oreed_clean/features/notification/data/datasources/notification_remote_data_source.dart';
 import 'package:oreed_clean/features/notification/data/repositories/notification_repo.dart';
 import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
+import 'package:oreed_clean/features/personal_register/data/datasources/personal_register_remote_data_source.dart';
+import 'package:oreed_clean/features/personal_register/data/repositories/personal_register_repo_impl.dart';
+import 'package:oreed_clean/features/personal_register/domain/repositories/personal_register_repo.dart';
+import 'package:oreed_clean/features/personal_register/domain/usecases/personal_register_usecase.dart';
+import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
 import 'package:oreed_clean/networking/api_provider.dart';
 import 'package:oreed_clean/networking/http_client.dart';
 import 'package:oreed_clean/networking/optimized_api_client.dart';
@@ -59,7 +64,20 @@ sl.registerLazySingleton<AppSharedPreferences>(
   sl.registerLazySingleton<SharedPreferences>(() => prefs);
 // ================== Notifications ==================
 
-// Cubit
+  sl.registerLazySingleton<PersonalRegisterRemoteDataSource>(
+    () => PersonalRegisterRemoteDataSource(sl<ApiProvider>()),
+  );
+  sl.registerLazySingleton<PersonalRegisterRepository>(
+    () =>
+        PersonalRegisterRepositoryImpl(sl<PersonalRegisterRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<PersonalRegisterUseCase>(
+    () => PersonalRegisterUseCase(sl<PersonalRegisterRepository>()),
+  );
+sl.registerFactory<PersonalRegisterCubit>(
+  () => PersonalRegisterCubit(sl<PersonalRegisterUseCase>()),
+);
+
 sl.registerFactory(
   () => NotificationsCubit(
     repository: sl(),

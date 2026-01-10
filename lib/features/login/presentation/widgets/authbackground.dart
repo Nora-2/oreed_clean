@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 
 class AuthBack extends StatefulWidget {
   const AuthBack({
@@ -60,7 +61,7 @@ class _AuthBackState extends State<AuthBack> {
             width: size.width,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/img.png'),
+                image: AssetImage(Appimage.loginBack),
                 fit: BoxFit.cover,
               ),
             ),

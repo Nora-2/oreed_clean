@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oreed_clean/features/account_type/presentation/pages/account_type_screen.dart';
 import 'package:oreed_clean/features/banners/presentation/cubit/banners_cubit.dart';
 import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
@@ -11,6 +12,8 @@ import 'package:oreed_clean/features/mainlayout/presentation/pages/mainlayout.da
 import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:oreed_clean/features/notification/presentation/pages/notification_screen.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
+import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
+import 'package:oreed_clean/features/personal_register/presentation/pages/personal_register_screen.dart';
 import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
 import 'routes.dart';
@@ -27,6 +30,8 @@ class AppRouter {
         );
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => OnboardingPage());
+            case Routes.accounttype:
+        return MaterialPageRoute(builder: (_) => AccountTypePage());
       case Routes.splash:
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case Routes.home:
@@ -52,6 +57,24 @@ class AppRouter {
       );
     },
   );
+
+
+      case Routes.personalregister:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              // Provides registration logic
+              BlocProvider(
+                create: (context) => sl<PersonalRegisterCubit>(),
+              ),
+              // Provides login logic (since the screen has a login tab)
+              BlocProvider(
+                create: (context) => sl<AuthCubit>(),
+              ),
+            ],
+            child: const PersonalRegistrationScreen(),
+          ),
+        );
       case Routes.homelayout:
         return MaterialPageRoute(
           builder: (_) => BlocProvider<HomelayoutCubit>(

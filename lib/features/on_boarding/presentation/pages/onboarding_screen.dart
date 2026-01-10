@@ -96,11 +96,9 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   Future<void> _goToAccountType() async {
     await _completeOnboarding();
-    // Navigator.of(context).pushReplacement(
-    //   MaterialPageRoute(
-    //     builder: (_) => const AccountTypePage(),
-    //   ),
-    // );
+    Navigator.of(context).pushReplacementNamed(
+     Routes.accounttype
+    );
   }
 
   Future<void> _completeAndGoHome() async {

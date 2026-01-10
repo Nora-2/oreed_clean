@@ -3,8 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oreed_clean/core/enmus/enum.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
-
-
 class AdTypeBadge extends StatelessWidget {
   final AdType type;
   final bool dense;

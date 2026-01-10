@@ -1,5 +1,4 @@
 // lib/utils/app_shared_prefs.dart
-import 'package:oreed_clean/features/login/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_storage_keys.dart';
 

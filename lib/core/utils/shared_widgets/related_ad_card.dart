@@ -328,8 +328,8 @@ class _PriceDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     final parts = _splitPrice(priceText);
 
-    final displayCurrency =
-        parts.currency.isNotEmpty ? parts.currency : currencyLabel;
+    // final displayCurrency =
+    //     parts.currency.isNotEmpty ? parts.currency : currencyLabel;
 
     return Text(
       '${parts.number} $currencyLabel',
