@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../models/banner_model.dart';
+import 'package:oreed_clean/features/banners/data/models/banner_mode.dart' show BannerModel;
 
 class BannerRemoteDataSource {
   static const _baseUrl = 'https://oreedo.net/api/v1';

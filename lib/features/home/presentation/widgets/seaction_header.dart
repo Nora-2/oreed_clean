@@ -80,3 +80,38 @@ class SectionHeader extends StatelessWidget {
     );
   }
 }
+class SectionsTitle extends StatelessWidget {
+  const SectionsTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final appTrans = AppTranslations.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        children: [
+          Container(
+            width: 4,
+            height: 24,
+            decoration: BoxDecoration(
+              color: const Color(0xFFFF9F00),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              appTrans?.text('discover_sections') ?? 'اكتشف الأقسام',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+                color: AppColors.textPrimary,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

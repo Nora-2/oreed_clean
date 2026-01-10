@@ -2,8 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:oreed_clean/core/app_shared_prefs.dart';
-import 'package:oreed_clean/features/home/presentation/pages/home_screen.dart';
-import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
+import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/features/splash/widgets/glow_blob_painter.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -55,54 +54,34 @@ class _SplashScreenState extends State<SplashScreen>
       if (mounted) _goNext();
     });
   }
+Future<void> _goNext() async {
+  if (!mounted) return;
 
-  Future<void> _goNext() async {
+  try {
+    final prefs = AppSharedPreferences();
+    await prefs.initSharedPreferencesProp();
+
+    final goOnboarding = !prefs.hasSeenOnboarding;
+
     if (!mounted) return;
 
-    try {
-      final prefs = AppSharedPreferences();
-      await prefs.initSharedPreferencesProp();
+    Navigator.of(context).pushReplacementNamed(
+      goOnboarding ? Routes.onboarding : Routes.homelayout,
+    );
+  } catch (e, st) {
+    debugPrint('❌ Splash _goNext error: $e');
+    debugPrint(st.toString());
 
-      debugPrint('✅ Splash: prefs loaded');
-      debugPrint(
-        '📌 Cached: appOnOff=${prefs.appOnOff}, '
-        'android=${prefs.cachedAndroidVersion}, ios=${prefs.cachedIosVersion}',
-      );
+    if (!mounted) return;
 
-      bool shouldShowUpdate = false;
+    final prefs = AppSharedPreferences();
+    final goOnboarding = !prefs.hasSeenOnboarding;
 
-      debugPrint('📌 shouldShowUpdate=$shouldShowUpdate');
-
-      // ✅ Normal flow
-      final goOnboarding = !prefs.hasSeenOnboarding;
-      debugPrint('➡️ goOnboarding=$goOnboarding');
-
-      if (!mounted) return;
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          transitionDuration: const Duration(milliseconds: 500),
-          pageBuilder: (_, __, ___) =>
-              goOnboarding ? const OnboardingPage() : const HomeScreen(),
-          transitionsBuilder: (_, anim, __, child) =>
-              FadeTransition(opacity: anim, child: child),
-        ),
-      );
-    } catch (e, st) {
-      debugPrint('❌ Splash _goNext error: $e');
-      debugPrint(st.toString());
-
-      // fallback: just continue to home/onboarding so app never stuck
-      if (!mounted) return;
-      final prefs = AppSharedPreferences();
-      final goOnboarding = !prefs.hasSeenOnboarding;
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (_) =>
-              goOnboarding ? const OnboardingPage() : const HomeScreen(),
-        ),
-      );
-    }
+    Navigator.of(context).pushReplacementNamed(
+      goOnboarding ? Routes.onboarding : Routes.homelayout,
+    );
   }
+}
 
 
 
@@ -119,9 +98,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    // لايت فقط — درجات ثابتة
-    const bgStart = Color(0xFF3964D3);
-    const bgEnd = Color(0xFF3964D3);
+  
     const blob1 = Color(0xFF8B5CF6); // بنفسجي فاتح
     const blob2 = Color(0xFF22D3EE); // سماوي فاتح
     return Scaffold(

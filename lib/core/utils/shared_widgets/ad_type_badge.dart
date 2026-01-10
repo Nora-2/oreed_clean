@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oreed_clean/core/enmus/enum.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 
 
 class AdTypeBadge extends StatelessWidget {
@@ -106,7 +107,7 @@ class _AdTypeStyle {
       case AdType.pinned:
         return _AdTypeStyle(
             label: tr?.text('ad_type.pinned') ?? 'Pinned',
-            icon: 'assets/svg/pin.svg',
+            icon: AppIcons.pin,
             fg: const Color(0xFFF7F8FA),
             backcolor: const Color(0xffFF8A00));
     }

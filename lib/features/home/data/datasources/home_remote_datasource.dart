@@ -1,110 +1,58 @@
-import 'package:dio/dio.dart';
-import 'package:oreed_clean/features/home/data/models/banner_model.dart';
-import 'package:oreed_clean/features/home/data/models/category_model.dart';
-import 'package:oreed_clean/features/home/data/models/product_model.dart';
 
-abstract class HomeRemoteDataSource {
-  Future<List<CategoryModel>> getCategories();
-  Future<List<ProductModel>> getProducts();
-  Future<List<BannerModel>> getBanners({String place, int? sectionId});
-}
+import 'package:oreed_clean/features/home/data/models/related_ad_model.dart';
+import 'package:oreed_clean/networking/api_provider.dart';
 
-class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
-  final Dio dio;
+import '../../domain/entities/related_ad_entity.dart';
+import '../models/section_model.dart';
 
-  HomeRemoteDataSourceImpl(this.dio);
+class MainHomeRemoteDataSource {
+  final ApiProvider apiProvider;
 
-  @override
-  Future<List<CategoryModel>> getCategories() async {
-    final uri = '/api/get_sections';
+  MainHomeRemoteDataSource(this.apiProvider);
 
-    try {
-      final response = await dio.get(uri, queryParameters: {
-        'paginate': 'enabled',
-        'per_page': 10,
-      }, options: Options(headers: {
-        'Accept': 'application/json',
-      }));
-
-      if (response.statusCode == 200) {
-        final data = response.data;
-        // data might be { code:200, status:true, data: [...] } or directly list
-        List raw = [];
-        if (data is Map && data['data'] is List) raw = data['data'];
-        else if (data is List) raw = data;
-        else if (data is Map && data['data'] is Map && data['data']['data'] is List) raw = data['data']['data'];
-
-        return raw.map((e) => CategoryModel.fromJson(e as Map<String, dynamic>)).toList();
-      }
-
-      throw DioException(
-        requestOptions: response.requestOptions,
-        error: 'Failed to fetch categories: ${response.statusCode}',
-        type: DioExceptionType.badResponse,
-      );
-    } on DioException catch (e) {
-      throw e;
-    } catch (e) {
-      throw DioException(requestOptions: RequestOptions(path: uri), error: e.toString(), type: DioExceptionType.unknown);
+  Future<List<SectionModel>> fetchSections(int? companyId) async {
+    String endpoint = '';
+    if (companyId != null) {
+      endpoint = "/api/get_sections?companies=1";
+    } else {
+      endpoint = "/api/get_sections";
     }
+
+    final response = await apiProvider.get(endpoint, parser: (json) => json);
+    final data = response.data?['data'] as List? ?? [];
+    final sections = data.map((e) => SectionModel.fromJson(e)).toList();
+
+    return sections;
   }
 
-  @override
-  Future<List<ProductModel>> getProducts() async {
-    // Keep existing fake implementation for products for now
-    await Future.delayed(Duration(seconds: 1));
-    DateTime dateTime = DateTime.now();
-    final products = [
-      {
-        'id': '1',
-        'name': 'لاند كروزر 2022',
-        'image': 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400',
-        'price': 250000.0,
-        'category': 'سيارات',
-        'government': 'القاهرة',
-        'city': 'مدينة نصر',
-        'createdAt': dateTime,
-      },
-    ];
 
-    return products.map((e) => ProductModel.fromJson(e)).toList();
-  }
 
-  @override
-  Future<List<BannerModel>> getBanners({String place = 'home', int? sectionId}) async {
-    final uri = '/api/v1/banners';
-
+  Future<List<RelatedAdEntity>> getRelatedAds({
+    required int sectionId,
+    int page = 1,
+    int perPage = 100,
+  }) async {
     try {
-      final query = {
-        'place': place,
-        if (sectionId != null) 'section_id': sectionId,
-        'paginate': 'enabled',
-        'per_page': 10,
-      };
-
-      final response = await dio.get(uri, queryParameters: query, options: Options(headers: {
-        'Accept': 'application/json',
-      }));
-
-      if (response.statusCode == 200) {
-        final data = response.data;
-        List raw = [];
-        if (data is Map && data['data'] is List) raw = data['data'];
-        else if (data is List) raw = data;
-        else if (data is Map && data['data'] is Map && data['data']['data'] is List) raw = data['data']['data'];
-
-        return raw.map((e) => BannerModel.fromJson(e as Map<String, dynamic>)).toList();
-      }
-
-      throw DioException(
-        requestOptions: response.requestOptions,
-        error: 'Failed to fetch banners: ${response.statusCode}',
-        type: DioExceptionType.badResponse,
+      final response = await apiProvider.get(
+        '/api/advanced_filter?section_id=$sectionId&is_random=1&paginate=enabled&per_page=$perPage&page=$page',
+        parser: (json) => json,
       );
-    } on DioException catch (e) {
-      throw e;
+
+      final List data = response.data?['data'] ?? [];
+
+
+
+      return data.map((e) {
+        return RelatedAdModel.fromJson(e);
+      }).toList();
     } catch (e) {
-      throw DioException(requestOptions: RequestOptions(path: uri), error: e.toString(), type: DioExceptionType.unknown);
+      // If 404 with "No ads found" message, return empty list instead of throwing
+      if (e.toString().contains('No ads found') ||
+          e.toString().contains('404')) {
+        return [];
+      }
+      // Re-throw other errors
+      rethrow;
     }
   }
 }

@@ -1,4 +1,6 @@
+
 import 'package:oreed_clean/features/home/data/models/ad_model.dart';
+
 class RelatedAdEntity {
   final int id;
   final String title;

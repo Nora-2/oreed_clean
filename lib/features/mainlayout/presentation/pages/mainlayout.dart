@@ -6,14 +6,15 @@ import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/route_observer.dart';
+import 'package:oreed_clean/features/banners/presentation/cubit/banners_cubit.dart';
+import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
-import 'package:oreed_clean/features/home/presentation/pages/home_screen.dart';
+import 'package:oreed_clean/features/home/presentation/pages/main_home_tab.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_cubit.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_state.dart';
 import 'package:oreed_clean/injection_container.dart';
 
 class Homelayout extends StatefulWidget {
-
   final int? initialIndex;
 
   const Homelayout({super.key, this.initialIndex});
@@ -22,7 +23,8 @@ class Homelayout extends StatefulWidget {
   State<Homelayout> createState() => _HomelayoutState();
 }
 
-class _HomelayoutState extends State<Homelayout> with RouteAware, WidgetsBindingObserver {
+class _HomelayoutState extends State<Homelayout>
+    with RouteAware, WidgetsBindingObserver {
   /// Start at index 2 (The Right-most item, which is Home)
   late NotchBottomBarController _controller;
   bool _hasInitialized = false;
@@ -120,6 +122,8 @@ class _HomelayoutState extends State<Homelayout> with RouteAware, WidgetsBinding
 
   @override
   Widget build(BuildContext context) {
+    // 1. Get the BannerCubit first
+    final bannerCubit = sl<BannerCubit>();
     return BlocBuilder<HomelayoutCubit, HomelayoutState>(
       builder: (context, homeState) {
         // 1. Sync Animation Controller with Cubit
@@ -131,16 +135,26 @@ class _HomelayoutState extends State<Homelayout> with RouteAware, WidgetsBinding
         final tabs = [
           // const MoreTab(), // Index 0: Profile (Left)
 
-        
           // const HomeAddAds(),
+          const SizedBox(), // Add Ads tab
+          const SizedBox(),
 
-  const SizedBox(), // Add Ads tab
- const SizedBox(),
-  BlocProvider(
-    create: (_) => sl<HomeCubit>()..loadHomeData(),
-    child: const HomeScreen(),
-  ), // Index 2: Home (Right)
-        ];
+          MultiBlocProvider(
+        providers: [
+          // 2. Provide BannerCubit so BannerSection can see it
+          BlocProvider.value(value: bannerCubit),
+  BlocProvider(create: (_) => sl<FavoritesCubit>()..loadFavorites()),
+          BlocProvider(
+            create: (context) => MainHomeCubit(
+              sl(),
+              sl(),
+              bannerCubit, // Use the same instance
+            )..fetchHomeData(),
+          ),
+        ],
+        child: const MainHomeTab(),
+      ),
+    ];
 
         final currentIndex = homeState.currentTabIndex;
 
@@ -188,8 +202,9 @@ class _HomelayoutState extends State<Homelayout> with RouteAware, WidgetsBinding
                 // Handle Tap
                 onTap: (index) async {
                   final homeCubit = context.read<HomelayoutCubit>();
-                  
-                  if (AppSharedPreferences().getUserToken == null && index == 1) {
+
+                  if (AppSharedPreferences().getUserToken == null &&
+                      index == 1) {
                     // Navigator.push(
                     //     context,
                     //     MaterialPageRoute(
@@ -229,7 +244,7 @@ class _HomelayoutState extends State<Homelayout> with RouteAware, WidgetsBinding
                       color: Colors.black,
                     ),
                     activeItem: SvgPicture.asset(
-                       AppIcons.profile,
+                      AppIcons.profile,
                       color: Colors.white,
                     ),
                   ),
@@ -237,11 +252,11 @@ class _HomelayoutState extends State<Homelayout> with RouteAware, WidgetsBinding
                   // Index 1: Center (Plus)
                   BottomBarItem(
                     inActiveItem: SvgPicture.asset(
-                       AppIcons.ads,
+                      AppIcons.ads,
                       color: Colors.black,
                     ),
                     activeItem: SvgPicture.asset(
-                       AppIcons.ads,
+                      AppIcons.ads,
                       color: Colors.white,
                     ),
                   ),
@@ -249,11 +264,11 @@ class _HomelayoutState extends State<Homelayout> with RouteAware, WidgetsBinding
                   // Index 2: Right Side (Home)
                   BottomBarItem(
                     inActiveItem: SvgPicture.asset(
-                       AppIcons.homeNav,
+                      AppIcons.homeNav,
                       color: Colors.black,
                     ),
                     activeItem: SvgPicture.asset(
-                       AppIcons.homeNav,
+                      AppIcons.homeNav,
                       color: Colors.white,
                     ),
                   ),

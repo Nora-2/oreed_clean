@@ -1,34 +1,65 @@
 part of 'home_cubit.dart';
 
-abstract class HomeState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+enum HomeStatus { idle, loading, success, error }
 
-class HomeInitial extends HomeState {}
+class MainHomeState extends Equatable {
+  final HomeStatus status;
+  final String? errorMessage;
+  final List<SectionEntity> sections;
 
-class HomeLoading extends HomeState {}
+  final HomeStatus relatedAdsStatus;
+  final String? relatedAdsError;
+  final List<RelatedAd> relatedAdsCars;
+  final List<RelatedAd> relatedAdsRealEstate;
+  final List<RelatedAd> relatedAdsTechnical;
+  final List<RelatedAd> relatedAdsPhones;
 
-class HomeLoaded extends HomeState {
-  final List<CategoryEntity> categories;
-  final List<ProductEntity> products;
-  final List<BannerEntity> banners;
-
-  HomeLoaded({
-    required this.categories,
-    required this.products,
-    required this.banners,
+  const MainHomeState({
+    this.status = HomeStatus.idle,
+    this.errorMessage,
+    this.sections = const [],
+    this.relatedAdsStatus = HomeStatus.idle,
+    this.relatedAdsError,
+    this.relatedAdsCars = const [],
+    this.relatedAdsRealEstate = const [],
+    this.relatedAdsTechnical = const [],
+    this.relatedAdsPhones = const [],
   });
 
+  MainHomeState copyWith({
+    HomeStatus? status,
+    String? errorMessage,
+    List<SectionEntity>? sections,
+    HomeStatus? relatedAdsStatus,
+    String? relatedAdsError,
+    List<RelatedAd>? relatedAdsCars,
+    List<RelatedAd>? relatedAdsRealEstate,
+    List<RelatedAd>? relatedAdsTechnical,
+    List<RelatedAd>? relatedAdsPhones,
+  }) {
+    return MainHomeState(
+      status: status ?? this.status,
+      errorMessage: errorMessage ?? this.errorMessage,
+      sections: sections ?? this.sections,
+      relatedAdsStatus: relatedAdsStatus ?? this.relatedAdsStatus,
+      relatedAdsError: relatedAdsError ?? this.relatedAdsError,
+      relatedAdsCars: relatedAdsCars ?? this.relatedAdsCars,
+      relatedAdsRealEstate: relatedAdsRealEstate ?? this.relatedAdsRealEstate,
+      relatedAdsTechnical: relatedAdsTechnical ?? this.relatedAdsTechnical,
+      relatedAdsPhones: relatedAdsPhones ?? this.relatedAdsPhones,
+    );
+  }
+
   @override
-  List<Object?> get props => [categories, products, banners];
-}
-
-class HomeError extends HomeState {
-  final String message;
-
-  HomeError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [
+        status,
+        errorMessage,
+        sections,
+        relatedAdsStatus,
+        relatedAdsError,
+        relatedAdsCars,
+        relatedAdsRealEstate,
+        relatedAdsTechnical,
+        relatedAdsPhones,
+      ];
 }

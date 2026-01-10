@@ -1,5 +1,6 @@
+import 'package:oreed_clean/features/banners/domain/repositories/banner_repo.dart';
+
 import '../entities/banner_entity.dart';
-import '../repositories/banner_repository.dart';
 
 class GetBannersUseCase {
   final BannerRepository repository;

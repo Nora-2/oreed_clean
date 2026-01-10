@@ -1,15 +1,10 @@
-import 'package:oreed_clean/core/error/failures.dart';
-import 'package:oreed_clean/core/utils/either.dart';
-import 'package:oreed_clean/features/home/domain/entities/category_entity.dart';
 import 'package:oreed_clean/features/home/domain/repositories/home_repo.dart';
 
+import '../entities/section_entity.dart';
 
-class GetCategoriesUseCase {
-  final HomeRepository repository;
-
-  GetCategoriesUseCase(this.repository);
-
-  Future<Either<Failure, List<CategoryEntity>>> call() {
-    return repository.getCategories();
-  }
+class GetSectionsUseCase {
+  final MainHomeRepository repository;
+  GetSectionsUseCase(this.repository);
+  Future<List<SectionEntity>> call(int? companyId) =>
+      repository.getSections(companyId);
 }

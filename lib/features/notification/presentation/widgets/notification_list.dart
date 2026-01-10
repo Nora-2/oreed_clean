@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/features/notification/data/models/notification_model.dart';
 import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:oreed_clean/features/notification/presentation/widgets/notification_ttile.dart';
@@ -64,9 +65,9 @@ class NotificationsList extends StatelessWidget {
   }
   String _getIconForType(String? type) {
   switch (type) {
-    case 'personal': return 'assets/svg/personalnotfication.svg';
-    case 'company': return 'assets/svg/volumnotification.svg';
-    default: return 'assets/svg/notification.svg';
+    case 'personal': return AppIcons.personalNotification;
+    case 'company': return AppIcons.volumeNotification;
+    default: return AppIcons.notification;
   }
 }
 

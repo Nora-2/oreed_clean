@@ -1,5 +1,6 @@
+import 'package:oreed_clean/features/banners/domain/repositories/banner_repo.dart';
+
 import '../../domain/entities/banner_entity.dart';
-import '../../domain/repositories/banner_repository.dart';
 import '../datasources/banner_remote_data_source.dart';
 
 class BannerRepositoryImpl implements BannerRepository {

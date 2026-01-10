@@ -28,23 +28,7 @@ class _ShimmerBox extends StatelessWidget {
   }
 }
 
-class _ShimmerCircle extends StatelessWidget {
-  final double size;
 
-  const _ShimmerCircle({required this.size});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: size,
-      width: size,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.grey,
-      ),
-    );
-  }
-}
 
 /// Shimmer loading state
 class LoadingShimmer extends StatefulWidget {
@@ -94,63 +78,7 @@ class LoadingShimmerState extends State<LoadingShimmer>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// ===== Header Shimmer =====
-                Padding(
-                  padding: EdgeInsets.all(widget.isTablet ? 20 : 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const _ShimmerCircle(size: 40),
-                          _ShimmerBox(
-                            height: 25,
-                            width: 25,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      _ShimmerBox(height: 12, width: 140),
-                      const SizedBox(height: 8),
-                      _ShimmerBox(height: 18, width: 200),
-                      const SizedBox(height: 16),
-                      _ShimmerBox(
-                        height: 48,
-                        width: double.infinity,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ],
-                  ),
-                ),
-
-                /// ===== Banner Shimmer =====
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      _ShimmerBox(
-                        height: bannerHeight,
-                        width: double.infinity,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          3,
-                          (_) => _ShimmerBox(
-                            height: 6,
-                            width: 11,
-                            margin: const EdgeInsets.symmetric(horizontal: 3),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            
 
                 const SizedBox(height: 24),
 

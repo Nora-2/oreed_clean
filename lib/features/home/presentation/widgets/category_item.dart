@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
-import 'package:oreed_clean/features/home/domain/entities/category_entity.dart';
+import 'package:oreed_clean/features/home/domain/entities/section_entity.dart';
 
 class CategoryItem extends StatefulWidget {
-  final CategoryEntity category;
+  final SectionEntity category;
   final VoidCallback? onTap;
 
   const CategoryItem({
@@ -27,7 +27,7 @@ class _CategoryItemState extends State<CategoryItem> {
   @override
   Widget build(BuildContext context) {
     final bool isSvg =
-        widget.category.icon.toLowerCase().endsWith('.svg');
+        widget.category.image.toLowerCase().endsWith('.svg');
 
     return AnimatedScale(
       duration: const Duration(milliseconds: 140),
@@ -57,11 +57,11 @@ class _CategoryItemState extends State<CategoryItem> {
                     child: Center(
                       child: isSvg
                           ? SvgPicture.network(
-                              widget.category.icon,
+                              widget.category.image,
                               fit: BoxFit.contain,
                             )
                           : CachedNetworkImage(
-                              imageUrl: widget.category.icon,
+                              imageUrl: widget.category.image,
                               fit: BoxFit.contain,
                               placeholder: (_, __) => const SizedBox(
                                 width: 24,
