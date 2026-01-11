@@ -372,7 +372,9 @@ class _PersonalRegistrationScreenState
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.resetpass);
+                },
                 child: Text(
                   appTrans.text('forgetPass'),
                   style: TextStyle(color: AppColors.primary),

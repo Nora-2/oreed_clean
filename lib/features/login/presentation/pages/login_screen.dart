@@ -37,9 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  // void _onForgetPassPressed() {
-  //   Navigator.of(context).pushNamed(ResetPasswordScreen.routeName);
-  // }
+  void _onForgetPassPressed() {
+    Navigator.of(context).pushNamed(Routes.resetpass);
+  }
 
   /// Trigger the login process
   Future<void> _onLoginPressed() async {
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final rawInput = _phoneCtrl.text;
     final onlyDigits = rawInput.replaceAll(RegExp(r'\D'), '');
-    
+
     if (onlyDigits.isEmpty) {
       setState(() => errorMessage = appTrans.text('enterPhoneNote'));
       return;
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // await NotificationService().subscribeToUserTypeTopic(user.accountType);
 
       if (mounted) Navigator.pushReplacementNamed(context, Routes.homelayout);
-    } 
+    }
     // Flow B: Company account without company ID
     else if (user.companyId == 'null' && user.accountType != 'personal') {
       await prefs.saveUserToken(user.token!);
@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
         //   MaterialPageRoute(builder: (context) => const CompanyFormUI()),
         // );
       }
-    } 
+    }
     // Flow C: Personal account
     else {
       await prefs.saveUserId(user.id);
@@ -114,27 +114,31 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     appTrans = AppTranslations.of(context)!;
-    
+
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state.status == AuthStatus.success) {
           _handlePostLogin(state);
         } else if (state.status == AuthStatus.error) {
           setState(() => errorMessage = state.errorMessage);
-          Fluttertoast.showToast(msg: state.errorMessage ?? appTrans.text('loginFailed'));
+          Fluttertoast.showToast(
+            msg: state.errorMessage ?? appTrans.text('loginFailed'),
+          );
         }
       },
       child: AuthBack(
         title: appTrans.text('login'),
         subtitle: appTrans.text('login_subtitle'),
         child: Container(
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
             ),
-            border: Border(top: BorderSide(color: AppColors.secondary, width: 2)),
+            border: Border(
+              top: BorderSide(color: AppColors.secondary, width: 2),
+            ),
           ),
           child: Padding(
             padding: const EdgeInsets.all(24),
@@ -147,7 +151,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   PhoneField(
                     controller: _phoneCtrl,
                     onChanged: (raw) {
-                      if (errorMessage != null) setState(() => errorMessage = null);
+                      if (errorMessage != null)
+                        setState(() => errorMessage = null);
                     },
                     validator: (val) => val == null || val.isEmpty
                         ? (appTrans.text("register_phone_error"))
@@ -166,15 +171,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (errorMessage != null && errorMessage!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child:Text( errorMessage!, ),
+                      child: Text(errorMessage!),
                     ),
                   Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: TextButton(
-                      onPressed:(){ },
+                      onPressed: () {
+                        _onForgetPassPressed();
+                      },
                       child: Text(
                         appTrans.text('forgetPass'),
-                        style:  TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.primary),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                   ),
@@ -184,17 +195,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (context) {
                       final status = context.watch<AuthCubit>().state.status;
                       final isLoading = status == AuthStatus.loading;
-                      
+
                       return SizedBox(
                         height: 50,
                         child: CustomButton(
-                          onTap: ()=>isLoading ? null : _onLoginPressed,
+                          onTap: () => isLoading ? null : _onLoginPressed,
                           text: isLoading
                               ? "..." // Or a loading spinner if CustomButton supports it
                               : appTrans.text('login_button'),
                         ),
                       );
-                    }
+                    },
                   ),
                   const SizedBox(height: 10),
                 ],

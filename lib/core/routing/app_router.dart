@@ -14,6 +14,7 @@ import 'package:oreed_clean/features/mainlayout/presentation/pages/mainlayout.da
 import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:oreed_clean/features/notification/presentation/pages/notification_screen.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
+import 'package:oreed_clean/features/password/presentation/pages/resetpass_screen.dart';
 import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
 import 'package:oreed_clean/features/personal_register/presentation/pages/personal_register_screen.dart';
 import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
@@ -28,6 +29,13 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => sl<AuthCubit>(),
             child: LoginScreen(),
+          ),
+        );
+         case Routes.resetpass:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<AuthCubit>(),
+            child: ResetPasswordScreen(),
           ),
         );
       case Routes.onboarding:
