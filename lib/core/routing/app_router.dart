@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/features/account_type/presentation/pages/account_type_screen.dart';
 import 'package:oreed_clean/features/banners/presentation/cubit/banners_cubit.dart';
+import 'package:oreed_clean/features/comapany_register/presentation/cubit/comapany_register_cubit.dart';
+import 'package:oreed_clean/features/comapany_register/presentation/pages/comapny_register_screen.dart';
 import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/pages/main_home_tab.dart';
@@ -30,47 +32,59 @@ class AppRouter {
         );
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => OnboardingPage());
-            case Routes.accounttype:
+      case Routes.accounttype:
         return MaterialPageRoute(builder: (_) => AccountTypePage());
       case Routes.splash:
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case Routes.home:
-  return MaterialPageRoute(
-    builder: (_) {
-      // 1. Get the BannerCubit first
-      final bannerCubit = sl<BannerCubit>();
-      
-      return MultiBlocProvider(
-        providers: [
-          // 2. Provide BannerCubit so BannerSection can see it
-          BlocProvider.value(value: bannerCubit),
-     BlocProvider(create: (_) => sl<FavoritesCubit>()..loadFavorites()),
-          BlocProvider(
-            create: (context) => MainHomeCubit(
-              sl(), 
-              sl(), 
-              bannerCubit, // Use the same instance
-            )..fetchHomeData(),
-          ),
-        ],
-        child: const MainHomeTab(),
-      );
-    },
-  );
+        return MaterialPageRoute(
+          builder: (_) {
+            // 1. Get the BannerCubit first
+            final bannerCubit = sl<BannerCubit>();
 
-
-      case Routes.personalregister:
+            return MultiBlocProvider(
+              providers: [
+                // 2. Provide BannerCubit so BannerSection can see it
+                BlocProvider.value(value: bannerCubit),
+                BlocProvider(
+                  create: (_) => sl<FavoritesCubit>()..loadFavorites(),
+                ),
+                BlocProvider(
+                  create: (context) => MainHomeCubit(
+                    sl(),
+                    sl(),
+                    bannerCubit, // Use the same instance
+                  )..fetchHomeData(),
+                ),
+              ],
+              child: const MainHomeTab(),
+            );
+          },
+        );
+  case Routes.companyregister:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
               // Provides registration logic
               BlocProvider(
-                create: (context) => sl<PersonalRegisterCubit>(),
+                create: (context) => sl<CompanyRegisterCubit>(),
               ),
               // Provides login logic (since the screen has a login tab)
               BlocProvider(
                 create: (context) => sl<AuthCubit>(),
               ),
+            ],
+            child: const CompanyRegisterScreen (),
+          ),
+        );
+      case Routes.personalregister:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              // Provides registration logic
+              BlocProvider(create: (context) => sl<PersonalRegisterCubit>()),
+              // Provides login logic (since the screen has a login tab)
+              BlocProvider(create: (context) => sl<AuthCubit>()),
             ],
             child: const PersonalRegistrationScreen(),
           ),
@@ -82,17 +96,14 @@ class AppRouter {
             child: const Homelayout(),
           ),
         );
-        
-         case Routes.notification:
-  return MaterialPageRoute(
-    builder: (_) => BlocProvider<NotificationsCubit>(
-      create: (_) => sl<NotificationsCubit>(),
-      child: NotificationsScreen (),
-    ),
-  );
 
-         
-
+      case Routes.notification:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<NotificationsCubit>(
+            create: (_) => sl<NotificationsCubit>(),
+            child: NotificationsScreen(),
+          ),
+        );
     }
     return null;
   }

@@ -1,30 +1,88 @@
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oreed_clean/features/login/domain/entities/user_entity.dart';
-import 'package:oreed_clean/features/login/domain/usecases/login_usecase.dart';
-part 'login_state.dart';
+import 'package:oreed_clean/core/app_shared_prefs.dart';
+import 'package:oreed_clean/features/login/presentation/cubit/login_state.dart';
+import 'package:oreed_clean/networking/exception.dart';
+import '../../domain/usecases/login_usecase.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final LoginUseCase loginUseCase;
+  final AppSharedPreferences _prefs = AppSharedPreferences();
 
-  AuthCubit(this.loginUseCase) : super(AuthInitial());
+  AuthCubit(this.loginUseCase) : super(const AuthState()) {
+    init();
+  }
 
-  Future<void> login(String phoneNumber, String password) async {
-    emit(AuthLoading());
+  // ====== Initialization ======
+  Future<void> init() async {
+    final lang = _prefs.languageCode ?? 'ar';
+    final userId = _prefs.userId;
+    final loggedIn = _prefs.isLoggedIn;
+
+    emit(state.copyWith(
+      savedLocale: lang,
+      currentUserId: userId,
+      isLoggedIn: loggedIn,
+    ));
+    log("AuthCubit Initialized: userId: $userId, isLoggedIn: $loggedIn");
+  }
+
+  // ====== Actions ======
+
+  Future<void> changeLocale(String langCode) async {
+    await _prefs.saveAppLang(langCode);
+    emit(state.copyWith(savedLocale: langCode));
+  }
+
+  Future<void> login({
+    required String phone,
+    required String password,
+    required String fcmToken,
+  }) async {
+    emit(state.copyWith(status: AuthStatus.loading, errorMessage: null));
+
     try {
-      final result = await loginUseCase(phoneNumber, password);
-      result.fold((failure) {
-        emit(AuthError(failure.message));
-      }, (user) {
-        emit(AuthSuccess(user));
-      });
-    } catch (e) {
-      emit(AuthError(e.toString()));
+      final user = await loginUseCase(
+        phone: phone,
+        password: password,
+        fcmToken: fcmToken,
+      );
+
+      // Save to SharedPreferences
+      await _prefs.saveUserId(user.id);
+      await _prefs.saveUserName(user.name);
+      await _prefs.saveUserType(user.accountType);
+      await _prefs.saveUserToken(user.token ?? '');
+      await _prefs.saveuserPhone(user.phone);
+      await _prefs.saveLoggedIn(true);
+
+      emit(state.copyWith(
+        status: AuthStatus.success,
+        user: user,
+        isLoggedIn: true,
+        currentUserId: user.id,
+      ));
+
+      log("✅ Login success -> userId: ${user.id}");
+    } on ErrorMessgeException catch (e, st) {
+      log("❌ Login failed: ${e.uiMessage()}", stackTrace: st);
+      emit(state.copyWith(
+        status: AuthStatus.error,
+        errorMessage: e.uiMessage(),
+        isLoggedIn: false,
+      ));
+    } catch (e, st) {
+      log("❌ Login unexpected error: $e", stackTrace: st);
+      emit(state.copyWith(
+        status: AuthStatus.error,
+        errorMessage: "حدث خطأ أثناء تسجيل الدخول",
+        isLoggedIn: false,
+      ));
     }
   }
 
-  void reset() {
-    emit(AuthInitial());
+  Future<void> signOut() async {
+     _prefs.clearPrefs();
+    emit(const AuthState(status: AuthStatus.idle, isLoggedIn: false));
   }
 }

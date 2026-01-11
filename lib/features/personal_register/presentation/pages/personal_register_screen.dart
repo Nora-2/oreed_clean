@@ -13,15 +13,18 @@ import 'package:oreed_clean/features/login/presentation/widgets/custom_phonefiel
 import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 
-class PersonalRegistrationScreen extends StatefulWidget {
+import '../../../login/presentation/cubit/login_state.dart';
 
+class PersonalRegistrationScreen extends StatefulWidget {
   const PersonalRegistrationScreen({super.key});
 
   @override
-  State<PersonalRegistrationScreen> createState() => _PersonalRegistrationScreenState();
+  State<PersonalRegistrationScreen> createState() =>
+      _PersonalRegistrationScreenState();
 }
 
-class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen> {
+class _PersonalRegistrationScreenState
+    extends State<PersonalRegistrationScreen> {
   // Forms
   final _personalFormKey = GlobalKey<FormState>();
   final _loginFormKey = GlobalKey<FormState>();
@@ -87,8 +90,9 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
     final onlyDigits = rawInput.replaceAll(RegExp(r'\D'), '');
 
     context.read<AuthCubit>().login(
-      onlyDigits,
-      loginPasswordController.text.trim(),
+      phone: onlyDigits,
+      password: loginPasswordController.text.trim(),
+      fcmToken: 'knkdnlqlwndl',
     );
   }
 
@@ -132,10 +136,10 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
         // Login Listener
         BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
-            if (state is AuthSuccess) {
+            if (state.status == AuthStatus.success) {
               _handleLoginPersistence(state.user);
-            } else if (state is AuthError) {
-              Fluttertoast.showToast(msg: state.message);
+            } else if (state.status == AuthStatus.error) {
+              Fluttertoast.showToast(msg: state.errorMessage.toString());
             }
           },
         ),
@@ -205,8 +209,8 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
                               onPageChanged: (page) =>
                                   setState(() => _currentPage = page),
                               children: [
-                                _buildPersonalForm(appTrans),
-                                _buildLoginForm(appTrans),
+                                _buildPersonalForm(appTrans, size.height * .45),
+                                _buildLoginForm(appTrans, size.height * .45),
                               ],
                             ),
                           ),
@@ -227,7 +231,7 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Container(
-        height: 60,
+        height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           border: Border.all(color: AppColors.secondary),
@@ -250,6 +254,7 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
           _switchToPage(index);
         },
         child: Container(
+          margin: EdgeInsets.all(5),
           decoration: BoxDecoration(
             color: _currentPage == index
                 ? const Color.fromRGBO(21, 77, 187, 1)
@@ -269,7 +274,7 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
     );
   }
 
-  Widget _buildPersonalForm(AppTranslations appTrans) {
+  Widget _buildPersonalForm(AppTranslations appTrans, double d) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Form(
@@ -304,7 +309,7 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
               labelText: appTrans.text("register_password"),
               hintText: appTrans.text("register_password_hint"),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: d),
             BlocBuilder<PersonalRegisterCubit, PersonalRegisterState>(
               builder: (context, state) {
                 final isLoading =
@@ -332,7 +337,7 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
     );
   }
 
-  Widget _buildLoginForm(AppTranslations appTrans) {
+  Widget _buildLoginForm(AppTranslations appTrans, double height) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Form(
@@ -357,11 +362,8 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
             ),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
-                if (state is AuthError) {
-                  return Text(
-                   state.message,
-                   
-                  );
+                if (state.status == AuthStatus.error) {
+                  return Text(state.errorMessage.toString());
                 }
                 return const SizedBox.shrink();
               },
@@ -370,26 +372,26 @@ class _PersonalRegistrationScreenState extends State<PersonalRegistrationScreen>
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: TextButton(
-                onPressed: () {
-                  /* Handle Forget Pass */
-                },
+                onPressed: () {},
                 child: Text(
                   appTrans.text('forgetPass'),
                   style: TextStyle(color: AppColors.primary),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: height),
             BlocBuilder<AuthCubit, AuthState>(
               builder: (context, state) {
-                final isLoading = state is AuthLoading;
+                final isLoading = state.status == AuthStatus.loading;
                 return Column(
                   children: [
                     CustomButton(
-                      onTap:()=> isLoading ? null : _onLoginPressed,
+                      onTap: () {
+                        isLoading ? null : _onLoginPressed();
+                      },
                       text: isLoading
                           ? appTrans.text('loggingIn')
-                          : (appTrans.text('login_button') ?? "دخول الحساب"),
+                          : (appTrans.text('login_button')),
                     ),
                     if (isLoading)
                       Padding(

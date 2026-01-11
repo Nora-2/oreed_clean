@@ -8,6 +8,6 @@ class Routes {
     static const String personalregister = '/personalregister';
    static const String companyregister = '/companyregister';
      static const String accounttype = '/accounttype';
-   
+
   
 }

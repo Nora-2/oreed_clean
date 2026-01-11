@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 
 class SearchBarwidget extends StatelessWidget {
   final TextEditingController controller;
@@ -24,7 +25,7 @@ class SearchBarwidget extends StatelessWidget {
           hintStyle: TextStyle(color: const Color(0xff676768).withOpacity(.3)),
           prefixIcon: Padding(
             padding: const EdgeInsets.all(12),
-            child: SvgPicture.asset('assets/svg/search.svg', width: 10, height: 14),
+            child: SvgPicture.asset(AppIcons.search, width: 10, height: 14),
           ),
           filled: true,
           fillColor: Colors.white,

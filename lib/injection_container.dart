@@ -2,6 +2,16 @@ import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:oreed_clean/core/app_shared_prefs.dart';
+import 'package:oreed_clean/features/comapany_register/data/datasources/company_register_remote_data_source.dart';
+import 'package:oreed_clean/features/comapany_register/data/datasources/company_remote_data_source.dart';
+import 'package:oreed_clean/features/comapany_register/data/repositories/comapny_register_repo_impl.dart';
+import 'package:oreed_clean/features/comapany_register/data/repositories/comapny_repo_impl.dart';
+import 'package:oreed_clean/features/comapany_register/domain/usecases/create_company_usecase.dart';
+import 'package:oreed_clean/features/comapany_register/domain/usecases/get_categories_usecase.dart';
+import 'package:oreed_clean/features/comapany_register/domain/usecases/get_country_usecase.dart';
+import 'package:oreed_clean/features/comapany_register/domain/usecases/get_state_usecase.dart';
+import 'package:oreed_clean/features/comapany_register/domain/usecases/rwgister_company_usecase.dart';
+import 'package:oreed_clean/features/comapany_register/presentation/cubit/comapany_register_cubit.dart';
 import 'package:oreed_clean/features/favourite/data/datasources/favourite_remote_data_source.dart';
 import 'package:oreed_clean/features/favourite/data/repositories/favourite_repo.dart';
 import 'package:oreed_clean/features/favourite/domain/repositories/favourite_repo_impl.dart';
@@ -30,7 +40,6 @@ import 'package:oreed_clean/features/banners/data/repositories/banner_repo_impl.
 import 'package:oreed_clean/features/banners/domain/repositories/banner_repo.dart';
 import 'package:oreed_clean/features/banners/domain/usecases/get_banner_usecase.dart';
 import 'package:oreed_clean/features/banners/presentation/cubit/banners_cubit.dart';
-import 'package:oreed_clean/features/login/data/datasources/auth_remote_data_source.dart';
 import 'package:oreed_clean/features/login/data/repositories/auth_repo_impl.dart';
 import 'package:oreed_clean/features/login/domain/repositories/auth_repo.dart';
 import 'package:oreed_clean/features/login/domain/usecases/login_usecase.dart';
@@ -77,6 +86,46 @@ sl.registerLazySingleton<AppSharedPreferences>(
 sl.registerFactory<PersonalRegisterCubit>(
   () => PersonalRegisterCubit(sl<PersonalRegisterUseCase>()),
 );
+  sl.registerLazySingleton<CompanyRegisterRemoteDataSource>(
+    () => CompanyRegisterRemoteDataSource(sl<ApiProvider>()),
+  );
+  sl.registerLazySingleton<CompanyRemoteDataSource>(
+    () => CompanyRemoteDataSource(),
+  );
+  sl.registerLazySingleton<CompanyRegisterRepositoryImpl>(
+    () => CompanyRegisterRepositoryImpl(sl<CompanyRegisterRemoteDataSource>()),
+  );
+
+  sl.registerLazySingleton<CompanyRepositoryImpl>(
+    () => CompanyRepositoryImpl(sl<CompanyRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<CreateCompanyUseCase>(
+    () => CreateCompanyUseCase(sl<CompanyRepositoryImpl>()),
+  );
+
+  sl.registerLazySingleton<GetCountriesUseCase>(
+    () => GetCountriesUseCase(sl<CompanyRegisterRepositoryImpl>()),
+  );
+  sl.registerLazySingleton<GetStatesUseCase>(
+    () => GetStatesUseCase(sl<CompanyRegisterRepositoryImpl>()),
+  );
+  sl.registerFactory<CompanyRegisterCubit>(
+    () => CompanyRegisterCubit(
+      sl<GetCountriesUseCase>(),
+      sl<GetStatesUseCase>(),
+      sl<GetCategoriesUseCase>(),
+      sl<RegisterCompanyUseCase>(),
+      sl<GetSectionsUseCase>(), // This comes from the Home module
+    ),
+  );
+  // sl.registerLazySingleton<CreateCompanyUseCase>(
+  //     () => CreateCompanyUseCase(sl()));
+  sl.registerLazySingleton<GetCategoriesUseCase>(
+    () => GetCategoriesUseCase(sl<CompanyRegisterRepositoryImpl>()),
+  );
+  sl.registerLazySingleton<RegisterCompanyUseCase>(
+    () => RegisterCompanyUseCase(sl<CompanyRegisterRepositoryImpl>()),
+  );
 
 sl.registerFactory(
   () => NotificationsCubit(
@@ -119,13 +168,11 @@ sl.registerLazySingleton<NotificationsRemoteDataSource>(
 
   // Repository
   sl.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(sl(), sl()),
+    () => AuthRepositoryImpl(sl(),)
   );
 
   // Data source
-  sl.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(sl()),
-  );
+ 
 
   // ================== Banners ==================
   // Cubit

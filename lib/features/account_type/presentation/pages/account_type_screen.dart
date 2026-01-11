@@ -3,11 +3,10 @@ import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
-import 'package:oreed_clean/core/utils/shared_widgets/circelback.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/custom_button.dart';
-import 'package:oreed_clean/core/utils/textstyle/apptext_style.dart';
 import 'package:oreed_clean/features/account_type/domain/entities/account_type_entity.dart';
 import 'package:oreed_clean/features/account_type/presentation/widgets/account_type_card.dart';
+import 'package:oreed_clean/features/account_type/presentation/widgets/build_header.dart';
 
 
 class AccountTypePage extends StatefulWidget {
@@ -18,7 +17,6 @@ class AccountTypePage extends StatefulWidget {
 }
 
 class _AccountTypePageState extends State<AccountTypePage> {
-  // Layout constants
   static const double _horizontalPadding = 16.0;
   static const double _headerTopPadding = 30.0;
   static const double _headerBottomPadding = 24.0;
@@ -27,9 +25,6 @@ class _AccountTypePageState extends State<AccountTypePage> {
   static const double _titleFontSize = 22.0;
   static const double _contentRadius = 32.0;
   static const Color _topBorderColor = Color(0xFFFF8C00); // البرتقالي الرفيع
-
-  // String constants for i18n
-// String constants removed in favor of AppTranslations
 
   List<AccountTypeEntity> _getTypes(BuildContext context) {
     return [
@@ -64,7 +59,7 @@ class _AccountTypePageState extends State<AccountTypePage> {
       );
     } else if (_selected == AccountType.company) {
       Navigator.of(context).pushNamed(
-        Routes.personalregister,
+        Routes.companyregister,
       );
     }
   }
@@ -93,7 +88,9 @@ class _AccountTypePageState extends State<AccountTypePage> {
         bottom: false,
         child: Column(
           children: [
-            _buildHeader(),
+              BuildHeader(horizontalPadding: _horizontalPadding, headerTopPadding: _headerTopPadding, headerBottomPadding: _headerBottomPadding, context: context, titleFontSize: _titleFontSize),
+
+
             Expanded(child: Container(decoration: BoxDecoration(color: Colors.white, borderRadius:BorderRadius.only(topRight: Radius.circular(_contentRadius),topLeft: Radius.circular(_contentRadius))), child: _buildContent())),
           ],
         ),
@@ -101,61 +98,6 @@ class _AccountTypePageState extends State<AccountTypePage> {
     );
   }
 
-  // ------------------- HEADER -------------------
-
-  Widget _buildHeader() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(
-        _horizontalPadding,
-        _headerTopPadding,
-        _horizontalPadding,
-        _headerBottomPadding,
-      ),
-      decoration:  BoxDecoration(
-         color: AppColors.primary,
-        image: DecorationImage(
-          image: AssetImage(Appimage.back), // نفس الخلفية اللي عندك
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-             CircleBack(context: context, background_color: Colors.white),
-              const Spacer(),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            AppTranslations.of(context)!.text('select_account_type_title'),
-            textAlign: TextAlign.center,
-            style: AppTextStyles.title.copyWith(
-              fontSize: _titleFontSize,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            AppTranslations.of(context)!.text('select_account_type_subtitle'),
-            textAlign: TextAlign.center,
-            style: AppTextStyles.body.copyWith(
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-
-
-  // ------------------- CONTENT -------------------
 
 Widget _buildContent() {
   return Container(
