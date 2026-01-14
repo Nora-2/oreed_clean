@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -10,24 +9,20 @@ import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart'
     show AppTranslations;
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
-import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/appstring/app_string.dart';
-import 'package:oreed_clean/core/utils/bottomsheets/option_sheet_register_grid.dart';
-import 'package:oreed_clean/core/utils/option_item_register.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/custom_button.dart';
-import 'package:oreed_clean/core/utils/shared_widgets/custom_form_field.dart';
-import 'package:oreed_clean/core/utils/textstyle/appfonts.dart';
 import 'package:oreed_clean/features/comapany_register/presentation/cubit/comapany_register_cubit.dart';
+import 'package:oreed_clean/features/comapany_register/presentation/widgets/company_register_form.dart';
 import 'package:oreed_clean/features/comapany_register/presentation/widgets/helperwidgets.dart';
 import 'package:oreed_clean/features/comapany_register/presentation/widgets/loading.dart';
 import 'package:oreed_clean/features/comapany_register/presentation/widgets/themtile.dart';
+import 'package:oreed_clean/features/home/domain/entities/section_entity.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_state.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/custom_apptextfield.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/custom_phonefield.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/success_dialog.dart';
-import '../../../../core/utils/bottomsheets/option_sheet_register_list.dart';
 import '../../../../features/comapany_register/presentation/cubit/comapany_register_state.dart';
 import '../../domain/entities/category_entity.dart';
 import '../../domain/entities/country_entity.dart';
@@ -61,7 +56,7 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
 
   CountryEntity? selectedCountry;
   StateEntity? selectedGovernorate;
-  CategoryEntity? selectedMainCategory;
+  SectionEntity? selectedMainCategory;
   CategoryEntity? selectedSubCategory;
 
   @override
@@ -82,52 +77,12 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
 
   Future<void> _pickLicense() async => _pickImage((f) => licenseFile = f);
 
-  // --- Original Decoration Method ---
-  InputDecoration _selectDecoration({
-    required String label,
-    String? errorText,
-  }) {
-    return InputDecoration(
-      suffixIcon: const Icon(
-        Icons.keyboard_arrow_down,
-        color: Colors.black,
-        size: 30,
-      ),
-      labelText: label,
-      errorText: errorText,
-      labelStyle: AppFonts.body.copyWith(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-      ),
-      filled: true,
-      fillColor: Colors.white,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: Colors.grey.shade300, width: 1.2),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: AppColors.primary, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Colors.red, width: 1.5),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: Colors.red, width: 2),
-      ),
-    );
-  }
 
-  Color _tagColor(int i) => i.isEven ? AppColors.primary : AppColors.secondary;
-
+ 
   void _showSnack(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
-  // ============== LOGIC ==============
 
   Future<void> _onLoginPressed() async {
     final rawInput = loginPhoneController.text.trim();
@@ -333,313 +288,66 @@ Future<void> _onRegisterPressed() async {
 
         if (_currentPage == 0)
           Padding(
-            padding: const EdgeInsets.all(20),
-            child: Form(
-              key: _companyFormKey,
-              child: _buildRegistrationFields(context),
-            ),
-          )
+  padding: const EdgeInsets.all(20),
+  child: Form(
+    key: _companyFormKey,
+    child: CompanyRegistrationForm(
+      companyNameController: companyNameController,
+      mobileController: mobileController,
+      whatsappController: whatsappController,
+      passwordController: passwordController,
+      isPasswordHidden: isPasswordHidden,
+
+      selectedCountry: selectedCountry,
+      selectedGovernorate: selectedGovernorate,
+      selectedMainCategory: selectedMainCategory,
+      selectedSubCategory: selectedSubCategory,
+
+      onCountrySelected: (country) {
+        setState(() {
+          selectedCountry = country;
+          selectedGovernorate = null;
+        });
+        context
+            .read<CompanyRegisterCubit>()
+            .fetchStates(country.id);
+      },
+
+      onGovernorateSelected: (stateEntity) {
+        setState(() => selectedGovernorate = stateEntity);
+      },
+
+      onMainCategorySelected: (category) {
+        setState(() {
+          selectedMainCategory = category;
+          selectedSubCategory = null;
+        });
+        context
+            .read<CompanyRegisterCubit>()
+            .getCategories(category.id);
+      },
+
+      onSubCategorySelected: (category) {
+        setState(() => selectedSubCategory = category);
+      },
+
+      onSubmit: () {
+        if (_companyFormKey.currentState!.validate() &&
+            selectedSubCategory != null) {
+          setState(() => _currentStep = 2);
+        }
+      },
+    ),
+  ),
+)
         else
           _buildLoginForm(appTrans, height),
       ],
     );
   }
 
-  // --- THE ORIGINAL FORM FIELD UI ---
-  Widget _buildRegistrationFields(BuildContext context) {
-    final t = AppTranslations.of(context);
-    return BlocBuilder<CompanyRegisterCubit, CompanyRegisterState>(
-      builder: (context, state) {
-        return Column(
-          children: [
-            AppTextField(
-              hint: t?.text(AppString.companyNameHint) ?? 'Company Name',
-              controller: companyNameController,
-              label: Text(t?.text('company_name_label') ?? 'Company Name'),
-              validator: (String? p1) {
-                return null;
-              },
-            ),
-            const SizedBox(height: 20),
-            PhoneField(
-              controller: mobileController,
-              labletext: t?.text('phone_label') ?? 'Phone',
-              validator: (String? p1) {
-                return null;
-              },
-              lablehint: t?.text(AppString.phoneHint) ?? 'Phone',
-            ),
-            const SizedBox(height: 20),
-            PhoneField(
-              controller: whatsappController,
-              labletext: t?.text('whatsapp_label') ?? 'WhatsApp',
-              validator: (String? p1) {
-                return null;
-              },
-              lablehint: t?.text(AppString.whatsappHint) ?? 'whatsapp',
-            ),
-            const SizedBox(height: 20),
-            PasswordField(
-              controller: passwordController,
-              isHidden: isPasswordHidden,
-              labelText: t?.text('password_label') ?? 'Password',
-            ),
-            const SizedBox(height: 20),
 
-            FormField<CountryEntity>(
-              validator: (_) => selectedCountry == null ? 'Required' : null,
-              builder: (fieldState) => GestureDetector(
-                onTap: () async {
-                  final opts = state.countries
-                      .asMap()
-                      .entries
-                      .map(
-                        (e) => OptionItemregister(
-                          label: e.value.name,
-                          icon: AppIcons.global,
-                          colorTag: e.key,
-                        ),
-                      )
-                      .toList();
-                  final res = await showAppOptionSheetregister(
-                    context: context,
-                    subtitle:
-                        t?.text('choose_country_subtitle') ??
-                        'اختر محافظتك لعرض الإعلانات والخدمات القريبة منك.',
-                    hint:
-                        t?.text('select.search_governorate') ??
-                        'ابحث عن المحافظة',
-                    title: t?.text('choose_governorate') ?? 'اختر الدولة',
-                    options: opts,
-                    tagColor: _tagColor,
-                    current: selectedCountry?.name,
-                  );
-                  if (res != null) {
-                    setState(() {
-                      selectedCountry = state.countries.firstWhere(
-                        (c) => c.name == res,
-                      );
-                      selectedGovernorate = null;
-                    });
-                    fieldState.didChange(selectedCountry);
-                    context.read<CompanyRegisterCubit>().fetchStates(
-                      selectedCountry!.id,
-                    );
-                  }
-                },
-                child: InputDecorator(
-                  decoration: _selectDecoration(
-                    label: t?.text('governorate') ?? 'الدولة',
-                    errorText: fieldState.errorText,
-                  ),
-                  child: Text(
-                    selectedCountry?.name ??
-                        (t?.text('choose_governorate') ?? 'اختر الدولة'),
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
 
-            // --- STATE SELECTION (ORIGINAL UI) ---
-            FormField<StateEntity>(
-              validator: (_) => selectedGovernorate == null ? 'Required' : null,
-              builder: (fieldState) => GestureDetector(
-                onTap: () async {
-                  if (state.states.isEmpty) return;
-                  final opts = state.states
-                      .asMap()
-                      .entries
-                      .map(
-                        (e) => OptionItemregister(
-                          label: e.value.name,
-                          icon: AppIcons.location,
-                          colorTag: e.key,
-                        ),
-                      )
-                      .toList();
-                  final res = await showAppOptionSheetregister(
-                    context: context,
-                    title: t?.text('choose_country') ?? 'اختر المحافظة',
-                    options: opts,
-                    tagColor: _tagColor,
-                    current: selectedGovernorate?.name,
-                    subtitle:
-                        t?.text('select.select_area_subtitle') ??
-                        'اختر منطقتك لعرض الإعلانات والخدمات القريبة منك.',
-                    hint: t?.text('select.search_area') ?? 'ابحث عن المنطقة',
-                  );
-                  if (res != null) {
-                    setState(
-                      () => selectedGovernorate = state.states.firstWhere(
-                        (s) => s.name == res,
-                      ),
-                    );
-                    fieldState.didChange(selectedGovernorate);
-                  }
-                },
-                child: InputDecorator(
-                  decoration: _selectDecoration(
-                    label: t?.text("location.area") ?? 'المحافظة',
-                    errorText: fieldState.errorText,
-                  ),
-                  child: Text(
-                    selectedGovernorate?.name ??
-                        (t?.text("select.select_area") ?? 'اختر المحافظة'),
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // --- MAIN CATEGORY (GRID ORIGINAL UI) ---
-            FormField<CategoryEntity>(
-              validator: (_) =>
-                  selectedMainCategory == null ? 'Required' : null,
-              builder: (fieldState) => GestureDetector(
-                onTap: () async {
-                  if (state.sections.isEmpty) return;
-                  final opts = state.sections
-                      .asMap()
-                      .entries
-                      .map(
-                        (e) => OptionItemregister(
-                          label: e.value.name,
-                          icon: e.value.image,
-                          colorTag: e.key,
-                        ),
-                      )
-                      .toList();
-                  final res = await showAppOptionSheetregistergrid(
-                    context: context,
-
-                    options: opts,
-                    current: selectedMainCategory?.name,
-                    hint: AppTranslations.of(
-                      context,
-                    )!.text('search_main_section_hint'),
-                    subtitle: AppTranslations.of(
-                      context,
-                    )!.text('select_main_section_subtitle'),
-
-                    title:
-                        AppTranslations.of(
-                          context,
-                        )?.text('company_main_section_title') ??
-                        'القسم الرئيسي لشركتك',
-                  );
-                  if (res != null) {
-                    final section = state.sections.firstWhere(
-                      (s) => s.name == res,
-                    );
-                    setState(() {
-                      selectedMainCategory = CategoryEntity(
-                        id: section.id,
-                        name: section.name,
-                      );
-                      selectedSubCategory = null;
-                    });
-                    fieldState.didChange(selectedMainCategory);
-                    context.read<CompanyRegisterCubit>().getCategories(
-                      section.id,
-                    );
-                  }
-                },
-                child: InputDecorator(
-                  decoration: _selectDecoration(
-                    label: t?.text('main_category_label') ?? 'القسم الرئيسي',
-                    errorText: fieldState.errorText,
-                  ),
-                  child: Text(
-                    selectedMainCategory?.name ??
-                        (t?.text('choose_main_section') ??
-                            'اختر القسم الرئيسي'),
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            FormField<CategoryEntity>(
-              validator: (_) => selectedSubCategory == null ? 'Required' : null,
-              builder: (fieldState) => GestureDetector(
-                onTap: () async {
-                  List<CategoryEntity> cats = _getSubCats(state);
-                  if (cats.isEmpty) return;
-                  final opts = cats
-                      .asMap()
-                      .entries
-                      .map(
-                        (e) => OptionItemregister(
-                          label: e.value.name,
-                          icon: e.value.image,
-                          colorTag: e.key,
-                        ),
-                      )
-                      .toList();
-                  final res = await showAppOptionSheetregistergrid(
-                    options: opts,
-                    current: selectedSubCategory?.name,
-                    hint: AppTranslations.of(
-                      context,
-                    )!.text('search_sub_section_hint'),
-                    context: context,
-                    subtitle: AppTranslations.of(
-                      context,
-                    )!.text('select_sub_section_subtitle'),
-                    title:
-                        AppTranslations.of(
-                          context,
-                        )?.text('sub_section_title') ??
-                        ' القسم الفرعي',
-                  );
-                  if (res != null) {
-                    setState(
-                      () => selectedSubCategory = cats.firstWhere(
-                        (c) => c.name == res,
-                      ),
-                    );
-                    fieldState.didChange(selectedSubCategory);
-                  }
-                },
-                child: InputDecorator(
-                  decoration: _selectDecoration(
-                    label: t?.text('choose_sub_section') ?? 'القسم الفرعي',
-                    errorText: fieldState.errorText,
-                  ),
-                  child: Text(
-                    selectedSubCategory?.name ??
-                        (t?.text('choose_sub_section') ?? 'اختر القسم الفرعي'),
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            CustomButton(
-              text: t?.text('verify_phone_number') ?? 'Next',
-              onTap: () {
-                if (_companyFormKey.currentState!.validate() &&
-                    selectedSubCategory != null) {
-                  setState(() => _currentStep = 2);
-                }
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  List<CategoryEntity> _getSubCats(CompanyRegisterState state) {
-    if (selectedMainCategory?.id == 1) return state.categoriesCars;
-    if (selectedMainCategory?.id == 2) return state.categoriesProperties;
-    if (selectedMainCategory?.id == 3) return state.categoriesTechnicians;
-    return state.categoriesAnyThing;
-  }
 
   Widget _buildLoginForm(AppTranslations t, double height) {
     return Padding(
