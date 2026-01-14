@@ -1,3 +1,5 @@
+// ignore_for_file: curly_braces_in_flow_control_structures
+
 import 'package:oreed_clean/features/home/domain/entities/category_entity.dart';
 
 class CategoryModel {
@@ -15,8 +17,9 @@ class CategoryModel {
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) {
     String name = '';
-    if (json['name'] != null) name = json['name'].toString();
-    else if (json['name_ar'] != null) name = json['name_ar'].toString();
+    if (json['name'] != null) {
+      name = json['name'].toString();
+    } else if (json['name_ar'] != null) name = json['name_ar'].toString();
     else if (json['name_en'] != null) name = json['name_en'].toString();
 
     return CategoryModel(

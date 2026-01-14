@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
-import 'package:oreed_clean/features/notification/presentation/pages/notification_screen.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
@@ -18,10 +17,7 @@ class TopBar extends StatelessWidget {
             backgroundImage: AssetImage('assets/images/logo.png'),
           ),
           IconButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const NotificationsScreen()),
-            ),
+            onPressed: () => Navigator.pushNamed(context, '/notification'),
             icon: SvgPicture.asset(AppIcons.notification, width: 25),
           ),
         ],

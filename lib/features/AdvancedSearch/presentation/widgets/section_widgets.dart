@@ -6,7 +6,7 @@ import 'package:oreed_clean/features/AdvancedSearch/data/models/advanced_search_
 
 class SectionCardWidget extends StatelessWidget {
   final SearchSection section;
-  const SectionCardWidget({required this.section});
+  const SectionCardWidget({super.key, required this.section});
 
   @override
   Widget build(BuildContext context) {

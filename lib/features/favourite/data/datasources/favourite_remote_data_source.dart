@@ -27,11 +27,7 @@ class FavoritesRemoteDataSourceImpl implements FavoritesRemoteDataSource {
     await prefs.initSharedPreferencesProp();
     final userToken = prefs.getUserToken ?? '';
     final userId = prefs.getUserId ?? 0;
-    print({
-      'section_id': sectionId.toString(),
-      'ad_id': adId.toString(),
-      'user_id': userId.toString(),
-    });
+   
     if (userToken.isEmpty || userId == 0) {
       throw Exception('User not logged in or missing credentials');
     }

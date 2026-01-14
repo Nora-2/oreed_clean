@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:dio/src/dio.dart';
 import 'package:http/http.dart' as http;
 
 class HttpClientService {
@@ -44,7 +42,7 @@ class HttpClientService {
     Map<String, String>? headers,
     Map<String, dynamic>? queryParameters,
   }) async {
-    print(headers);
+  
     final uri =
         Uri.parse('$baseUrl$path').replace(queryParameters: queryParameters);
     final mergedHeaders = {
@@ -54,8 +52,7 @@ class HttpClientService {
     };
 
     final response = await _client.get(uri, headers: mergedHeaders);
-    print(response.statusCode);
-    print(json.decode(response.body));
+  
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final jsonMap = json.decode(utf8.decode(response.bodyBytes));
       if (jsonMap is Map<String, dynamic>) return jsonMap;

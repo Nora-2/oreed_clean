@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks, use_build_context_synchronously
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Changed from provider
@@ -73,13 +75,17 @@ class _CompanyFormUIState extends State<CompanyFormUI> {
                   const Text('الاسم بالعربية'),
                   AppTextField(
                     controller: _nameArCtrl,
-                    hint: 'مثال: شركة الريادة', label: null, validator: (String? p1) {  },
+                    hint: 'مثال: شركة الريادة', label: null, validator: (String? p1) {
+                      return null;
+                      },
                     
                   ),
                   const Text('الاسم بالإنجليزية'),
                   AppTextField(
                     controller: _nameEnCtrl,
-                    hint: 'Example: Al-Reyada Company', label: null, validator: (String? p1) {  },
+                    hint: 'Example: Al-Reyada Company', label: null, validator: (String? p1) {
+                      return null;
+                      },
                    
                   ),
                   const Text('شعار الشركة'),

@@ -1,6 +1,5 @@
-import 'dart:async';
-import 'dart:convert';
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -9,9 +8,7 @@ class AppTranslations {
   static Map<String, dynamic>? _localisedValues;
   static Map<String, dynamic>? _fallbackValues;
 
-  AppTranslations(Locale locale) {
-    this.locale = locale;
-  }
+  AppTranslations(Locale this.locale);
 
   static AppTranslations? of(BuildContext context) {
     return Localizations.of<AppTranslations>(context, AppTranslations);

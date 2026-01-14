@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/core/routing/routes.dart';
-import 'package:oreed_clean/features/login/presentation/pages/login_screen.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_state.dart';
 
 
@@ -31,9 +30,10 @@ class HomelayoutCubit extends Cubit<HomelayoutState> {
 
     // 1. Auth Check (Center Tab)
     if (token == null && index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
+     Navigator.of(context).pushNamedAndRemoveUntil(
+       Routes.login,
+        (route) => false,
+      
       );
       return;
     }

@@ -9,4 +9,9 @@ class Routes {
   static const String companyregister = '/companyregister';
   static const String accounttype = '/accounttype';
   static const String resetpass = '/resetpass';
+  static const String choosePlanScreen = '/ChoosePlanScreen';
+  static const String verificationScreen = '/VerificationScreen';
+  static const String newPasswordWithOtpScreen = '/NewPasswordWithOtpScreen';
+  static const String payment = '/payment';
+  static const String advancedSearch = '/advancedSearch';
 }

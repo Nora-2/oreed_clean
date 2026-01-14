@@ -51,7 +51,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         status: NotificationsStatus.error,
         errorMessage: e.toString(),
       ));
-      print('❌ Error loading notifications: $e');
+      
     }
   }
 

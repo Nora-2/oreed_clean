@@ -1,11 +1,11 @@
-// ignore_for_file: body_might_complete_normally_nullable
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Changed from Provider
-import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart'
     show AppTranslations;
@@ -26,6 +26,7 @@ import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_state.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/custom_apptextfield.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/custom_phonefield.dart';
+import 'package:oreed_clean/features/login/presentation/widgets/success_dialog.dart';
 import '../../../../core/utils/bottomsheets/option_sheet_register_list.dart';
 import '../../../../features/comapany_register/presentation/cubit/comapany_register_state.dart';
 import '../../domain/entities/category_entity.dart';
@@ -139,16 +140,30 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
     );
   }
 
-  Future<void> _onRegisterPressed() async {
-    if (logoFile == null || licenseFile == null) {
-      _showSnack("Please upload logo and license");
-      return;
-    }
+
+Future<void> _onRegisterPressed() async {
+
+  
+  if (logoFile == null || licenseFile == null) {
+    _showSnack("Please upload logo and license");
+    return;
+  }
+
+  // 2. Setup
+  final cubit = context.read<CompanyRegisterCubit>();
+  final t = AppTranslations.of(context);
+  
+
+
+  try {
+    // 3. Prepare Data
     String? token = await FirebaseMessaging.instance.getToken();
-    final phone = mobileController.text.trim();
+    final phoneTrimmed = mobileController.text.trim();
+    final fullPhone = '965$phoneTrimmed';
+
     final body = {
       'business_name_ar': companyNameController.text.trim(),
-      'phone': '965$phone',
+      'phone': fullPhone,
       'whatsapp': whatsappController.text.trim(),
       'password': passwordController.text.trim(),
       'account_type': 'business',
@@ -156,12 +171,56 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
       'state_id': selectedCountry!.id.toString(),
       'city_id': selectedGovernorate!.id.toString(),
       'section_id': selectedMainCategory!.id.toString(),
-      'company_type_id': selectedSubCategory!.id.toString(),
       'image': logoFile,
       'license': licenseFile,
+
     };
-    context.read<CompanyRegisterCubit>().submitRegister(body);
+
+    if (selectedSubCategory != null) {
+      body['company_type_id'] = selectedSubCategory!.id.toString();
+    }
+
+    // 4. Call Cubit and WAIT for it to finish
+    await cubit.submitRegister(body);
+
+    // 5. Logic handling based on Cubit State
+    if (cubit.state.status == RegisterStatus.success) {
+      // Save data locally
+      await AppSharedPreferences().saveuserPhone(fullPhone);
+
+      // Show Success Dialog
+      if (mounted) {
+        await showRequestSubmittedDialog(
+          context,
+          title: '',
+          message: cubit.state.response?.msg ??
+              (t?.text('request_sent_msg') ?? 'سوف يتم التواصل معكم قريبًا'),
+        );
+      }
+
+      // Navigate to Verification
+      if (mounted) {
+          Navigator.pushNamed(
+            context,
+            Routes.verificationScreen,
+            arguments: {
+               'isRegister': true,
+               'phone': fullPhone,
+               'isCompany': true,
+            },
+          );
+      }
+    } else if (cubit.state.status == RegisterStatus.error) {
+      // Show Error Message
+      final err = cubit.state.error;
+      _showSnack(err ?? t?.text('register_office_failed') ?? 'Registration failed');
+    }
+  } catch (e) {
+    _showSnack(e.toString());
+  } finally {
+   
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -182,9 +241,9 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
         BlocListener<CompanyRegisterCubit, CompanyRegisterState>(
           listener: (context, state) {
             if (state.status == RegisterStatus.success) {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => VerificationScreen(
-              //   isRegister: true, phone: '965${mobileController.text.trim()}', isCompany: true,
-              // )));
+              Navigator.pushNamed(context, Routes.verificationScreen, arguments: {
+                'isRegister': true, 'phone': '965${mobileController.text.trim()}', 'isCompany': true,
+              });
             } else if (state.status == RegisterStatus.error) {
               _showSnack(state.error ?? "Error");
             }
@@ -250,7 +309,7 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
           _buildStep2Images(context),
           SizedBox(height: size.height * 0.12),
           CustomButton(
-            text: appTrans.text('verify_phone_number') ?? 'تحقق من رقم هاتفك',
+            text: appTrans.text('verify_phone_number') ,
             font: 16,
 
             onTap: _onRegisterPressed,
@@ -297,20 +356,26 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
               hint: t?.text(AppString.companyNameHint) ?? 'Company Name',
               controller: companyNameController,
               label: Text(t?.text('company_name_label') ?? 'Company Name'),
-              validator: (String? p1) {},
+              validator: (String? p1) {
+                return null;
+              },
             ),
             const SizedBox(height: 20),
             PhoneField(
               controller: mobileController,
               labletext: t?.text('phone_label') ?? 'Phone',
-              validator: (String? p1) {},
+              validator: (String? p1) {
+                return null;
+              },
               lablehint: t?.text(AppString.phoneHint) ?? 'Phone',
             ),
             const SizedBox(height: 20),
             PhoneField(
               controller: whatsappController,
               labletext: t?.text('whatsapp_label') ?? 'WhatsApp',
-              validator: (String? p1) {},
+              validator: (String? p1) {
+                return null;
+              },
               lablehint: t?.text(AppString.whatsappHint) ?? 'whatsapp',
             ),
             const SizedBox(height: 20),
@@ -558,8 +623,9 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
               text: t?.text('verify_phone_number') ?? 'Next',
               onTap: () {
                 if (_companyFormKey.currentState!.validate() &&
-                    selectedSubCategory != null)
+                    selectedSubCategory != null) {
                   setState(() => _currentStep = 2);
+                }
               },
             ),
           ],
@@ -585,7 +651,9 @@ class _CompanyRegisterScreenState extends State<CompanyRegisterScreen> {
             PhoneField(
               controller: loginPhoneController,
               labletext: t.text('phone_label'),
-              validator: (String? p1) {},
+              validator: (String? p1) {
+                return null;
+              },
               lablehint: t.text(AppString.phoneHint),
             ),
             const SizedBox(height: 20),

@@ -4,18 +4,18 @@ abstract class Failure {
 }
 
 class ServerFailure extends Failure {
-  ServerFailure([String message = 'Server error']) : super(message);
+  ServerFailure([super.message = 'Server error']);
 }
 
 class AuthFailure extends Failure {
-  AuthFailure([String message = 'Authentication error']) : super(message);
+  AuthFailure([super.message = 'Authentication error']);
 }
 
 class UnverifiedPhoneFailure extends Failure {
-  UnverifiedPhoneFailure([String message = 'Phone not verified']) : super(message);
+  UnverifiedPhoneFailure([super.message = 'Phone not verified']);
 }
 
 class ParsingFailure extends Failure {
-  ParsingFailure([String message = 'Parsing error']) : super(message);
+  ParsingFailure([super.message = 'Parsing error']);
 }
 

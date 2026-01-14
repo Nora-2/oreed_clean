@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 class CustomException implements Exception {
   final _message;
   final _prefix;
@@ -35,10 +37,12 @@ class ErrorMessgeException extends CustomException {
 
   /// Extract only the message for UI display.
   String uiMessage() {
-    if (bodyWithErrors.containsKey('msg'))
+    if (bodyWithErrors.containsKey('msg')) {
       return bodyWithErrors['msg'].toString();
-    if (bodyWithErrors.containsKey('message'))
+    }
+    if (bodyWithErrors.containsKey('message')) {
       return bodyWithErrors['message'].toString();
+    }
     // Common API validation payloads: {errors: {field: [msg]}}
     final errors = bodyWithErrors['errors'];
     if (errors is Map && errors.isNotEmpty) {

@@ -66,14 +66,12 @@ class CompanyRegisterRemoteDataSource {
       hasToken: false,
       parser: (json) => json,
     );
-    print(res.data);
-    print(res.status);
+  
     // ✅ Defensive check — sometimes API returns {status, msg}, sometimes {data: {...}}
     final data = res.data is Map<String, dynamic>
         ? (res.data as Map<String, dynamic>)
         : (res.data?['data'] ?? {});
-    print('[][][][e[fwe][fe]w[prw[]epr[ew]pr[wep[we');
-    print(data);
+   
 
     return RegisterResponseModelcomapny.fromJson(data);
   }

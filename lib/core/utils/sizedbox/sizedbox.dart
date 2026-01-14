@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+// ignore: camel_case_types
 class sized{
   static SizedBox h(double height) {
     return SizedBox(height: height);

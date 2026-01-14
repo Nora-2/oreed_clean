@@ -52,7 +52,7 @@ class _AccountTypePageState extends State<AccountTypePage> {
           AppTranslations.of(context)!.text('select_account_type_error'));
       return;
     }
-    print('Selected account type: $_selected');
+    
     if (_selected == AccountType.individual) {
       Navigator.of(context).pushNamed(
        Routes.personalregister,

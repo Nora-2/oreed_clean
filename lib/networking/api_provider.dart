@@ -39,9 +39,6 @@ class ApiProvider {
     }
   }
 
-  /// Posts using multipart/form-data for better compatibility with servers
-  /// that expect form-data (like Postman form-data).
-  /// `body` can contain String, int, double, File, List<int> (bytes).
   Future<Response<T>> post<T>(
     String url,
     Map body, {

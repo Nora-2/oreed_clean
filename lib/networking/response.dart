@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class Response<T> {
   Status? status;
   T? data;

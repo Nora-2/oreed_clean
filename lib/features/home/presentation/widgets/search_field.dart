@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/appstring/app_string.dart';
-import 'package:oreed_clean/features/AdvancedSearch/presentation/cubit/advancedsearch_cubit.dart';
-import 'package:oreed_clean/features/AdvancedSearch/presentation/pages/advanced_search.dart';
 
 class HomeSearchField extends StatelessWidget {
   const HomeSearchField({super.key});
@@ -19,17 +17,10 @@ class HomeSearchField extends StatelessWidget {
       textAlign: TextAlign.right,
       onSubmitted:  (searchText) {
         if (searchText.trim().isNotEmpty) {
-          Navigator.push(
+          Navigator.pushNamed(
             context,
-            MaterialPageRoute(
-              builder: (_) =>BlocProvider<AdvancedSearchCubit>(
-            create: (_) => AdvancedSearchCubit(),
-            child:   AdvancedSearchScreen(
-                initialSearchQuery: searchText,
-              ),
-          ),
-              
-            ),
+            Routes.advancedSearch,
+            arguments: {'initialSearchQuery': searchText},
           );
         }
       },

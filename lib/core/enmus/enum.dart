@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum ViewMode { list, grid }
 enum SectionType {
   car,
@@ -19,7 +21,6 @@ enum FavoriteAction { added, removed }
 enum ProfileKind { user, company }
 enum ImagesTypes { Network, Assest }
 enum ImageSourceChoice { camera, gallery }
-// lib/core/enums/section_type_enum.dart
 
 
 extension SectionTypeExtension on SectionType {

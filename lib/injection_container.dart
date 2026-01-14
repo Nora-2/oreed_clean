@@ -2,6 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:oreed_clean/core/app_shared_prefs.dart';
+import 'package:oreed_clean/features/chooseplane/data/datasources/packege_remote_datasource.dart';
+import 'package:oreed_clean/features/chooseplane/data/repositories/package_repo_impl.dart';
+import 'package:oreed_clean/features/chooseplane/domain/usecases/get_package_by_type_usecase.dart';
 import 'package:oreed_clean/features/comapany_register/data/datasources/company_register_remote_data_source.dart';
 import 'package:oreed_clean/features/comapany_register/data/datasources/company_remote_data_source.dart';
 import 'package:oreed_clean/features/comapany_register/data/repositories/comapny_register_repo_impl.dart';
@@ -44,6 +47,19 @@ import 'package:oreed_clean/features/login/data/repositories/auth_repo_impl.dart
 import 'package:oreed_clean/features/login/domain/repositories/auth_repo.dart';
 import 'package:oreed_clean/features/login/domain/usecases/login_usecase.dart';
 import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
+import 'package:oreed_clean/features/chooseplane/presentation/cubit/chooseplane_cubit.dart';
+import 'package:oreed_clean/features/verification/data/datasources/company_otp_verification_data_source.dart';
+import 'package:oreed_clean/features/verification/data/company_otp_verification_repo_impl.dart';
+import 'package:oreed_clean/features/verification/domain/repositories/compant_otp_repo.dart';
+import 'package:oreed_clean/features/verification/domain/usecases/verifiy_otp_usecase.dart';
+import 'package:oreed_clean/features/verification/presentation/cubit/verificationscreen_cubit.dart';
+import 'package:oreed_clean/features/AdvancedSearch/data/repositories/advanced_search_repo.dart';
+import 'package:oreed_clean/features/AdvancedSearch/presentation/cubit/advancedsearch_cubit.dart';
+import 'package:oreed_clean/features/account_type/presentation/cubit/account_type_cubit.dart';
+import 'package:oreed_clean/features/password/presentation/cubit/password_cubit.dart';
+import 'package:oreed_clean/features/on_boarding/presentation/cubit/on_boarding_cubit.dart';
+import 'package:oreed_clean/features/comapany_register/presentation/cubit/form_ui_cubit.dart';
+import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -103,6 +119,10 @@ sl.registerFactory<PersonalRegisterCubit>(
     () => CreateCompanyUseCase(sl<CompanyRepositoryImpl>()),
   );
 
+  sl.registerFactory<CompanyFormCubit>(
+    () => CompanyFormCubit(sl<CreateCompanyUseCase>()),
+  );
+
   sl.registerLazySingleton<GetCountriesUseCase>(
     () => GetCountriesUseCase(sl<CompanyRegisterRepositoryImpl>()),
   );
@@ -118,6 +138,15 @@ sl.registerFactory<PersonalRegisterCubit>(
       sl<GetSectionsUseCase>(), // This comes from the Home module
     ),
   );
+   sl.registerLazySingleton<PackageRemoteDataSource>(
+    () => PackageRemoteDataSource(sl<ApiProvider>()),
+  );
+  sl.registerLazySingleton<PackageRepositoryImpl>(
+    () => PackageRepositoryImpl(sl<PackageRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<GetPackagesByTypeUseCase>(
+    () => GetPackagesByTypeUseCase(sl<PackageRepositoryImpl>()),
+  );
   // sl.registerLazySingleton<CreateCompanyUseCase>(
   //     () => CreateCompanyUseCase(sl()));
   sl.registerLazySingleton<GetCategoriesUseCase>(
@@ -125,6 +154,52 @@ sl.registerFactory<PersonalRegisterCubit>(
   );
   sl.registerLazySingleton<RegisterCompanyUseCase>(
     () => RegisterCompanyUseCase(sl<CompanyRegisterRepositoryImpl>()),
+  );
+
+  sl.registerFactory<PackagesCubit>(
+    () => PackagesCubit(sl<GetPackagesByTypeUseCase>()),
+  );
+
+  // ================== Verification ==================
+   sl.registerLazySingleton<CompanyOtpRemoteDataSource>(
+    () => CompanyOtpRemoteDataSource(sl<ApiProvider>()),
+  );
+  sl.registerLazySingleton<CompanyOtpRepository>(
+    () => CompanyOtpRepositoryImpl(sl<CompanyOtpRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<VerifyOtpUseCase>(
+    () => VerifyOtpUseCase(sl<CompanyOtpRepository>()),
+  );
+  sl.registerFactory<VerificationCubit>(
+    () => VerificationCubit(sl<VerifyOtpUseCase>()),
+  );
+
+  // ================== Advanced Search ==================
+  sl.registerLazySingleton<AdvancedSearchRepository>(
+    () => AdvancedSearchRepository(),
+  );
+  sl.registerFactory<AdvancedSearchCubit>(
+    () => AdvancedSearchCubit(repository: sl<AdvancedSearchRepository>()),
+  );
+
+  // ================== Password ==================
+  sl.registerFactory<PasswordCubit>(
+    () => PasswordCubit(sl<AuthRepository>()),
+  );
+
+  // ================== Account Type ==================
+  sl.registerFactory<AccountTypeCubit>(
+    () => AccountTypeCubit(),
+  );
+
+  // ================== OnBoarding ==================
+  sl.registerFactory<OnBoardingCubit>(
+    () => OnBoardingCubit(),
+  );
+
+  // ================== Main Layout ==================
+  sl.registerFactory<HomelayoutCubit>(
+    () => HomelayoutCubit(),
   );
 
 sl.registerFactory(

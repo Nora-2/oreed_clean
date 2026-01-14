@@ -119,7 +119,7 @@ class CompanyRegisterCubit extends Cubit<CompanyRegisterState> {
         emit(
           state.copyWith(
             status: RegisterStatus.error,
-            error: response.msg ?? 'Registration failed',
+            error: response.msg ,
             response: response,
           ),
         );

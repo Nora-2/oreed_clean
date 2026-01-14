@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/core/routing/routes.dart';

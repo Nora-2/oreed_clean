@@ -61,7 +61,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(t.text('code_sent') ?? 'Code sent successfully'),
+          content: Text(t.text('code_sent')),
           backgroundColor: Colors.green,
         ),
       );
@@ -92,8 +92,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     final size = MediaQuery.of(context).size;
 
     return AuthBack(
-      title: t.text('reset_password') ?? 'إعادة تعيين كلمة المرور',
-      subtitle: t.text('enter_phone_to_reset') ?? 'أدخل رقم الهاتف لإرسال رمز التحقق',
+      title: t.text('reset_password'),
+      subtitle: t.text('enter_phone_to_reset') ,
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Padding(

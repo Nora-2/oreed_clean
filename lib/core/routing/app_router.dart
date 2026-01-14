@@ -18,7 +18,15 @@ import 'package:oreed_clean/features/password/presentation/pages/resetpass_scree
 import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
 import 'package:oreed_clean/features/personal_register/presentation/pages/personal_register_screen.dart';
 import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
+import 'package:oreed_clean/features/verification/presentation/pages/verification_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
+import 'package:oreed_clean/features/chooseplane/presentation/cubit/chooseplane_cubit.dart';
+import 'package:oreed_clean/features/chooseplane/presentation/pages/chooseplan_screen.dart';
+import 'package:oreed_clean/features/password/presentation/pages/newpass_withotp_screen.dart';
+import 'package:oreed_clean/features/verification/presentation/cubit/verificationscreen_cubit.dart';
+import 'package:oreed_clean/features/AdvancedSearch/presentation/cubit/advancedsearch_cubit.dart';
+import 'package:oreed_clean/features/AdvancedSearch/presentation/pages/advanced_search.dart';
+import 'package:oreed_clean/features/verification/presentation/pages/payment_webview.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -98,10 +106,11 @@ class AppRouter {
           ),
         );
       case Routes.homelayout:
+        final int? initialIndex = settings.arguments as int?;
         return MaterialPageRoute(
           builder: (_) => BlocProvider<HomelayoutCubit>(
-            create: (_) => HomelayoutCubit(),
-            child: const Homelayout(),
+            create: (_) => sl<HomelayoutCubit>(), // Changed to use sl since we registered it
+            child: Homelayout(initialIndex: initialIndex),
           ),
         );
 
@@ -112,7 +121,76 @@ class AppRouter {
             child: NotificationsScreen(),
           ),
         );
+        
+      case Routes.choosePlanScreen:
+         final args = settings.arguments as Map<String, dynamic>;
+         return MaterialPageRoute(
+           builder: (_) => BlocProvider(
+             create: (context) => sl<PackagesCubit>(),
+             child: ChoosePlanScreen(
+               type: args['type'],
+               title: args['title'],
+               icon: args['icon'],
+               introText: args['introText'],
+               accentColor: args['accentColor'],
+             ),
+           ),
+         );
+
+      case Routes.verificationScreen:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<VerificationCubit>(),
+            child: VerificationScreen(
+              phone: args['phone'],
+              isForget: args['isForget'] ?? false,
+              isRegister: args['isRegister'] ?? false,
+              isCompany: args['isCompany'] ?? false,
+            ),
+          ),
+        );
+
+      case Routes.newPasswordWithOtpScreen:
+         final args = settings.arguments as Map<String, dynamic>;
+         return MaterialPageRoute(
+           builder: (_) => NewPasswordWithOtpScreen(
+             phone: args['phone'],
+           ),
+         );
+         
+
+      case Routes.payment:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => PaymentWebView(
+            url: args['url'],
+            title: args['title'],
+            successMatcher: args['successMatcher'],
+            cancelMatcher: args['cancelMatcher'],
+          ),
+        );
+
+      case Routes.advancedSearch:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<AdvancedSearchCubit>(),
+            child: AdvancedSearchScreen(
+              initialSearchQuery: args['initialSearchQuery'] ?? '',
+            ),
+          ),
+        );
+
+      default:
+          return MaterialPageRoute(
+            builder: (_) => Scaffold(
+              body: Center(
+                child: Text('Route not found: \\${settings.name}'),
+              ),
+            ),
+          );
     }
-    return null;
+  
   }
 }
