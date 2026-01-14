@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +8,7 @@ import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/ad_type_badge.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/shimmer.dart';
+import 'package:oreed_clean/features/addetails/presentation/pages/ad_detailes_screen.dart';
 import 'package:oreed_clean/features/favourite/presentation/widgets/favourite_circle_button.dart';
 import 'package:oreed_clean/features/home/data/models/related_ad_view.dart';
 import 'package:oreed_clean/features/home/data/models/releted_ad_model.dart';
@@ -18,12 +18,11 @@ class RelatedCard extends StatelessWidget {
   final int sectionId;
 
   RelatedCard({super.key, required RelatedAd ad, required this.sectionId})
-      : ad = RelatedAdView.from(ad);
+    : ad = RelatedAdView.from(ad);
 
   @override
   Widget build(BuildContext context) {
-  
-    final mainBlueColor =AppColors.primary;
+    final mainBlueColor = AppColors.primary;
     final t = AppTranslations.of(context);
     final showPrice = _shouldShowPrice(ad.priceText);
 
@@ -35,9 +34,7 @@ class RelatedCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: Colors.grey.withOpacity(.4),
-        ),
+        border: Border.all(color: Colors.grey.withOpacity(.4)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0D000000),
@@ -48,17 +45,14 @@ class RelatedCard extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        // onTap: () => _navigateToDetails(context),
+        onTap: () => _navigateToDetails(context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // --- Image & Overlays Section ---
             Stack(
               children: [
-                AspectRatio(
-                  aspectRatio: 4 / 3,
-                  child: _buildAdImage(),
-                ),
+                AspectRatio(aspectRatio: 4 / 3, child: _buildAdImage()),
                 PositionedDirectional(
                   top: 3,
                   start: 5,
@@ -88,7 +82,7 @@ class RelatedCard extends StatelessWidget {
                       image: DecorationImage(
                         image: AssetImage(
                           Directionality.of(context) == TextDirection.rtl
-                              ?Appimage.timeFrame
+                              ? Appimage.timeFrame
                               : Appimage.timeFrameEnglish,
                         ),
                         fit: BoxFit.fill,
@@ -104,9 +98,10 @@ class RelatedCard extends StatelessWidget {
                           width: 10,
                           // Fallback icon if SVG fails or for safety
                           placeholderBuilder: (_) => const Icon(
-                              Icons.access_time,
-                              size: 10,
-                              color: Colors.grey),
+                            Icons.access_time,
+                            size: 10,
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(width: 4),
                         Text(
@@ -126,9 +121,10 @@ class RelatedCard extends StatelessWidget {
                           height: 10,
                           width: 10,
                           placeholderBuilder: (_) => const Icon(
-                              Icons.visibility,
-                              size: 10,
-                              color: Colors.grey),
+                            Icons.visibility,
+                            size: 10,
+                            color: Colors.grey,
+                          ),
                         ),
                         const SizedBox(width: 6),
                         Text(
@@ -150,8 +146,10 @@ class RelatedCard extends StatelessWidget {
             // --- Content Section ---
             Expanded(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -176,10 +174,11 @@ class RelatedCard extends StatelessWidget {
                         SvgPicture.asset(
                           AppIcons.locationCountry,
                           height: 12,
-                          placeholderBuilder: (_) =>  Icon(
-                              Icons.location_on,
-                              size: 14,
-                              color: AppColors.primary),
+                          placeholderBuilder: (_) => Icon(
+                            Icons.location_on,
+                            size: 14,
+                            color: AppColors.primary,
+                          ),
                         ),
                         const SizedBox(width: 4),
                         Expanded(
@@ -202,9 +201,10 @@ class RelatedCard extends StatelessWidget {
                     // Price
                     if (showPrice)
                       _PriceDisplay(
-                          priceText: ad.priceText,
-                          mainColor: mainBlueColor,
-                          currencyLabel: t?.text('currency_kwd') ?? 'د.ك'),
+                        priceText: ad.priceText,
+                        mainColor: mainBlueColor,
+                        currencyLabel: t?.text('currency_kwd') ?? 'د.ك',
+                      ),
                   ],
                 ),
               ),
@@ -238,18 +238,15 @@ class RelatedCard extends StatelessWidget {
   }
 
   /// Navigate to ad details screen
-  // void _navigateToDetails(BuildContext context) {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (_) => DetailsScreen(
-  //         sectionId: sectionId,
-  //         adId: int.parse(ad.id),
-  //       ),
-  //     ),
-  //   );
-  // }
+  void _navigateToDetails(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) =>
+            DetailsAdsScreen(sectionId: sectionId, adId: int.parse(ad.id)),
+      ),
+    );
+  }
 
-  /// Build advertisement image with Shimmer support
   Widget _buildAdImage() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
@@ -265,11 +262,7 @@ class RelatedCard extends StatelessWidget {
         errorWidget: (context, url, error) => Container(
           color: const Color(0xFFE8E8E9),
           alignment: Alignment.center,
-          child: const Icon(
-            Icons.image_outlined,
-            size: 40,
-            color: Colors.grey,
-          ),
+          child: const Icon(Icons.image_outlined, size: 40, color: Colors.grey),
         ),
       ),
     );
@@ -309,9 +302,6 @@ class RelatedCard extends StatelessWidget {
     final dd = dt.day.toString().padLeft(2, '0');
     return '${dt.year}-$mm-$dd';
   }
-
-
-
 }
 
 class _PriceDisplay extends StatelessWidget {
@@ -319,10 +309,11 @@ class _PriceDisplay extends StatelessWidget {
   final Color mainColor;
   final String currencyLabel;
 
-  const _PriceDisplay(
-      {required this.priceText,
-      required this.mainColor,
-      required this.currencyLabel});
+  const _PriceDisplay({
+    required this.priceText,
+    required this.mainColor,
+    required this.currencyLabel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -344,14 +335,12 @@ class _PriceDisplay extends StatelessWidget {
   ({String number, String currency}) _splitPrice(String text) {
     final parts = text.trim().split(' ');
     var number = parts.isNotEmpty ? parts.first : text;
-    final currency =
-        parts.length > 1 ? text.substring(number.length).trim() : '';
+    final currency = parts.length > 1
+        ? text.substring(number.length).trim()
+        : '';
     if (number.endsWith('.00')) {
       number = number.substring(0, number.length - 3);
     }
     return (number: number, currency: currency);
   }
 }
-
-
-

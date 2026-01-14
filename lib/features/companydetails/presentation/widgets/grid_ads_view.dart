@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oreed_clean/features/addetails/presentation/pages/ad_detailes_screen.dart';
 import 'package:oreed_clean/features/companydetails/presentation/widgets/related_ad_grid_card.dart';
 import 'package:oreed_clean/features/home/domain/entities/related_ad_entity.dart';
 
@@ -60,14 +61,12 @@ class GridAdsView extends StatelessWidget {
               item: ad,
               sectionId: sectionId,
               onTap: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (_) => DetailsScreen(
-                //       sectionId: sectionId,
-                //       adId: ad.id,
-                //     ),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) =>
+                        DetailsAdsScreen(sectionId: sectionId, adId: ad.id),
+                  ),
+                );
               },
             );
           },

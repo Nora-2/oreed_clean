@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oreed_clean/features/addetails/presentation/pages/ad_detailes_screen.dart';
 import 'package:oreed_clean/features/companydetails/presentation/widgets/related_ad_list_card.dart';
 import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubit.dart';
 import 'package:oreed_clean/features/home/domain/entities/related_ad_entity.dart';
@@ -43,14 +44,12 @@ class ListAdsView extends StatelessWidget {
           isFavorite: isFav,
           isPending: isBusy,
           onTap: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (_) => DetailsScreen(
-            //       sectionId: sectionId,
-            //       adId: ad.id,
-            //     ),
-            //   ),
-            // );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) =>
+                    DetailsAdsScreen(sectionId: sectionId, adId: ad.id),
+              ),
+            );
           },
         );
       },
