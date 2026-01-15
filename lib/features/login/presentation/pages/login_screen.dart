@@ -14,6 +14,7 @@ import 'package:oreed_clean/features/login/presentation/cubit/login_state.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/authbackground.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/custom_apptextfield.dart';
 import 'package:oreed_clean/features/login/presentation/widgets/custom_phonefield.dart';
+import 'package:oreed_clean/features/notification/presentation/pages/notification_services.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = "/home_add_ads";
@@ -85,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await prefs.saveUserType(user.accountType);
       await prefs.saveUserToken(user.token!);
       await prefs.saveUserId(user.id);
-      // await NotificationService().subscribeToUserTypeTopic(user.accountType);
+      await NotificationService().subscribeToUserTypeTopic(user.accountType);
 
       if (mounted) Navigator.pushReplacementNamed(context, Routes.homelayout);
     }
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await prefs.saveUserName(user.name);
       await prefs.saveUserType(user.accountType);
       await prefs.saveUserToken(user.token!);
-      // await NotificationService().subscribeToUserTypeTopic(user.accountType);
+      await NotificationService().subscribeToUserTypeTopic(user.accountType);
 
       if (mounted) Navigator.pushReplacementNamed(context, Routes.homelayout);
     }

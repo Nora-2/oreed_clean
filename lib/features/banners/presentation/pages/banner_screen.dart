@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Added
 import 'package:flutter_svg/svg.dart';
+import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/shimmer.dart';
 import 'package:oreed_clean/features/banners/domain/entities/banner_entity.dart'; // Ensure this is imported
@@ -134,7 +135,16 @@ class _BannerSectionState extends State<BannerSection> {
           // Navigation logic here...
           break;
         case 'company_id':
-          // Navigation logic here...
+          final companyId = int.tryParse(banner.companyId);
+          final sectionId = int.tryParse(banner.valueSectionId ?? '');
+          if (companyId == null || sectionId == null) {
+            debugPrint('Invalid company id or section id');
+            return;
+          }
+          Navigator.of(context).pushNamed(
+            Routes.companydetails,
+            arguments: {'sectionId': sectionId, 'companyId': companyId},
+          );
           break;
         default:
           debugPrint('Unhandled banner type: $type');
@@ -156,7 +166,9 @@ class _BannerSectionState extends State<BannerSection> {
           height: MediaQuery.of(context).size.height * 0.20,
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border(top: BorderSide(color: AppColors.secondary, width: 5)),
+            border: Border(
+              top: BorderSide(color: AppColors.secondary, width: 5),
+            ),
             borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
           ),
           child: Padding(
@@ -217,7 +229,8 @@ class _BannerSectionState extends State<BannerSection> {
   Future<void> _openWhatsApp(String phone) async {
     final clean = phone.replaceAll(RegExp(r'[^0-9+]'), '');
     final uri = Uri.parse('https://wa.me/$clean');
-    if (await canLaunchUrl(uri)) await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (await canLaunchUrl(uri))
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
   }
 }
 
@@ -228,7 +241,12 @@ class _ActionTile extends StatelessWidget {
   final String iconPath;
   final VoidCallback onTap;
 
-  const _ActionTile({required this.label, required this.color, required this.iconPath, required this.onTap});
+  const _ActionTile({
+    required this.label,
+    required this.color,
+    required this.iconPath,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -243,9 +261,22 @@ class _ActionTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(iconPath, colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+            SvgPicture.asset(
+              iconPath,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
+            ),
             const SizedBox(width: 8),
-            Text(label, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600)),
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
@@ -276,7 +307,8 @@ class _BannerItem extends StatelessWidget {
             height: double.infinity,
             borderRadius: BorderRadius.circular(19),
           ),
-          errorWidget: (context, url, error) => const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+          errorWidget: (context, url, error) =>
+              const Icon(Icons.broken_image, size: 50, color: Colors.grey),
         ),
       ),
     );
@@ -288,7 +320,11 @@ class _DotsIndicator extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onDotTap;
 
-  const _DotsIndicator({required this.count, required this.currentIndex, required this.onDotTap});
+  const _DotsIndicator({
+    required this.count,
+    required this.currentIndex,
+    required this.onDotTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -304,7 +340,9 @@ class _DotsIndicator extends StatelessWidget {
             height: 5,
             width: 12,
             decoration: BoxDecoration(
-              color: active ? AppColors.secondary : AppColors.secondary.withOpacity(.5),
+              color: active
+                  ? AppColors.secondary
+                  : AppColors.secondary.withOpacity(.5),
               borderRadius: BorderRadius.circular(8),
             ),
           ),

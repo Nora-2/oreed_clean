@@ -61,6 +61,12 @@ import 'package:oreed_clean/features/on_boarding/presentation/cubit/on_boarding_
 import 'package:oreed_clean/features/comapany_register/presentation/cubit/form_ui_cubit.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:oreed_clean/features/companydetails/presentation/cubit/companydetailes_cubit.dart';
+import 'package:oreed_clean/features/companydetails/domain/usecases/get_company_usecase.dart';
+import 'package:oreed_clean/features/companydetails/domain/usecases/get_company_ad_usecase.dart';
+import 'package:oreed_clean/features/companydetails/domain/repositories/company_details_repo.dart';
+import 'package:oreed_clean/features/companydetails/data/repositories/company_details_repo.dart';
+import 'package:oreed_clean/features/companydetails/data/datasources/company_details_remote_data_source.dart';
 
 final sl = GetIt.instance;
 
@@ -319,4 +325,23 @@ sl.registerLazySingleton<NotificationsRemoteDataSource>(
 
 
 
+  // ================== Company Details ==================
+  sl.registerLazySingleton<CompanyDetailsRemoteDataSource>(
+    () => CompanyDetailsRemoteDataSource(sl<ApiProvider>()),
+  );
+  sl.registerLazySingleton<CompanyDetailsRepository>(
+    () => CompanyDetailsRepositoryImpl(sl<CompanyDetailsRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<GetCompanyDetailsUseCase>(
+    () => GetCompanyDetailsUseCase(sl<CompanyDetailsRepository>()),
+  );
+  sl.registerLazySingleton<GetCompanyAdsUseCase>(
+    () => GetCompanyAdsUseCase(sl<CompanyDetailsRepository>()),
+  );
+  sl.registerFactory<CompanyDetailsCubit>(
+    () => CompanyDetailsCubit(
+      getCompanyDetailsUseCase: sl<GetCompanyDetailsUseCase>(),
+      getCompanyAdsUseCase: sl<GetCompanyAdsUseCase>(),
+    ),
+  );
 }

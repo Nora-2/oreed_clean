@@ -14,4 +14,7 @@ class Routes {
   static const String newPasswordWithOtpScreen = '/NewPasswordWithOtpScreen';
   static const String payment = '/payment';
   static const String advancedSearch = '/advancedSearch';
+  static const String companydetails = '/companydetails';
+  static const String addetails = '/addetails';
+  static const String companyTypesCompany = '/companyTypesCompany';
 }

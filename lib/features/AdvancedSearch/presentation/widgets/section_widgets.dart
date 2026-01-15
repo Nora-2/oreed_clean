@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/constants.dart';
+import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/features/AdvancedSearch/data/models/advanced_search_model.dart';
+import 'package:oreed_clean/features/AdvancedSearch/presentation/cubit/advancedsearch_cubit.dart';
 
 class SectionCardWidget extends StatelessWidget {
   final SearchSection section;
@@ -27,29 +30,46 @@ class SectionCardWidget extends StatelessWidget {
                 width: 3,
                 height: 20,
                 decoration: BoxDecoration(
-                    color: Colors.orange, borderRadius: BorderRadius.circular(2)),
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
               const SizedBox(width: 8),
               Text(
                 section.name,
                 style: const TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff333333)),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff333333),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 16),
           if (section.companies.isNotEmpty) ...[
-            Text('${tr?.text('search_results_companies') ?? 'Companies'} (${section.companyCount})',
-                style: const TextStyle(fontSize: 14, color: Colors.grey)),
+            Text(
+              '${tr?.text('search_results_companies') ?? 'Companies'} (${section.companyCount})',
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
             const SizedBox(height: 16),
-            _GridWidget(items: section.companies, isCompany: true, sectionId: section.sectionId),
+            _GridWidget(
+              items: section.companies,
+              isCompany: true,
+              sectionId: section.sectionId,
+            ),
             const SizedBox(height: 20),
           ],
           if (section.categories.isNotEmpty) ...[
-            Text('${tr?.text('search_results_categories') ?? 'Categories'} (${section.categoryCount})',
-                style: const TextStyle(fontSize: 14, color: Colors.grey)),
+            Text(
+              '${tr?.text('search_results_categories') ?? 'Categories'} (${section.categoryCount})',
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
             const SizedBox(height: 16),
-            _GridWidget(items: section.categories, isCompany: false, sectionId: section.sectionId),
+            _GridWidget(
+              items: section.categories,
+              isCompany: false,
+              sectionId: section.sectionId,
+            ),
           ],
         ],
       ),
@@ -63,7 +83,11 @@ class _GridWidget extends StatelessWidget {
   final bool isCompany;
   final int sectionId;
 
-  const _GridWidget({required this.items, required this.isCompany, required this.sectionId});
+  const _GridWidget({
+    required this.items,
+    required this.isCompany,
+    required this.sectionId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +135,17 @@ class _GridItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Handle navigation or action
+        Navigator.of(context).pushNamed(
+          Routes.companydetails,
+          arguments: {
+            'sectionId': sectionId,
+            'companyId': id,
+            'searchText': context
+                .read<AdvancedSearchCubit>()
+                .state
+                .currentSearchQuery,
+          },
+        );
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
@@ -132,7 +166,11 @@ class _GridItemWidget extends StatelessWidget {
                     height: 80,
                     child: image != null
                         ? Image.asset(image!, fit: BoxFit.cover)
-                        : const Icon(Icons.business, color: Colors.grey, size: 32),
+                        : const Icon(
+                            Icons.business,
+                            color: Colors.grey,
+                            size: 32,
+                          ),
                   ),
                 ),
               ),
@@ -146,10 +184,11 @@ class _GridItemWidget extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black,
-                      fontFamily: Constants.fontFamily),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                    fontFamily: Constants.fontFamily,
+                  ),
                 ),
               ),
             ),

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:oreed_clean/core/app_shared_prefs.dart';
+import 'package:oreed_clean/features/notification/presentation/pages/notification_services.dart';
 import 'package:oreed_clean/features/verification/domain/entities/otp_response_entity.dart';
 import 'package:oreed_clean/features/verification/domain/usecases/verifiy_otp_usecase.dart';
 
@@ -28,7 +29,7 @@ class VerificationCubit extends Cubit<VerificationState> {
         // Note: Usually companies also need tokens, but keeping your original logic
         if (!isCompany) {
           final data = response.data;
-          
+
           if (data.containsKey('token')) {
             await AppSharedPreferences().saveUserToken(data['token']);
             await AppSharedPreferences().saveLoggedIn(true);
@@ -36,33 +37,36 @@ class VerificationCubit extends Cubit<VerificationState> {
           if (data.containsKey('account_type')) {
             await AppSharedPreferences().saveUserType(data['account_type']);
             // Subscribe to notification topic
-            // await NotificationService().subscribeToUserTypeTopic(data['account_type']);
+            await NotificationService().subscribeToUserTypeTopic(
+              data['account_type'],
+            );
           }
           if (data.containsKey('id')) {
             await AppSharedPreferences().saveUserId(data['id']);
           }
           if (data.containsKey('business_name')) {
-             await AppSharedPreferences().saveUserName(data['business_name']);
+            await AppSharedPreferences().saveUserName(data['business_name']);
           }
         }
 
-        emit(state.copyWith(
-          status: OtpStatus.success,
-          response: response,
-        ));
+        emit(state.copyWith(status: OtpStatus.success, response: response));
       } else {
-        emit(state.copyWith(
-          status: OtpStatus.error,
-          error: response.msg ,
-          response: response,
-        ));
+        emit(
+          state.copyWith(
+            status: OtpStatus.error,
+            error: response.msg,
+            response: response,
+          ),
+        );
       }
     } catch (e, stack) {
       log('❌ OTP verification error: $e', stackTrace: stack);
-      emit(state.copyWith(
-        status: OtpStatus.error,
-        error: 'حدث خطأ أثناء التحقق من الرمز',
-      ));
+      emit(
+        state.copyWith(
+          status: OtpStatus.error,
+          error: 'حدث خطأ أثناء التحقق من الرمز',
+        ),
+      );
     }
   }
 
