@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
@@ -39,7 +40,9 @@ class BodyContentNotLogin extends StatelessWidget {
                 hasArrow: true,
                 title: appTrans?.text("favorites") ?? "Favorite Ads",
                 icon: AppIcons.heartBack,
-                onPressed: () => Navigator.pushNamed(context, "/favorites"),
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.favourite);
+                },
               ),
             ],
 
@@ -65,7 +68,7 @@ class BodyContentNotLogin extends StatelessWidget {
                 title: appTrans?.text("password") ?? 'Password',
                 icon: AppIcons.lock,
                 onPressed: () =>
-                    Navigator.pushNamed(context, '/change-password'),
+                    Navigator.pushNamed(context, Routes.changepass),
               ),
 
             const SizedBox(height: 15),
@@ -73,8 +76,7 @@ class BodyContentNotLogin extends StatelessWidget {
               hasArrow: true,
               title: appTrans?.text("contact_us") ?? "Contact Us",
               icon: AppIcons.callUs,
-              onPressed: () =>
-                  Navigator.of(context).pushNamed('MsgContactUs.routeName'),
+              onPressed: () => Navigator.of(context).pushNamed(Routes.contacus),
             ),
 
             const SizedBox(height: 15),
@@ -151,9 +153,10 @@ class BodyContentNotLogin extends StatelessWidget {
       if (prefs.getCompanyId == null) {
         // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CompanyFormUI()));
       } else {
-        // Navigator.of(context).push(MaterialPageRoute(
-        //   builder: (_) => CompanyProfileLiteScreen(companyId: prefs.getCompanyId!),
-        // ));
+        Navigator.of(context).pushNamed(
+          Routes.companyprfilelite,
+          arguments: {'companyId': prefs.getCompanyId!},
+        );
       }
     }
   }
@@ -182,8 +185,6 @@ class BodyContentNotLogin extends StatelessWidget {
     );
   }
 }
-
-// --- Small helper widgets for cleaner code ---
 
 class _LoadingWidget extends StatelessWidget {
   const _LoadingWidget();

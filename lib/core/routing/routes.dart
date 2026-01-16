@@ -17,4 +17,8 @@ class Routes {
   static const String companydetails = '/companydetails';
   static const String addetails = '/addetails';
   static const String companyTypesCompany = '/companyTypesCompany';
+  static const String changepass = '/changepass';
+  static const String contacus = '/contactus';
+  static const String favourite = '/favourite';
+  static const String companyprfilelite = '/companyprfilelite';
 }

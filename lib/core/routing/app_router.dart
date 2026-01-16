@@ -8,7 +8,10 @@ import 'package:oreed_clean/features/comapany_register/presentation/pages/comapn
 import 'package:oreed_clean/features/company_types_by_company/presentation/cubit/company_types_by_company_cubit.dart';
 import 'package:oreed_clean/features/company_types_by_company/presentation/pages/company_types_company.dart';
 import 'package:oreed_clean/features/companydetails/presentation/pages/company_details_screen.dart';
+import 'package:oreed_clean/features/companyprofile/presentation/cubit/companyprofile_cubit.dart';
+import 'package:oreed_clean/features/companyprofile/presentation/pages/company_profile_screen.dart';
 import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubit.dart';
+import 'package:oreed_clean/features/favourite/presentation/pages/favourite_screen.dart';
 import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/pages/main_home_tab.dart';
 import 'package:oreed_clean/features/location_selector/presentation/cubit/location_selector_cubit.dart';
@@ -19,9 +22,11 @@ import 'package:oreed_clean/features/mainlayout/presentation/pages/mainlayout.da
 import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:oreed_clean/features/notification/presentation/pages/notification_screen.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
+import 'package:oreed_clean/features/password/presentation/pages/change_password_screen.dart';
 import 'package:oreed_clean/features/password/presentation/pages/resetpass_screen.dart';
 import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
 import 'package:oreed_clean/features/personal_register/presentation/pages/personal_register_screen.dart';
+import 'package:oreed_clean/features/settings/presentation/pages/contactus.dart';
 import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
 import 'package:oreed_clean/features/verification/presentation/pages/verification_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
@@ -53,6 +58,10 @@ class AppRouter {
         );
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => OnboardingPage());
+      case Routes.contacus:
+        return MaterialPageRoute(builder: (_) => MsgContactUs());
+      case Routes.changepass:
+        return MaterialPageRoute(builder: (_) => ChangePasswordScreen());
       case Routes.accounttype:
         return MaterialPageRoute(builder: (_) => AccountTypePage());
       case Routes.splash:
@@ -125,7 +134,14 @@ class AppRouter {
             child: NotificationsScreen(),
           ),
         );
-
+      case Routes.companyprfilelite:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider<CompanyprofileCubit>(
+            create: (_) => sl<CompanyprofileCubit>(),
+            child: CompanyProfileLiteScreen(companyId: args['companyId']),
+          ),
+        );
       case Routes.choosePlanScreen:
         final args = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
@@ -160,7 +176,13 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => NewPasswordWithOtpScreen(phone: args['phone']),
         );
-
+      case Routes.favourite:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => sl<FavoritesCubit>()..loadFavorites(),
+            child: const FavoritesScreen(),
+          ),
+        );
       case Routes.payment:
         final args = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(

@@ -2,6 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:oreed_clean/core/app_shared_prefs.dart';
+import 'package:oreed_clean/features/ads/domain/repositories/ads_repo.dart';
+import 'package:oreed_clean/features/ads/domain/usecases/delete_ad_use_case.dart';
 import 'package:oreed_clean/features/chooseplane/data/datasources/packege_remote_datasource.dart';
 import 'package:oreed_clean/features/chooseplane/data/repositories/package_repo_impl.dart';
 import 'package:oreed_clean/features/chooseplane/domain/usecases/get_package_by_type_usecase.dart';
@@ -15,6 +17,12 @@ import 'package:oreed_clean/features/comapany_register/domain/usecases/get_count
 import 'package:oreed_clean/features/comapany_register/domain/usecases/get_state_usecase.dart';
 import 'package:oreed_clean/features/comapany_register/domain/usecases/rwgister_company_usecase.dart';
 import 'package:oreed_clean/features/comapany_register/presentation/cubit/comapany_register_cubit.dart';
+import 'package:oreed_clean/features/companyprofile/data/datasources/company_profile_remote_data_source.dart';
+import 'package:oreed_clean/features/companyprofile/data/repositories/company_profile_repo_impl.dart';
+import 'package:oreed_clean/features/companyprofile/domain/repositories/company_profile_repo.dart';
+import 'package:oreed_clean/features/companyprofile/domain/usecases/get_company_profile_ad_usecase.dart';
+import 'package:oreed_clean/features/companyprofile/domain/usecases/get_company_profile_usecase.dart';
+import 'package:oreed_clean/features/companyprofile/presentation/cubit/companyprofile_cubit.dart';
 import 'package:oreed_clean/features/favourite/data/datasources/favourite_remote_data_source.dart';
 import 'package:oreed_clean/features/favourite/data/repositories/favourite_repo.dart';
 import 'package:oreed_clean/features/favourite/domain/repositories/favourite_repo_impl.dart';
@@ -71,29 +79,54 @@ import 'package:oreed_clean/features/companydetails/data/datasources/company_det
 final sl = GetIt.instance;
 
 Future<void> init() async {
-sl.registerLazySingleton<AppSharedPreferences>(
-  () => AppSharedPreferences(),
-);
+  sl.registerLazySingleton<AppSharedPreferences>(() => AppSharedPreferences());
 
-  sl.registerLazySingleton<Dio>(() => Dio(
-        BaseOptions(
-          baseUrl: 'https://oreedo.net/',
-          connectTimeout: const Duration(seconds: 5),
-          receiveTimeout: const Duration(seconds: 3),
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-        ),
-      ));
+  sl.registerLazySingleton<Dio>(
+    () => Dio(
+      BaseOptions(
+        baseUrl: 'https://oreedo.net/',
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 3),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ),
+    ),
+  );
+  sl.registerLazySingleton<CompanyProfileRemoteDataSource>(
+    () => CompanyProfileRemoteDataSource(),
+  );
+  sl.registerLazySingleton<CompanyProfileRepository>(
+    () => CompanyProfileRepositoryImpl(sl<CompanyProfileRemoteDataSource>()),
+  );
 
-  // API client wrapper
+  sl.registerLazySingleton<GetCompanyProfileUseCase>(
+    () => GetCompanyProfileUseCase(sl<CompanyProfileRepository>()),
+  );
+
+  sl.registerLazySingleton<GetCompanyProfileAdsUseCase>(
+    () => GetCompanyProfileAdsUseCase(sl<CompanyProfileRepository>()),
+  );
+
+  sl.registerLazySingleton<DeleteAdUseCase>(
+    () => DeleteAdUseCase(sl<AdsRepository>()),
+  );
+
+  sl.registerFactory<CompanyprofileCubit>(
+    () => CompanyprofileCubit(
+      sl<GetCompanyProfileUseCase>(),
+      sl<GetCompanyProfileAdsUseCase>(),
+      sl<DeleteAdUseCase>(),
+    ),
+  );
+
   sl.registerLazySingleton<OptimizedApiClient>(() => OptimizedApiClient());
 
   // SharedPreferences initialization
   final prefs = await SharedPreferences.getInstance();
   sl.registerLazySingleton<SharedPreferences>(() => prefs);
-// ================== Notifications ==================
+  // ================== Notifications ==================
 
   sl.registerLazySingleton<PersonalRegisterRemoteDataSource>(
     () => PersonalRegisterRemoteDataSource(sl<ApiProvider>()),
@@ -105,9 +138,9 @@ sl.registerLazySingleton<AppSharedPreferences>(
   sl.registerLazySingleton<PersonalRegisterUseCase>(
     () => PersonalRegisterUseCase(sl<PersonalRegisterRepository>()),
   );
-sl.registerFactory<PersonalRegisterCubit>(
-  () => PersonalRegisterCubit(sl<PersonalRegisterUseCase>()),
-);
+  sl.registerFactory<PersonalRegisterCubit>(
+    () => PersonalRegisterCubit(sl<PersonalRegisterUseCase>()),
+  );
   sl.registerLazySingleton<CompanyRegisterRemoteDataSource>(
     () => CompanyRegisterRemoteDataSource(sl<ApiProvider>()),
   );
@@ -144,7 +177,7 @@ sl.registerFactory<PersonalRegisterCubit>(
       sl<GetSectionsUseCase>(), // This comes from the Home module
     ),
   );
-   sl.registerLazySingleton<PackageRemoteDataSource>(
+  sl.registerLazySingleton<PackageRemoteDataSource>(
     () => PackageRemoteDataSource(sl<ApiProvider>()),
   );
   sl.registerLazySingleton<PackageRepositoryImpl>(
@@ -167,7 +200,7 @@ sl.registerFactory<PersonalRegisterCubit>(
   );
 
   // ================== Verification ==================
-   sl.registerLazySingleton<CompanyOtpRemoteDataSource>(
+  sl.registerLazySingleton<CompanyOtpRemoteDataSource>(
     () => CompanyOtpRemoteDataSource(sl<ApiProvider>()),
   );
   sl.registerLazySingleton<CompanyOtpRepository>(
@@ -189,55 +222,36 @@ sl.registerFactory<PersonalRegisterCubit>(
   );
 
   // ================== Password ==================
-  sl.registerFactory<PasswordCubit>(
-    () => PasswordCubit(sl<AuthRepository>()),
-  );
+  sl.registerFactory<PasswordCubit>(() => PasswordCubit(sl<AuthRepository>()));
 
   // ================== Account Type ==================
-  sl.registerFactory<AccountTypeCubit>(
-    () => AccountTypeCubit(),
-  );
+  sl.registerFactory<AccountTypeCubit>(() => AccountTypeCubit());
 
   // ================== OnBoarding ==================
-  sl.registerFactory<OnBoardingCubit>(
-    () => OnBoardingCubit(),
-  );
+  sl.registerFactory<OnBoardingCubit>(() => OnBoardingCubit());
 
   // ================== Main Layout ==================
-  sl.registerFactory<HomelayoutCubit>(
-    () => HomelayoutCubit(),
+  sl.registerFactory<HomelayoutCubit>(() => HomelayoutCubit());
+
+  sl.registerFactory(() => NotificationsCubit(repository: sl(), prefs: sl()));
+
+  // Repository
+  sl.registerLazySingleton<NotificationsRepository>(
+    () => NotificationsRepository(remoteDataSource: sl()),
   );
 
-sl.registerFactory(
-  () => NotificationsCubit(
-    repository: sl(),
-    prefs: sl(),
-  ),
-);
-
-// Repository
-sl.registerLazySingleton<NotificationsRepository>(
-  () => NotificationsRepository(
-    remoteDataSource: sl(),
-  ),
-);
-
-// Remote Data Source
-sl.registerLazySingleton<NotificationsRemoteDataSource>(
-  () => NotificationsRemoteDataSourceImpl(),
-);
-   sl.registerLazySingleton<http.Client>(
-    () => http.Client(),
+  // Remote Data Source
+  sl.registerLazySingleton<NotificationsRemoteDataSource>(
+    () => NotificationsRemoteDataSourceImpl(),
   );
+  sl.registerLazySingleton<http.Client>(() => http.Client());
 
   /// HttpClientService ✅
   sl.registerLazySingleton<HttpClientService>(
     () => HttpClientService(
       client: sl<http.Client>(),
       baseUrl: 'https://oreedo.net/', // ⚠️ نفس baseUrl بتاعتك
-      defaultHeaders: const {
-        'Content-Type': 'application/json',
-      },
+      defaultHeaders: const {'Content-Type': 'application/json'},
     ),
   );
   // ================== Auth ==================
@@ -248,12 +262,9 @@ sl.registerLazySingleton<NotificationsRemoteDataSource>(
   sl.registerLazySingleton(() => LoginUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(sl(),)
-  );
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
 
   // Data source
- 
 
   // ================== Banners ==================
   // Cubit
@@ -263,9 +274,7 @@ sl.registerLazySingleton<NotificationsRemoteDataSource>(
   sl.registerLazySingleton(() => GetBannersUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<BannerRepository>(
-    () => BannerRepositoryImpl(sl()),
-  );
+  sl.registerLazySingleton<BannerRepository>(() => BannerRepositoryImpl(sl()));
 
   // Data source
   sl.registerLazySingleton<BannerRemoteDataSource>(
@@ -274,11 +283,7 @@ sl.registerLazySingleton<NotificationsRemoteDataSource>(
 
   // ================== Home ==================
   // Cubit
-  sl.registerFactory(() => MainHomeCubit(
-        sl(),
-        sl(),
-        sl(),
-      ));
+  sl.registerFactory(() => MainHomeCubit(sl(), sl(), sl()));
 
   // Use cases
   sl.registerLazySingleton(() => GetSectionsUseCase(sl()));
@@ -293,27 +298,20 @@ sl.registerLazySingleton<NotificationsRemoteDataSource>(
   sl.registerLazySingleton<MainHomeRemoteDataSource>(
     () => MainHomeRemoteDataSource(sl()),
   );
-  sl.registerLazySingleton<ApiProvider>(
-  () => ApiProvider(),
-);
-// ================== Favorites ==================
+  sl.registerLazySingleton<ApiProvider>(() => ApiProvider());
+  // ================== Favorites ==================
 
-
- sl.registerLazySingleton<FavoritesRemoteDataSource>(
-  () => FavoritesRemoteDataSourceImpl(sl<HttpClientService>()),
-);
+  sl.registerLazySingleton<FavoritesRemoteDataSource>(
+    () => FavoritesRemoteDataSourceImpl(sl<HttpClientService>()),
+  );
 
   sl.registerLazySingleton<FavoritesRepository>(
-    () => FavoritesRepositoryImpl(sl(),),
+    () => FavoritesRepositoryImpl(sl()),
   );
 
-  sl.registerLazySingleton<ToggleFavorite>(
-    () => ToggleFavorite(sl()),
-  );
+  sl.registerLazySingleton<ToggleFavorite>(() => ToggleFavorite(sl()));
 
-  sl.registerLazySingleton<GetFavorites>(
-    () => GetFavorites(sl()),
-  );
+  sl.registerLazySingleton<GetFavorites>(() => GetFavorites(sl()));
 
   sl.registerFactory<FavoritesCubit>(
     () => FavoritesCubit(
@@ -322,8 +320,6 @@ sl.registerLazySingleton<NotificationsRemoteDataSource>(
       sl<AppSharedPreferences>(),
     ),
   );
-
-
 
   // ================== Company Details ==================
   sl.registerLazySingleton<CompanyDetailsRemoteDataSource>(

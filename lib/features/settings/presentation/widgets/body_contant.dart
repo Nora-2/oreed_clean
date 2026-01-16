@@ -19,7 +19,7 @@ class BodyContent extends StatelessWidget {
     final t = AppTranslations.of(context);
     final prefs = AppSharedPreferences();
     final isLoggedIn = prefs.userId != null;
-
+    final cubit = context.read<MoreCubit>();
     return BlocConsumer<MoreCubit, MoreState>(
       listener: (context, state) {
         if (state.status == MoreStatus.actionSuccess &&
@@ -42,8 +42,7 @@ class BodyContent extends StatelessWidget {
                 hasArrow: true,
                 title: t?.text("my_ads") ?? 'My Ads',
                 icon: AppIcons.volumeWithBack,
-                // onPressed: () =>
-                //     Navigator.pushNamed(context, Routes.myAds),
+                onPressed: () => _handleProfileNavigation(context, cubit),
               ),
 
             if (isLoggedIn)
@@ -51,8 +50,9 @@ class BodyContent extends StatelessWidget {
                 hasArrow: true,
                 title: t?.text("favorites") ?? "Favorite Ads",
                 icon: AppIcons.heartBack,
-                // onPressed: () =>
-                //     Navigator.pushNamed(context, Routes.favorites),
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.favourite);
+                },
               ),
 
             RowWithArrow(
@@ -78,10 +78,8 @@ class BodyContent extends StatelessWidget {
                 hasArrow: true,
                 title: t?.text("password") ?? 'Password',
                 icon: AppIcons.lock,
-                // onPressed: () => Navigator.pushNamed(
-                //   context,
-                //   Routes.changePassword,
-                // ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, Routes.changepass),
               ),
 
             const SizedBox(height: 30),
@@ -92,8 +90,7 @@ class BodyContent extends StatelessWidget {
               hasArrow: true,
               title: t?.text("contact_us") ?? "Contact Us",
               icon: AppIcons.callUs,
-              // onPressed: () =>
-              //     Navigator.pushNamed(context, Routes.contactUs),
+              onPressed: () => Navigator.pushNamed(context, Routes.contacus),
             ),
 
             _buildDynamicPages(state, context, t),
@@ -102,7 +99,7 @@ class BodyContent extends StatelessWidget {
               RowWithArrow(
                 hasArrow: true,
                 title: t?.text("signOut") ?? "Sign Out",
-                icon: 'assets/svg/exitback.svg',
+                icon: AppIcons.exit,
                 onPressed: () => _confirmLogout(context),
               ),
           ],
@@ -214,6 +211,22 @@ class BodyContent extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _handleProfileNavigation(BuildContext context, MoreCubit cubit) {
+    final prefs = cubit.prefs;
+    if (prefs.userType == 'personal') {
+      // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProfileScreen()));
+    } else {
+      if (prefs.getCompanyId == null) {
+        // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CompanyFormUI()));
+      } else {
+        Navigator.of(context).pushNamed(
+          Routes.companyprfilelite,
+          arguments: {'companyId': prefs.getCompanyId!},
+        );
+      }
+    }
   }
 
   void _shareApp(BuildContext context) {
