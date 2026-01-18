@@ -29,6 +29,11 @@ import 'package:oreed_clean/features/favourite/domain/repositories/favourite_rep
 import 'package:oreed_clean/features/favourite/domain/usecases/get_favourite.dart';
 import 'package:oreed_clean/features/favourite/domain/usecases/toggel_favourite.dart';
 import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubit.dart';
+import 'package:oreed_clean/features/my_ads/data/datasources/user_ads_remote_data_source.dart';
+import 'package:oreed_clean/features/my_ads/data/repositories/user_ads_repo_impl.dart';
+import 'package:oreed_clean/features/my_ads/domain/repositories/user_Ads_repo.dart';
+import 'package:oreed_clean/features/my_ads/domain/usecases/get_use_ads_usecase.dart';
+import 'package:oreed_clean/features/my_ads/presentation/cubit/my_ads_cubit.dart';
 import 'package:oreed_clean/features/notification/data/datasources/notification_remote_data_source.dart';
 import 'package:oreed_clean/features/notification/data/repositories/notification_repo.dart';
 import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
@@ -94,6 +99,23 @@ Future<void> init() async {
       ),
     ),
   );
+  sl.registerFactory<PersonAdsCubit>(
+    () => PersonAdsCubit(
+      getUserAdsUseCase: sl<GetUserAdsUseCase>(),
+      deleteAdUseCase: sl<DeleteAdUseCase>(),
+    ),
+  );
+  sl.registerLazySingleton<UserAdsRemoteDataSource>(
+    () => UserAdsRemoteDataSourceImpl(sl()),
+  );
+
+  // Repository
+  sl.registerLazySingleton<UserAdsRepository>(
+    () => UserAdsRepositoryImpl(remoteDataSource: sl()),
+  );
+
+  // Use Cases
+  sl.registerLazySingleton(() => GetUserAdsUseCase(sl()));
   sl.registerLazySingleton<CompanyProfileRemoteDataSource>(
     () => CompanyProfileRemoteDataSource(),
   );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/features/companyprofile/domain/entities/company_ad_entity.dart';
+import 'package:oreed_clean/features/companyprofile/presentation/widgets/adbanner_carousel.dart';
 
 class CompanyAdsList extends StatelessWidget {
   final List<CompanyAdEntity> ads;
@@ -22,14 +23,14 @@ class CompanyAdsList extends StatelessWidget {
     this.companyId,
   });
 
-  // bool _isCompanyAd(int index) {
-  //   return ads[index].adOwnerType == 'company';
-  // }
-  // bool get _isCompanyList => ownerType == 'company';
+  bool _isCompanyAd(int index) {
+    return ads[index].adOwnerType == 'company';
+  }
+  bool get _isCompanyList => ownerType == 'company';
 
-  // bool _shouldShowExpiredOverlay(int index) {
-  //   return isExpired && _isCompanyList;
-  // }
+  bool _shouldShowExpiredOverlay(int index) {
+    return isExpired && _isCompanyList;
+  }
 
  
   @override
@@ -68,36 +69,36 @@ class CompanyAdsList extends StatelessWidget {
       children: [
         Stack(
           children: [
-            // AdBannerCarousel(
-            //   ownerType: ownerType,
-            //   itemCount: ads.length,
-            //   titleBuilder: (i) => ads[i].title,
-            //   companyId: companyId ?? 0,
-            //   dateBuilder: (i) => ads[i].adsExpirationDate,
-            //   viewsBuilder: (i) => ads[i].visit,
-            //   sectionId: (i) => ads[i].sectionId,
-            //   imageUrlBuilder: (i) => ads[i].mainImage,
-            //   statusBuilder: (i) => ads[i].status,
-            //   onEdit: (i) {
-            //     // Only restrict company ads when expired
-            //     if (_shouldShowExpiredOverlay(i) && onAdTap != null) {
-            //       onAdTap!();
-            //     }
-            //   },
-            //   onDelete: (i) => onDelete(ads[i].id, ads[i].sectionId),
-            //   onRepublish: (i) {
-            //     // Only restrict company ads when expired
-            //     if (_shouldShowExpiredOverlay(i) && onAdTap != null) {
-            //       onAdTap!();
-            //     }
-            //   },
-            //   showHighlight: true,
-            //   showPin: (i) => ads[i].adOwnerType == 'personal',
-            //   typeBuilder: (i) => ads[i].sectionName,
-            //   adTypeBuilder: (i) => ads[i].adType,
-            //   sectionTypeBuilder: (i) => ads[i].sectionType,
-            //   adIdBuilder: (i) => ads[i].id.toString(),
-            // ),
+            AdBannerCarousel(
+              ownerType: ownerType,
+              itemCount: ads.length,
+              titleBuilder: (i) => ads[i].title,
+              companyId: companyId ?? 0,
+              dateBuilder: (i) => ads[i].adsExpirationDate,
+              viewsBuilder: (i) => ads[i].visit,
+              sectionId: (i) => ads[i].sectionId,
+              imageUrlBuilder: (i) => ads[i].mainImage,
+              statusBuilder: (i) => ads[i].status,
+              onEdit: (i) {
+                // Only restrict company ads when expired
+                if (_shouldShowExpiredOverlay(i) && onAdTap != null) {
+                  onAdTap!();
+                }
+              },
+              onDelete: (i) => onDelete(ads[i].id, ads[i].sectionId),
+              onRepublish: (i) {
+                // Only restrict company ads when expired
+                if (_shouldShowExpiredOverlay(i) && onAdTap != null) {
+                  onAdTap!();
+                }
+              },
+              showHighlight: true,
+              showPin: (i) => ads[i].adOwnerType == 'personal',
+              typeBuilder: (i) => ads[i].sectionName,
+              adTypeBuilder: (i) => ads[i].adType,
+              sectionTypeBuilder: (i) => ads[i].sectionType,
+              adIdBuilder: (i) => ads[i].id.toString(),
+            ),
             // Only show expired overlay on company ads
             if (isExpired && ads.any((ad) => ad.adOwnerType == 'company'))
               Positioned.fill(

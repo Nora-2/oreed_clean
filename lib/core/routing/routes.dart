@@ -21,4 +21,6 @@ class Routes {
   static const String contacus = '/contactus';
   static const String favourite = '/favourite';
   static const String companyprfilelite = '/companyprfilelite';
+  static const String dynamicPage = '/dynamicPage';
+  static const String personalads = '/personalads';
 }

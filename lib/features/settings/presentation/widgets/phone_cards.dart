@@ -1,34 +1,4 @@
-import 'package:flutter/material.dart'
-    show
-        BorderRadius,
-        BoxDecoration,
-        StatelessWidget,
-        BuildContext,
-        Widget,
-        SizedBox,
-        EdgeInsets,
-        DecorationImage,
-        Offset,
-        Directionality,
-        TextDirection,
-        Clip,
-        AssetImage,
-        BoxFit,
-        CrossAxisAlignment,
-        Column,
-        Container,
-        Stack,
-        Theme,
-        FontWeight,
-        Text,
-        Row,
-        TextDecoration,
-        InkWell,
-        Colors,
-        Border,
-        BoxShadow,
-        Divider,
-        MainAxisAlignment;
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
@@ -129,7 +99,7 @@ class AllPhonesCard extends StatelessWidget {
         SvgPicture.asset(AppIcons.mail, color: AppColors.whiteColor),
         const SizedBox(width: 5),
         InkWell(
-          onTap: settingsModel?.email?.isNotEmpty == true
+          onTap: settingsModel?.email.isNotEmpty == true
               ? () => _launchEmail(email: settingsModel!.email)
               : null,
           child: Text(
@@ -225,8 +195,6 @@ class AllPhonesCard extends StatelessWidget {
       ],
     );
   }
-
-  // ================= ACTIONS =================
 
   Future<void> _launchWhatsApp({required String phone}) async {
     final parsed = phone.startsWith('+') ? phone.substring(1) : phone;

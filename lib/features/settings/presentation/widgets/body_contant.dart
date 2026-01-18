@@ -5,6 +5,7 @@ import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
+import 'package:oreed_clean/features/comapany_register/presentation/pages/company_form_ui.dart';
 import 'package:oreed_clean/features/settings/data/models/page_model.dart';
 import 'package:oreed_clean/features/settings/presentation/cubit/moretab_cubit.dart';
 import 'package:oreed_clean/features/settings/presentation/widgets/row_with_arrow.dart';
@@ -176,12 +177,11 @@ class BodyContent extends StatelessWidget {
               title: page.title,
               icon: AppIcons.shieldBack,
 
-              // onPressed: () => Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (_) => SettingScreen(page: page),
-              //   ),
-              // ),
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).pushNamed(Routes.dynamicPage, arguments: {'pageModel': page});
+              },
             ),
           )
           .toList(),
@@ -216,10 +216,12 @@ class BodyContent extends StatelessWidget {
   void _handleProfileNavigation(BuildContext context, MoreCubit cubit) {
     final prefs = cubit.prefs;
     if (prefs.userType == 'personal') {
-      // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProfileScreen()));
+      Navigator.of(context).pushNamed(Routes.personalads);
     } else {
       if (prefs.getCompanyId == null) {
-        // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CompanyFormUI()));
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => const CompanyFormUI()));
       } else {
         Navigator.of(context).pushNamed(
           Routes.companyprfilelite,

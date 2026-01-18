@@ -46,7 +46,7 @@ class FavoritesScreen extends StatelessWidget {
 
               const Expanded(child: FavoritesSection()),
             ],
-          ), // 👈 نفس الودجت اللي كانت في ProfileScreen
+          ), // 
         ),
       ),
     );

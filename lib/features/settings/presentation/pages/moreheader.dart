@@ -5,11 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
+import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/emptywidget.dart';
 import 'package:oreed_clean/core/utils/textstyle/apptext_style.dart';
 import 'package:oreed_clean/features/companyprofile/presentation/cubit/companyprofile_cubit.dart';
+import 'package:oreed_clean/features/settings/presentation/pages/edit_profile.dart';
 import 'package:oreed_clean/features/settings/presentation/widgets/more_header_errorand_loading.dart';
 
 class MoreHeader extends StatefulWidget {
@@ -27,6 +29,15 @@ class MoreHeader extends StatefulWidget {
 }
 
 class _MoreHeaderState extends State<MoreHeader> {
+  final prefs = AppSharedPreferences();
+    Future<void> _fetchData() async {
+    if (AppSharedPreferences().companyId != null) {
+      await context.read<CompanyprofileCubit>().fetchCompanyProfileAndAds(
+          prefs.companyId!,
+        );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -112,6 +123,7 @@ class _MoreHeaderState extends State<MoreHeader> {
   // ================= HEADERS =================
 
   Widget _companyHeader(
+    
     BuildContext context,
     AppTranslations? t,
     AppSharedPreferences prefs,
@@ -129,14 +141,77 @@ class _MoreHeaderState extends State<MoreHeader> {
               const SizedBox(height: 70),
               Row(
                 children: [
-                  Text(
-                    prefs.userName ?? '',
-                    style: AppTextStyles.heading2.copyWith(
-                      color: Colors.white,
-                      fontSize: 20,
+                  GestureDetector(
+                     onTap: () async {
+                                    await AppSharedPreferences()
+                                        .initSharedPreferencesProp();
+                                    final prefs = AppSharedPreferences();
+                                    final result =
+                                        await Navigator.of(context).pushNamed(
+                                      EditProfileScreen.routeName,
+                                      arguments: EditProfileArgs(
+                                        kind: ProfileKind.company,
+                                        initialName: prefs.userName ?? '',
+                                        initialPhone: prefs.userPhone ?? '',
+                                        initialLogoUrl: profile.imageUrl,
+                                      ),
+                                    );
+
+                                    if (result == true) {
+                                      await AppSharedPreferences()
+                                          .initSharedPreferencesProp();
+                                      // 2. Refresh API data
+                                      _fetchData();
+                                      // 3. Update the UI
+                                      setState(() {});
+                                    }
+                                  },
+                    child: Text(
+                      prefs.userName ?? '',
+                      style: AppTextStyles.heading2.copyWith(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                   const Spacer(),
+                   if(! (prefs.userType != 'personal'))CircleAvatar(
+                                  radius: 16,
+                                  backgroundColor: AppColors.secondary,
+                                  child: IconButton(
+                                      onPressed: () async {
+                                        await AppSharedPreferences()
+                                            .initSharedPreferencesProp();
+                                        final prefs = AppSharedPreferences();
+                                        final result =
+                                            await Navigator.of(context)
+                                                .pushNamed(
+                                          EditProfileScreen.routeName,
+                                          arguments: EditProfileArgs(
+                                            kind: ProfileKind.company,
+                                            initialName: prefs.userName ?? '',
+                                            initialPhone: prefs.userPhone ?? '',
+                                            initialLogoUrl: profile.imageUrl,
+                                          ),
+                                        );
+
+                                        if (result == true) {
+                                          await AppSharedPreferences()
+                                              .initSharedPreferencesProp();
+                                          // 2. Refresh API data
+                                          _fetchData();
+                                          // 3. Update the UI
+                                          setState(() {});
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.edit,
+                                        size: 18,
+                                      )),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                )
                 ],
               ),
               const SizedBox(height: 5),
@@ -166,18 +241,65 @@ class _MoreHeaderState extends State<MoreHeader> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 60),
-              Row(
-                children: [
-                  Text(
-                    prefs.userName ?? '',
-                    style: AppTextStyles.heading2.copyWith(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const Spacer(),
-                ],
-              ),
+                Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+
+                                      await AppSharedPreferences()
+                                          .initSharedPreferencesProp();
+                                      final prefs = AppSharedPreferences();
+                                      print('Tapped on username${prefs.userName}' );
+                                      print('Tapped on username${prefs.userPhone}' );
+                                      Navigator.of(context).pushNamed(
+                                        EditProfileScreen.routeName,
+                                        arguments: EditProfileArgs(
+                                          kind: ProfileKind.user,
+                                          initialName: prefs.userName ?? '',
+                                          initialPhone: prefs.userPhone ?? '',
+                                        ),
+                                      );
+
+
+                                    },
+                                    child: Text(
+                                      prefs.userName ?? '',
+                                      style: AppTextStyles.heading2.copyWith(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  CircleAvatar(
+                                    radius: 16,
+                                    backgroundColor: AppColors.secondary,
+                                    child: IconButton(
+                                        onPressed: () async {
+                                          await AppSharedPreferences()
+                                              .initSharedPreferencesProp();
+                                          final prefs = AppSharedPreferences();
+                                          Navigator.of(context).pushNamed(
+                                            EditProfileScreen.routeName,
+                                            arguments: EditProfileArgs(
+                                              kind: ProfileKind.user,
+                                              initialName: prefs.userName ?? '',
+                                              initialPhone:
+                                                  prefs.userPhone ?? '',
+                                            ),
+                                          );
+                                        },
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          size: 18,
+                                        )),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
               const SizedBox(height: 5),
               _accountTypeRow(t, false, isRTL),
               const SizedBox(height: 5),

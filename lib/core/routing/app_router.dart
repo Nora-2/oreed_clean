@@ -19,6 +19,8 @@ import 'package:oreed_clean/features/login/presentation/cubit/login_cubit.dart';
 import 'package:oreed_clean/features/login/presentation/pages/login_screen.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_cubit.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/pages/mainlayout.dart';
+import 'package:oreed_clean/features/my_ads/presentation/cubit/my_ads_cubit.dart';
+import 'package:oreed_clean/features/my_ads/presentation/pages/personal_ads.dart';
 import 'package:oreed_clean/features/notification/presentation/cubit/notification_cubit.dart';
 import 'package:oreed_clean/features/notification/presentation/pages/notification_screen.dart';
 import 'package:oreed_clean/features/on_boarding/presentation/pages/onboarding_screen.dart';
@@ -27,6 +29,7 @@ import 'package:oreed_clean/features/password/presentation/pages/resetpass_scree
 import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
 import 'package:oreed_clean/features/personal_register/presentation/pages/personal_register_screen.dart';
 import 'package:oreed_clean/features/settings/presentation/pages/contactus.dart';
+import 'package:oreed_clean/features/settings/presentation/pages/more_dynamic_page.dart';
 import 'package:oreed_clean/features/splash/presentation/splash_screen.dart';
 import 'package:oreed_clean/features/verification/presentation/pages/verification_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
@@ -49,6 +52,13 @@ class AppRouter {
             child: LoginScreen(),
           ),
         );
+      case Routes.personalads:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<PersonAdsCubit>(),
+            child: PersonalAds(),
+          ),
+        );
       case Routes.resetpass:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -58,6 +68,11 @@ class AppRouter {
         );
       case Routes.onboarding:
         return MaterialPageRoute(builder: (_) => OnboardingPage());
+      case Routes.dynamicPage:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => MoreDynamicPage(pageModel: args['pageModel']),
+        );
       case Routes.contacus:
         return MaterialPageRoute(builder: (_) => MsgContactUs());
       case Routes.changepass:

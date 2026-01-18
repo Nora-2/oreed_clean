@@ -4,6 +4,7 @@ import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
+import 'package:oreed_clean/features/comapany_register/presentation/pages/company_form_ui.dart';
 import 'package:oreed_clean/features/settings/presentation/cubit/moretab_cubit.dart';
 import 'package:oreed_clean/features/settings/presentation/widgets/row_with_arrow.dart';
 import 'package:oreed_clean/features/settings/presentation/widgets/show_change_lang_botyom_sheet.dart';
@@ -98,9 +99,10 @@ class BodyContentNotLogin extends StatelessWidget {
                       'Privacy Policy',
                   icon: AppIcons.shieldBack,
                   onPressed: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(builder: (_) => MoreDynamicPage(pageModel: page)),
-                    // );
+                    Navigator.of(context).pushNamed(
+                      Routes.dynamicPage,
+                      arguments: {'pageModel': page},
+                    );
                   },
                 );
               }),
@@ -118,8 +120,6 @@ class BodyContentNotLogin extends StatelessWidget {
       },
     );
   }
-
-  // --- Helper UI Methods (Moved from ViewModel to UI) ---
 
   Widget _buildSectionHeader(String title) {
     return Row(
@@ -148,10 +148,12 @@ class BodyContentNotLogin extends StatelessWidget {
   void _handleProfileNavigation(BuildContext context, MoreCubit cubit) {
     final prefs = cubit.prefs;
     if (prefs.userType == 'personal') {
-      // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProfileScreen()));
+      Navigator.of(context).pushNamed(Routes.personalads);
     } else {
       if (prefs.getCompanyId == null) {
-        // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const CompanyFormUI()));
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => const CompanyFormUI()));
       } else {
         Navigator.of(context).pushNamed(
           Routes.companyprfilelite,
