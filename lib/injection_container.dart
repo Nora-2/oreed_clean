@@ -42,6 +42,9 @@ import 'package:oreed_clean/features/personal_register/data/repositories/persona
 import 'package:oreed_clean/features/personal_register/domain/repositories/personal_register_repo.dart';
 import 'package:oreed_clean/features/personal_register/domain/usecases/personal_register_usecase.dart';
 import 'package:oreed_clean/features/personal_register/presentation/cubit/personal_register_cubit.dart';
+import 'package:oreed_clean/features/realstateform/domain/usecases/create_realstate_usecase.dart';
+import 'package:oreed_clean/features/realstateform/domain/usecases/edit_real_state_usecase.dart';
+import 'package:oreed_clean/features/realstateform/domain/usecases/get_realstate_usecase.dart';
 import 'package:oreed_clean/networking/api_provider.dart';
 import 'package:oreed_clean/networking/http_client.dart';
 import 'package:oreed_clean/networking/optimized_api_client.dart';
@@ -80,6 +83,27 @@ import 'package:oreed_clean/features/companydetails/domain/usecases/get_company_
 import 'package:oreed_clean/features/companydetails/domain/repositories/company_details_repo.dart';
 import 'package:oreed_clean/features/companydetails/data/repositories/company_details_repo.dart';
 import 'package:oreed_clean/features/companydetails/data/datasources/company_details_remote_data_source.dart';
+import 'package:oreed_clean/features/company_types_by_company/data/datasources/company_types_company_remote_data_source.dart';
+import 'package:oreed_clean/features/company_types_by_company/data/repositories/company_types_company_repo_impl.dart';
+import 'package:oreed_clean/features/company_types_by_company/domain/repositories/company_types_company_repo.dart';
+import 'package:oreed_clean/features/company_types_by_company/domain/usecases/get_company_types_by_company.dart';
+import 'package:oreed_clean/features/company_types_by_company/presentation/cubit/company_types_by_company_cubit.dart';
+import 'package:oreed_clean/features/location_selector/presentation/cubit/location_selector_cubit.dart';
+import 'package:oreed_clean/features/technicalforms/data/datasources/technican_remote_data_source.dart';
+import 'package:oreed_clean/features/technicalforms/data/repositories/technican_repo_impl.dart';
+import 'package:oreed_clean/features/technicalforms/domain/repositories/technican_repo.dart';
+import 'package:oreed_clean/features/technicalforms/domain/usecases/create_technican_ad_usecase.dart';
+import 'package:oreed_clean/features/technicalforms/domain/usecases/edit_technican_ad_usecase.dart';
+import 'package:oreed_clean/features/technicalforms/domain/usecases/get_cities_usecase.dart'
+    as tf;
+import 'package:oreed_clean/features/technicalforms/domain/usecases/get_states_usecase.dart'
+    as tf;
+import 'package:oreed_clean/features/technicalforms/domain/usecases/get_techniocan_detailes_usecase.dart';
+import 'package:oreed_clean/features/technicalforms/presentation/cubit/technician_forms_cubit.dart';
+import 'package:oreed_clean/features/realstateform/data/datasources/realstate_remote_data_source.dart';
+import 'package:oreed_clean/features/realstateform/data/repositories/realstate_repo_impl.dart';
+import 'package:oreed_clean/features/realstateform/domain/repositories/realstate_repo.dart';
+import 'package:oreed_clean/features/realstateform/presentation/cubit/realstateform_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -360,6 +384,90 @@ Future<void> init() async {
     () => CompanyDetailsCubit(
       getCompanyDetailsUseCase: sl<GetCompanyDetailsUseCase>(),
       getCompanyAdsUseCase: sl<GetCompanyAdsUseCase>(),
+    ),
+  );
+
+  // ================== Company Types ==================
+  sl.registerLazySingleton<CompanyTypesCompanyRemoteDataSource>(
+    () => CompanyTypesCompanyRemoteDataSource(sl<ApiProvider>()),
+  );
+  sl.registerLazySingleton<CompanyTypesCompanyRepository>(
+    () => CompanyTypesCompanyRepositoryImpl(
+      sl<CompanyTypesCompanyRemoteDataSource>(),
+    ),
+  );
+  sl.registerLazySingleton<GetCompanyTypesByCompanyUseCase>(
+    () => GetCompanyTypesByCompanyUseCase(sl<CompanyTypesCompanyRepository>()),
+  );
+  sl.registerFactory<CompanyTypesByCompanyCubit>(
+    () => CompanyTypesByCompanyCubit(sl<GetCompanyTypesByCompanyUseCase>()),
+  );
+
+  // ================== Location Selector ==================
+  sl.registerFactory<LocationSelectorCubit>(
+    () => LocationSelectorCubit(
+      getCountriesUseCase: sl<GetCountriesUseCase>(),
+      getStatesUseCase: sl<GetStatesUseCase>(),
+    ),
+  );
+
+  // ================== Technical Forms ==================
+  sl.registerLazySingleton<TechnicianRemoteDataSource>(
+    () => TechnicianRemoteDataSource(),
+  );
+  sl.registerLazySingleton<TechnicianRepository>(
+    () => TechnicianRepositoryImpl(sl<TechnicianRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<CreateTechnicianAdUseCase>(
+    () => CreateTechnicianAdUseCase(sl<TechnicianRepository>()),
+  );
+  sl.registerLazySingleton<EditTechnicianAdUseCase>(
+    () => EditTechnicianAdUseCase(sl<TechnicianRepository>()),
+  );
+  sl.registerLazySingleton<GetTechnicianDetailsUseCase>(
+    () => GetTechnicianDetailsUseCase(sl<TechnicianRepository>()),
+  );
+  sl.registerLazySingleton<tf.GetStatesUseCase>(
+    () => tf.GetStatesUseCase(sl<TechnicianRepository>()),
+  );
+  sl.registerLazySingleton<tf.GetCitiesUseCase>(
+    () => tf.GetCitiesUseCase(sl<TechnicianRepository>()),
+  );
+
+  sl.registerFactory<TechnicianFormsCubit>(
+    () => TechnicianFormsCubit(
+      getStatesUseCase: sl<tf.GetStatesUseCase>(),
+      getCitiesUseCase: sl<tf.GetCitiesUseCase>(),
+      getDetailsUseCase: sl<GetTechnicianDetailsUseCase>(),
+      createAdUseCase: sl<CreateTechnicianAdUseCase>(),
+      editAdUseCase: sl<EditTechnicianAdUseCase>(),
+    ),
+  );
+
+  // ================== Real Estate Form ==================
+  sl.registerLazySingleton<PropertyRemoteDataSource>(
+    () => PropertyRemoteDataSource(),
+  );
+  sl.registerLazySingleton<PropertyRepository>(
+    () => PropertyRepositoryImpl(sl<PropertyRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<CreatePropertyUseCase>(
+    () => CreatePropertyUseCase(sl<PropertyRepository>()),
+  );
+  sl.registerLazySingleton<EditPropertyUseCase>(
+    () => EditPropertyUseCase(sl<PropertyRepository>()),
+  );
+  sl.registerLazySingleton<GetPropertyDetailsUseCase>(
+    () => GetPropertyDetailsUseCase(sl<PropertyRepository>()),
+  );
+
+  sl.registerFactory<RealstateformCubit>(
+    () => RealstateformCubit(
+      createPropertyUseCase: sl<CreatePropertyUseCase>(),
+      getCountriesUseCase: sl<GetCountriesUseCase>(),
+      getStatesUseCase: sl<tf.GetStatesUseCase>(),
+      getPropertyDetailsUseCase: sl<GetPropertyDetailsUseCase>(),
+      editPropertyUseCase: sl<EditPropertyUseCase>(),
     ),
   );
 }

@@ -59,18 +59,16 @@ class BuildPriorityOption extends StatelessWidget {
                 );
 
                 // 5. Handle UI feedback
-                if (result != null) {
-                  final bool success = result['success'] == true;
-                  messenger.showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        result['message'] ?? (success ? 'Success' : 'Failed'),
-                      ),
-                      backgroundColor: success ? Colors.green : Colors.red,
-                      duration: const Duration(seconds: 2),
+                final bool success = result['success'] == true;
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      result['message'] ?? (success ? 'Success' : 'Failed'),
                     ),
-                  );
-                }
+                    backgroundColor: success ? Colors.green : Colors.red,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
               },
         borderRadius: BorderRadius.circular(14),
         child: Container(

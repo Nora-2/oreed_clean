@@ -14,6 +14,7 @@ class CompanyAdsList extends StatelessWidget {
   final String ownerType;
 
   const CompanyAdsList({
+    super.key,
     required this.ads,
     required this.isExpired,
     this.onAdTap,
@@ -23,16 +24,15 @@ class CompanyAdsList extends StatelessWidget {
     this.companyId,
   });
 
-  bool _isCompanyAd(int index) {
-    return ads[index].adOwnerType == 'company';
-  }
+  // bool _isCompanyAd(int index) {
+  //   return ads[index].adOwnerType == 'company';
+  // }
   bool get _isCompanyList => ownerType == 'company';
 
   bool _shouldShowExpiredOverlay(int index) {
     return isExpired && _isCompanyList;
   }
 
- 
   @override
   Widget build(BuildContext context) {
     final t = AppTranslations.of(context)!;
@@ -51,7 +51,7 @@ class CompanyAdsList extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                t.text('no_ads_for_company') ,
+                t.text('no_ads_for_company'),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: AppColors.textSecondary,
@@ -111,8 +111,9 @@ class CompanyAdsList extends StatelessWidget {
                       stream: null, // Would need carousel controller stream
                       builder: (context, snapshot) {
                         // For now, check if ANY company ad exists
-                        final hasCompanyAd =
-                            ads.any((ad) => ad.adOwnerType == 'company');
+                        final hasCompanyAd = ads.any(
+                          (ad) => ad.adOwnerType == 'company',
+                        );
                         if (!hasCompanyAd) return const SizedBox.shrink();
 
                         return GestureDetector(
@@ -131,17 +132,20 @@ class CompanyAdsList extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      const Color(0xFFD32F2F)
-                                          .withValues(alpha: 0.95),
-                                      const Color(0xFFC62828)
-                                          .withValues(alpha: 0.95),
+                                      const Color(
+                                        0xFFD32F2F,
+                                      ).withValues(alpha: 0.95),
+                                      const Color(
+                                        0xFFC62828,
+                                      ).withValues(alpha: 0.95),
                                     ],
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFFD32F2F)
-                                          .withValues(alpha: 0.4),
+                                      color: const Color(
+                                        0xFFD32F2F,
+                                      ).withValues(alpha: 0.4),
                                       blurRadius: 12,
                                       offset: const Offset(0, 4),
                                     ),
@@ -158,7 +162,8 @@ class CompanyAdsList extends StatelessWidget {
                                     const SizedBox(width: 8),
                                     Text(
                                       AppTranslations.of(context)?.text(
-                                              'subscription_expired_company_only') ??
+                                            'subscription_expired_company_only',
+                                          ) ??
                                           'الإعلانات الخاصة بالشركة معلقة',
                                       style: const TextStyle(
                                         color: Colors.white,
@@ -180,9 +185,7 @@ class CompanyAdsList extends StatelessWidget {
               ),
           ],
         ),
-      
       ],
     );
   }
 }
-

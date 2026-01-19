@@ -12,6 +12,7 @@ import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/pages/main_home_tab.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_cubit.dart';
 import 'package:oreed_clean/features/mainlayout/presentation/cubit/mainlayout_state.dart';
+import 'package:oreed_clean/features/settings/presentation/pages/setting_screen.dart';
 import 'package:oreed_clean/injection_container.dart';
 
 class Homelayout extends StatefulWidget {
@@ -133,28 +134,29 @@ class _HomelayoutState extends State<Homelayout>
 
         // 2. Define Tabs [Left, Center, Right]
         final tabs = [
-          // const MoreTab(), // Index 0: Profile (Left)
-
+          const MoreTab(), // Index 0: Profile (Left)
           // const HomeAddAds(),
           const SizedBox(), // Add Ads tab
           const SizedBox(),
 
           MultiBlocProvider(
-        providers: [
-          // 2. Provide BannerCubit so BannerSection can see it
-          BlocProvider.value(value: bannerCubit),
-  BlocProvider(create: (_) => sl<FavoritesCubit>()..loadFavorites()),
-          BlocProvider(
-            create: (context) => MainHomeCubit(
-              sl(),
-              sl(),
-              bannerCubit, // Use the same instance
-            )..fetchHomeData(),
+            providers: [
+              // 2. Provide BannerCubit so BannerSection can see it
+              BlocProvider.value(value: bannerCubit),
+              BlocProvider(
+                create: (_) => sl<FavoritesCubit>()..loadFavorites(),
+              ),
+              BlocProvider(
+                create: (context) => MainHomeCubit(
+                  sl(),
+                  sl(),
+                  bannerCubit, // Use the same instance
+                )..fetchHomeData(),
+              ),
+            ],
+            child: const MainHomeTab(),
           ),
-        ],
-        child: const MainHomeTab(),
-      ),
-    ];
+        ];
 
         final currentIndex = homeState.currentTabIndex;
 

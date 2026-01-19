@@ -40,6 +40,10 @@ import 'package:oreed_clean/features/verification/presentation/cubit/verificatio
 import 'package:oreed_clean/features/AdvancedSearch/presentation/cubit/advancedsearch_cubit.dart';
 import 'package:oreed_clean/features/AdvancedSearch/presentation/pages/advanced_search.dart';
 import 'package:oreed_clean/features/verification/presentation/pages/payment_webview.dart';
+import 'package:oreed_clean/features/technicalforms/presentation/pages/technican_form_ui.dart';
+import 'package:oreed_clean/features/technicalforms/presentation/cubit/technician_forms_cubit.dart';
+import 'package:oreed_clean/features/realstateform/presentation/pages/realstate_form.dart';
+import 'package:oreed_clean/features/realstateform/presentation/cubit/realstateform_cubit.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -252,6 +256,28 @@ class AppRouter {
             child: AdvancedSearchScreen(
               initialSearchQuery: args['initialSearchQuery'] ?? '',
             ),
+          ),
+        );
+      case Routes.technicanform:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<TechnicianFormsCubit>(),
+            child: TechnicianFormUI(
+              categoryId: args['categoryId'],
+              sectionID: args['sectionID'],
+              companyId: args['companyId'],
+              companyTypeId: args['companyTypeId'],
+              adId: args['adId'],
+            ),
+          ),
+        );
+      case Routes.realstateform:
+       final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<RealstateformCubit>(),
+            child:  RealEstateFormUI(sectionId: args['sectionId'], categoryId: args['categoryId'], supCategoryId: args['supCategoryId'],adId:args['adId']),
           ),
         );
 

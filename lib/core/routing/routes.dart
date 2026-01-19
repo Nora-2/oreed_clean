@@ -23,4 +23,6 @@ class Routes {
   static const String companyprfilelite = '/companyprfilelite';
   static const String dynamicPage = '/dynamicPage';
   static const String personalads = '/personalads';
+  static const String technicanform = '/technicanform';
+  static const String realstateform = '/realstateform';
 }
