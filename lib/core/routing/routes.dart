@@ -25,4 +25,5 @@ class Routes {
   static const String personalads = '/personalads';
   static const String technicanform = '/technicanform';
   static const String realstateform = '/realstateform';
+  static const String carForm = '/carForm';
 }

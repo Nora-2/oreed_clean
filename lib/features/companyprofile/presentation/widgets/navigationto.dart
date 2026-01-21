@@ -20,35 +20,35 @@ class Navigationedit extends StatelessWidget {
           result = await Navigator.pushNamed(
             context,
             Routes.technicanform,
-            arguments: {'sectionID': widget.sectionId,
+            arguments: {
+              'sectionID': widget.sectionId,
               'categoryId': 0,
-              'adId': int.tryParse(widget.adId!),}
-
+              'adId': int.tryParse(widget.adId!),
+            },
           );
-        } else if (widget.sectionType ==
-            'property') {
-            result = await Navigator.pushNamed(
-              context,
-              Routes.realstateform,
-              arguments: {'sectionId': 0,
-                  'categoryId': 0,
-                  'adId': int.tryParse(widget.adId!),
-                  'supCategoryId': 0,}
-
-            );
-          }
-        // else if (widget.sectionType == 'car') {
-        //   result = await Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (_) => CarFormUI(
-        //         sectionId: 0,
-        //         categoryId: 0,
-        //         adId: int.tryParse(widget.adId!),
-        //         supCategoryId: 0,
-        //       ),
-        //     ),
-        //   );
+        } else if (widget.sectionType == 'property') {
+          result = await Navigator.pushNamed(
+            context,
+            Routes.realstateform,
+            arguments: {
+              'sectionId': 0,
+              'categoryId': 0,
+              'adId': int.tryParse(widget.adId!),
+              'supCategoryId': 0,
+            },
+          );
+        } else if (widget.sectionType == 'car') {
+          result = await Navigator.pushNamed(
+            context,
+            Routes.carForm,
+            arguments: {
+              'sectionId': 0,
+              'categoryId': 0,
+              'adId': int.tryParse(widget.adId!),
+              'supCategoryId': 0,
+            },
+          );
+        }
         // } else {
         //   result = await Navigator.push(
         //     context,

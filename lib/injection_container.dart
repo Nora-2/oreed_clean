@@ -104,6 +104,15 @@ import 'package:oreed_clean/features/realstateform/data/datasources/realstate_re
 import 'package:oreed_clean/features/realstateform/data/repositories/realstate_repo_impl.dart';
 import 'package:oreed_clean/features/realstateform/domain/repositories/realstate_repo.dart';
 import 'package:oreed_clean/features/realstateform/presentation/cubit/realstateform_cubit.dart';
+import 'package:oreed_clean/features/carform/data/datasources/car_form_remote_data_source.dart';
+import 'package:oreed_clean/features/carform/data/repositories/car_form_repo_impl.dart';
+import 'package:oreed_clean/features/carform/domain/repositories/car_form_repo.dart';
+import 'package:oreed_clean/features/carform/domain/usecases/create_car_ad_usecase.dart';
+import 'package:oreed_clean/features/carform/domain/usecases/edit_car_ad_usecase.dart';
+import 'package:oreed_clean/features/carform/domain/usecases/get_brands_usecase.dart';
+import 'package:oreed_clean/features/carform/domain/usecases/get_models_usecase.dart';
+import 'package:oreed_clean/features/carform/domain/usecases/get_car_details_usecase.dart';
+import 'package:oreed_clean/features/carform/presentation/cubit/carform_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -468,6 +477,41 @@ Future<void> init() async {
       getStatesUseCase: sl<tf.GetStatesUseCase>(),
       getPropertyDetailsUseCase: sl<GetPropertyDetailsUseCase>(),
       editPropertyUseCase: sl<EditPropertyUseCase>(),
+    ),
+  );
+
+  // ================== Car Form ==================
+  sl.registerLazySingleton<CarAdsRemoteDataSource>(
+    () => CarAdsRemoteDataSource(),
+  );
+  sl.registerLazySingleton<CarAdsRepository>(
+    () => CarAdsRepositoryImpl(sl<CarAdsRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<CreateCarAdUseCase>(
+    () => CreateCarAdUseCase(sl<CarAdsRepository>()),
+  );
+  sl.registerLazySingleton<EditCarAdUseCase>(
+    () => EditCarAdUseCase(sl<CarAdsRepository>()),
+  );
+  sl.registerLazySingleton<GetBrandsUseCase>(
+    () => GetBrandsUseCase(sl<CarAdsRepository>()),
+  );
+  sl.registerLazySingleton<GetModelsUseCase>(
+    () => GetModelsUseCase(sl<CarAdsRepository>()),
+  );
+  sl.registerLazySingleton<GetCarDetailsUseCase>(
+    () => GetCarDetailsUseCase(sl<CarAdsRepository>()),
+  );
+
+  sl.registerFactory<CarformCubit>(
+    () => CarformCubit(
+      createCarAdUseCase: sl<CreateCarAdUseCase>(),
+      getBrandsUseCase: sl<GetBrandsUseCase>(),
+      getModelsUseCase: sl<GetModelsUseCase>(),
+      getStatesUseCase: sl<tf.GetStatesUseCase>(),
+      getCitiesUseCase: sl<tf.GetCitiesUseCase>(),
+      getCarDetailsUseCase: sl<GetCarDetailsUseCase>(),
+      editCarAdUseCase: sl<EditCarAdUseCase>(),
     ),
   );
 }

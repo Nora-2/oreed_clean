@@ -44,6 +44,8 @@ import 'package:oreed_clean/features/technicalforms/presentation/pages/technican
 import 'package:oreed_clean/features/technicalforms/presentation/cubit/technician_forms_cubit.dart';
 import 'package:oreed_clean/features/realstateform/presentation/pages/realstate_form.dart';
 import 'package:oreed_clean/features/realstateform/presentation/cubit/realstateform_cubit.dart';
+import 'package:oreed_clean/features/carform/presentation/pages/car_form_refactor.dart';
+import 'package:oreed_clean/features/carform/presentation/cubit/carform_cubit.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -278,6 +280,21 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => sl<RealstateformCubit>(),
             child:  RealEstateFormUI(sectionId: args['sectionId'], categoryId: args['categoryId'], supCategoryId: args['supCategoryId'],adId:args['adId']),
+          ),
+        );
+      case Routes.carForm:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => sl<CarformCubit>(),
+            child: CarFormUI(
+              sectionId: args['sectionId'],
+              categoryId: args['categoryId'],
+              supCategoryId: args['supCategoryId'],
+              companyId: args['companyId'],
+              companyTypeId: args['companyTypeId'],
+              adId: args['adId'],
+            ),
           ),
         );
 
