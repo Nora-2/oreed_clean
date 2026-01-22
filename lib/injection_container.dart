@@ -23,6 +23,11 @@ import 'package:oreed_clean/features/companyprofile/domain/repositories/company_
 import 'package:oreed_clean/features/companyprofile/domain/usecases/get_company_profile_ad_usecase.dart';
 import 'package:oreed_clean/features/companyprofile/domain/usecases/get_company_profile_usecase.dart';
 import 'package:oreed_clean/features/companyprofile/presentation/cubit/companyprofile_cubit.dart';
+import 'package:oreed_clean/features/dynamicfields/data/datasources/dynamic_fields_remote_datasource.dart';
+import 'package:oreed_clean/features/dynamicfields/data/repositories/dynamic_field_repo_impl.dart';
+import 'package:oreed_clean/features/dynamicfields/domain/repositories/dynamic_fields_repository.dart';
+import 'package:oreed_clean/features/dynamicfields/domain/usecases/get_dynamic_fields_usecase.dart';
+import 'package:oreed_clean/features/dynamicfields/presentation/cubit/dynamicfields_cubit.dart';
 import 'package:oreed_clean/features/favourite/data/datasources/favourite_remote_data_source.dart';
 import 'package:oreed_clean/features/favourite/data/repositories/favourite_repo.dart';
 import 'package:oreed_clean/features/favourite/domain/repositories/favourite_repo_impl.dart';
@@ -112,7 +117,16 @@ import 'package:oreed_clean/features/carform/domain/usecases/edit_car_ad_usecase
 import 'package:oreed_clean/features/carform/domain/usecases/get_brands_usecase.dart';
 import 'package:oreed_clean/features/carform/domain/usecases/get_models_usecase.dart';
 import 'package:oreed_clean/features/carform/domain/usecases/get_car_details_usecase.dart';
+
 import 'package:oreed_clean/features/carform/presentation/cubit/carform_cubit.dart';
+import 'package:oreed_clean/features/anythingform/data/datasources/create_anything_remote_data_source.dart';
+import 'package:oreed_clean/features/anythingform/data/repositories/create_anything_repository_impl.dart';
+import 'package:oreed_clean/features/anythingform/domain/repositories/create_anything_repository.dart';
+import 'package:oreed_clean/features/anythingform/domain/usecases/create_anything_usecase.dart';
+import 'package:oreed_clean/features/anythingform/domain/usecases/edit_anything_usecase.dart';
+import 'package:oreed_clean/features/anythingform/domain/usecases/get_anything_details_usecase.dart';
+import 'package:oreed_clean/features/anythingform/presentation/cubit/create_anything_cubit.dart';
+
 
 final sl = GetIt.instance;
 
@@ -502,6 +516,17 @@ Future<void> init() async {
   sl.registerLazySingleton<GetCarDetailsUseCase>(
     () => GetCarDetailsUseCase(sl<CarAdsRepository>()),
   );
+ sl.registerLazySingleton(() => DynamicFieldsRemoteDataSource());
+
+  // Repository
+  sl.registerLazySingleton<DynamicFieldsRepository>(
+    () => DynamicFieldsRepositoryImpl(sl()),
+  );
+
+  sl.registerLazySingleton(() => GetDynamicFieldsUseCase(sl()));
+
+  sl.registerFactory<DynamicFieldsCubit>(
+      () => DynamicFieldsCubit(sl<GetDynamicFieldsUseCase>()));
 
   sl.registerFactory<CarformCubit>(
     () => CarformCubit(
@@ -512,6 +537,33 @@ Future<void> init() async {
       getCitiesUseCase: sl<tf.GetCitiesUseCase>(),
       getCarDetailsUseCase: sl<GetCarDetailsUseCase>(),
       editCarAdUseCase: sl<EditCarAdUseCase>(),
+    ),
+  );
+
+  // ================== Create Anything Form ==================
+  sl.registerLazySingleton<CreateAnythingRemoteDataSource>(
+    () => CreateAnythingRemoteDataSource(),
+  );
+  sl.registerLazySingleton<CreateAnythingRepository>(
+    () => CreateAnythingRepositoryImpl(sl<CreateAnythingRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<CreateAnythingUseCase>(
+    () => CreateAnythingUseCase(sl<CreateAnythingRepository>()),
+  );
+  sl.registerLazySingleton<EditAnythingUseCase>(
+    () => EditAnythingUseCase(sl<CreateAnythingRepository>()),
+  );
+  sl.registerLazySingleton<GetAnythingDetailsUseCase>(
+    () => GetAnythingDetailsUseCase(sl<CreateAnythingRepository>()),
+  );
+
+  sl.registerFactory<CreateAnythingCubit>(
+    () => CreateAnythingCubit(
+      createAnythingUseCase: sl<CreateAnythingUseCase>(),
+      getCountriesUseCase: sl<GetCountriesUseCase>(),
+      getStatesUseCase: sl<GetStatesUseCase>(),
+      editUC: sl<EditAnythingUseCase>(),
+      detailsUC: sl<GetAnythingDetailsUseCase>(),
     ),
   );
 }

@@ -26,4 +26,6 @@ class Routes {
   static const String technicanform = '/technicanform';
   static const String realstateform = '/realstateform';
   static const String carForm = '/carForm';
+  static const String anythingform = '/anythingform';
+  static const String dynamicfields = '/dynamicfields';
 }

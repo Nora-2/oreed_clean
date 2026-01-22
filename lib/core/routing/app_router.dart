@@ -46,6 +46,7 @@ import 'package:oreed_clean/features/realstateform/presentation/pages/realstate_
 import 'package:oreed_clean/features/realstateform/presentation/cubit/realstateform_cubit.dart';
 import 'package:oreed_clean/features/carform/presentation/pages/car_form_refactor.dart';
 import 'package:oreed_clean/features/carform/presentation/cubit/carform_cubit.dart';
+import 'package:oreed_clean/features/anythingform/presentation/screen/any_thing_form.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -295,6 +296,18 @@ class AppRouter {
               companyTypeId: args['companyTypeId'],
               adId: args['adId'],
             ),
+          ),
+        );
+      case Routes.anythingform:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => AnythingForm(
+            sectionId: args['sectionId'],
+            categoryId: args['categoryId'],
+            supCategoryId: args['supCategoryId'],
+            companyId: args['companyId'],
+            companyTypeId: args['companyTypeId'],
+            adId: args['adId'],
           ),
         );
 
