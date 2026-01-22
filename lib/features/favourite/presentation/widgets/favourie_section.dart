@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/emptywidget.dart';
 import 'package:oreed_clean/core/utils/textstyle/appfonts.dart';
 import 'package:oreed_clean/features/companydetails/presentation/widgets/related_ad_grid_card.dart';
@@ -41,7 +42,7 @@ class FavoritesSection extends StatelessWidget {
               context: context,
               button:
                   appTrans?.text('common.explore_ads') ?? 'استكشاف الإعلانات',
-              image: 'assets/svg/emptyfav.svg',
+              image: AppIcons.emptyFav,
               title: appTrans?.text('empty_favorites') ?? 'المفضلة فارغة',
               subtitle:
                   appTrans?.text('empty_favorites_subtitle') ??

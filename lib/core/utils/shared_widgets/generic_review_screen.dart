@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
+import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/custom_button.dart';
 import 'package:oreed_clean/features/technicalforms/presentation/widgets/review_section.dart';
 
@@ -102,7 +103,7 @@ class _GenericReviewScreenState extends State<GenericReviewScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/Add Ad Details.png'),
+            image: AssetImage(Appimage.addAdDetails),
           ),
         ),
         child: SafeArea(

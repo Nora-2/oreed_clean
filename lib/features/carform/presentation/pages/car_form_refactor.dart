@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/bottomsheets/option_sheet_register_grid_model.dart';
 import 'package:oreed_clean/core/utils/bottomsheets/option_sheet_register_list.dart';
@@ -31,6 +32,7 @@ import '../widgets/car_form_navigation.dart';
 import '../widgets/car_form_step_one.dart';
 import '../widgets/car_form_step_two.dart';
 import '../widgets/car_form_step_three.dart';
+
 class CarFormUI extends StatefulWidget {
   const CarFormUI({
     super.key,
@@ -58,7 +60,6 @@ class _CarFormUIState extends State<CarFormUI>
         CarFormValidationMixin,
         CarFormImagePickerMixin,
         CarFormSubmissionMixin {
-
   final _titleCtrl = TextEditingController();
   final _priceCtrl = TextEditingController();
   final _colorCtrl = TextEditingController();
@@ -66,7 +67,6 @@ class _CarFormUIState extends State<CarFormUI>
   final _kmCtrl = TextEditingController();
   final _engineCtrl = TextEditingController();
   final _descCtrl = TextEditingController();
-
 
   final List<File> _images = [];
   final List<File> _certImages = [];
@@ -176,11 +176,8 @@ class _CarFormUIState extends State<CarFormUI>
 
     final brandEntity = _brands.firstWhere(
       (b) => b.id == d.brandId,
-      orElse: () => BrandEntity(
-        id: d.brandId,
-        name: d.brandId.toString(),
-        image: '',
-      ),
+      orElse: () =>
+          BrandEntity(id: d.brandId, name: d.brandId.toString(), image: ''),
     );
     _brand = Brand(
       id: brandEntity.id.toString(),
@@ -190,15 +187,10 @@ class _CarFormUIState extends State<CarFormUI>
 
     final modelEntity = _models.firstWhere(
       (m) => m.id == d.carModelId,
-      orElse: () => CarModelEntity(
-        id: d.carModelId,
-        name: d.carModelId.toString(),
-      ),
+      orElse: () =>
+          CarModelEntity(id: d.carModelId, name: d.carModelId.toString()),
     );
-    _model = CarModel(
-      id: modelEntity.id.toString(),
-      name: modelEntity.name,
-    );
+    _model = CarModel(id: modelEntity.id.toString(), name: modelEntity.name);
 
     _selectedState = StateEntity(id: d.stateId, name: d.stateName!);
     cubit.fetchCities(d.stateId);
@@ -239,10 +231,7 @@ class _CarFormUIState extends State<CarFormUI>
 
         if (state is CarformError) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.red,
-            ),
+            SnackBar(content: Text(state.message), backgroundColor: Colors.red),
           );
         }
       },
@@ -304,16 +293,17 @@ class _CarFormUIState extends State<CarFormUI>
     String title;
     switch (_currentStep) {
       case 1:
-        title = appTrans?.text('page.enter_car_details') ??
-            'Basic car information';
+        title =
+            appTrans?.text('page.enter_car_details') ?? 'Basic car information';
         break;
       case 2:
-        title = appTrans?.text('page.car_specs_price') ??
+        title =
+            appTrans?.text('page.car_specs_price') ??
             'Specifications and Price';
         break;
       default:
-        title = appTrans?.text('page.car_desc_media') ??
-            'Description and Media';
+        title =
+            appTrans?.text('page.car_desc_media') ?? 'Description and Media';
     }
 
     return Padding(
@@ -339,8 +329,7 @@ class _CarFormUIState extends State<CarFormUI>
       controller: _scrollController,
       padding: const EdgeInsets.symmetric(horizontal: 6),
       children: [
-        if (_currentStep == 1)
-          _buildStepOne(isModelsLoading, appTrans),
+        if (_currentStep == 1) _buildStepOne(isModelsLoading, appTrans),
         if (_currentStep == 2) _buildStepTwo(appTrans),
         if (_currentStep == 3) _buildStepThree(appTrans),
       ],
@@ -401,17 +390,11 @@ class _CarFormUIState extends State<CarFormUI>
         _mainImage = null;
         _mainImageUrl = null;
       }),
-      onGalleryPick: () => chooseImageSourceAndPick(
-        context: context,
-        target: _images,
-      ),
+      onGalleryPick: () =>
+          chooseImageSourceAndPick(context: context, target: _images),
       onGalleryLocalRemove: (index) => setState(() => _images.removeAt(index)),
-      onGalleryRemoteRemove: (index, imageId) => _handleRemoteImageDelete(
-        appTrans,
-        index,
-        imageId,
-        isGallery: true,
-      ),
+      onGalleryRemoteRemove: (index, imageId) =>
+          _handleRemoteImageDelete(appTrans, index, imageId, isGallery: true),
       onCertPick: _handleCertImagePick,
       onCertRemove: () => setState(() => _certImages.clear()),
       onCertRemoteRemove: () => setState(() {
@@ -532,7 +515,7 @@ class _CarFormUIState extends State<CarFormUI>
       accentColor: AppColors.primary,
       selectedId: _brand?.id,
     );
-    
+
     if (picked != null) {
       final newBrandId = int.tryParse(picked.id);
       setState(() {
@@ -557,11 +540,7 @@ class _CarFormUIState extends State<CarFormUI>
     }
 
     return _brands
-        .map((e) => Brand(
-              id: e.id.toString(),
-              name: e.name,
-              imageUrl: e.image,
-            ))
+        .map((e) => Brand(id: e.id.toString(), name: e.name, imageUrl: e.image))
         .toList();
   }
 
@@ -570,8 +549,7 @@ class _CarFormUIState extends State<CarFormUI>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            appTrans?.text('select_brand_first') ??
-                'Please select brand first',
+            appTrans?.text('select_brand_first') ?? 'Please select brand first',
           ),
           backgroundColor: Colors.redAccent,
         ),
@@ -605,7 +583,8 @@ class _CarFormUIState extends State<CarFormUI>
     final pickedName = await showAppOptionSheetregistergridmodel(
       context: context,
       title: appTrans?.text('select.choose_model') ?? 'Select Model',
-      subtitle: appTrans?.text('subtitle.select_model') ??
+      subtitle:
+          appTrans?.text('subtitle.select_model') ??
           'Select the model that fits your brand to complete details.',
       options: options,
       current: _model?.name,
@@ -663,7 +642,7 @@ class _CarFormUIState extends State<CarFormUI>
     final options = List.generate(_states.length, (i) {
       return OptionItemregister(
         label: _states[i].name,
-        icon: 'assets/svg/locationcontiry.svg',
+        icon: AppIcons.locationCountry,
         colorTag: i,
       );
     });
@@ -672,7 +651,8 @@ class _CarFormUIState extends State<CarFormUI>
       context: context,
       title: appTrans?.text('select.choose_state') ?? 'Select Governorate',
       hint: appTrans?.text('hint.search_state') ?? 'Search for governorate',
-      subtitle: appTrans?.text('subtitle.select_state') ??
+      subtitle:
+          appTrans?.text('subtitle.select_state') ??
           'Select your governorate to show ads and services.',
       options: options,
       tagColor: CarFormHelpers.tagColor,
@@ -690,7 +670,7 @@ class _CarFormUIState extends State<CarFormUI>
         _selectedCity = null;
         _cityId = null;
       });
-      
+
       final cubit = context.read<CarformCubit>();
       await cubit.fetchCities(stateObj.id);
       if (mounted) setState(() {});
@@ -732,7 +712,7 @@ class _CarFormUIState extends State<CarFormUI>
     final options = List.generate(_cities.length, (i) {
       return OptionItemregister(
         label: _cities[i].name,
-        icon: 'assets/svg/location.svg',
+        icon:AppIcons.location,
         colorTag: i,
       );
     });
@@ -741,7 +721,8 @@ class _CarFormUIState extends State<CarFormUI>
       context: context,
       title: appTrans?.text('select.choose_city') ?? 'Select City',
       hint: appTrans?.text('hint.search_city') ?? 'Search for city',
-      subtitle: appTrans?.text('subtitle.select_city') ??
+      subtitle:
+          appTrans?.text('subtitle.select_city') ??
           'Select your area to show ads and services.',
       options: options,
       tagColor: CarFormHelpers.tagColor,
@@ -773,7 +754,8 @@ class _CarFormUIState extends State<CarFormUI>
       title: titleWithUnit,
       options: options,
       current: _engineCc,
-      subtitle: appTrans?.text('select.choose_engine_subtitel') ??
+      subtitle:
+          appTrans?.text('select.choose_engine_subtitel') ??
           'Engine size shows the car power for buyers.',
     );
 
@@ -807,10 +789,7 @@ class _CarFormUIState extends State<CarFormUI>
         widget.adId != null) {
       final id = _certImageIds.first;
       final cubit = context.read<CarformCubit>();
-      await cubit.deleteAdImage(
-        adId: widget.adId!,
-        imageId: id,
-      );
+      await cubit.deleteAdImage(adId: widget.adId!, imageId: id);
       _applyLoadedDetailsFromCubit();
     }
   }
@@ -824,10 +803,7 @@ class _CarFormUIState extends State<CarFormUI>
     if (widget.adId == null) return;
 
     final cubit = context.read<CarformCubit>();
-    final ok = await cubit.deleteAdImage(
-      adId: widget.adId!,
-      imageId: imageId,
-    );
+    final ok = await cubit.deleteAdImage(adId: widget.adId!, imageId: imageId);
 
     if (ok) {
       setState(() {
@@ -867,7 +843,7 @@ class _CarFormUIState extends State<CarFormUI>
   void _applyLoadedDetailsFromCubit() {
     final cubit = context.read<CarformCubit>();
     final state = cubit.state;
-    
+
     if (state is CarformDetailsLoaded) {
       final d = state.details;
       setState(() {

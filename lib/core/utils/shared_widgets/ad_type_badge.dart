@@ -96,7 +96,7 @@ class _AdTypeStyle {
       case AdType.featured:
         return _AdTypeStyle(
             label: tr?.text('ad_type.featured') ?? 'Featured',
-            icon: 'assets/svg/star.svg',
+            icon: AppIcons.star,
             fg: Colors.white,
             backcolor: const Color(
               0xff8133F1,

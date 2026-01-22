@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/custom_button.dart';
 
 Future<void> showRequestSubmittedDialog(
@@ -47,7 +48,7 @@ Future<void> showRequestSubmittedDialog(
               ),
             ),
             const SizedBox(height: 30),
-Image.asset('assets/images/submit.gif'),
+Image.asset(Appimage.loginDone),
 
             const SizedBox(height: 24),
 

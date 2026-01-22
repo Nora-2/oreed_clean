@@ -112,7 +112,7 @@ class BodyContentNotLogin extends StatelessWidget {
               RowWithArrow(
                 hasArrow: true,
                 title: appTrans?.text("signOut") ?? "Sign Out",
-                icon: 'assets/svg/exitback.svg',
+                icon:AppIcons.exit,
                 onPressed: () => _showSignOutDialog(context, cubit),
               ),
           ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
+import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
@@ -14,7 +15,7 @@ class TopBar extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 20,
-            backgroundImage: AssetImage('assets/images/logo.png'),
+            backgroundImage: AssetImage(Appimage.logo),
           ),
           IconButton(
             onPressed: () => Navigator.pushNamed(context, '/notification'),

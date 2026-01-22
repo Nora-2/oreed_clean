@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/features/realstateform/presentation/cubit/realstateform_cubit.dart';
 import 'package:oreed_clean/features/realstateform/presentation/widgets/describtion_media_fields.dart';
 import 'package:oreed_clean/features/realstateform/presentation/widgets/form_validator.dart';
@@ -217,7 +218,7 @@ class _RealEstateFormUIState extends State<RealEstateFormUI> {
           body: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/add_ad_details.png'),
+                image: AssetImage(Appimage.addAdDetails),
               ),
             ),
             child: SafeArea(

@@ -253,7 +253,7 @@ class _CompanyTypesCompanyScreenState extends State<CompanyTypesCompanyScreen> {
               child: SelectSheetFieldads(
                 label: const Text(''),
                 redius: 45,
-                prefixIcon: _buildIcon('assets/svg/location.svg'),
+                prefixIcon: _buildIcon(AppIcons.location),
                 hint: _cityLabel ?? (t?.text('city') ?? 'المدينة'),
                 onTap: () async {
                   if (_stateLabel == null) {

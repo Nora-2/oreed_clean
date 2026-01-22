@@ -14,7 +14,6 @@ class Navigationedit extends StatelessWidget {
     return GestureDetector(
       child: SvgPicture.asset(AppIcons.edit),
       onTap: () async {
-        // push the appropriate form and wait for result.
         Object? result;
         if (widget.sectionType == 'technician') {
           result = await Navigator.pushNamed(
@@ -49,19 +48,16 @@ class Navigationedit extends StatelessWidget {
             },
           );
         }
-        // } else {
-        //   result = await Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (_) => AnythingForm(
-        //         sectionId: widget.sectionId,
-        //         categoryId: 0,
-        //         adId: int.tryParse(widget.adId!),
-        //         supCategoryId: 0,
-        //       ),
-        //     ),
-        //   );
-        // }
+         else {
+          result = await Navigator.pushNamed(
+            context,
+            Routes.anythingform,arguments: {'sectionId': widget.sectionId,
+                'categoryId': 0,
+                'adId': int.tryParse(widget.adId!),
+                'supCategoryId': 0,}
+            
+          );
+        }
 
         // If the pushed screen returned `true`, notify parent via onEdit
         if (result == true) {

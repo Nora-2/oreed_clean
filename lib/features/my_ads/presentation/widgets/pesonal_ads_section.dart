@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/appimage/app_images.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/emptywidget.dart';
 import 'package:oreed_clean/features/companyprofile/presentation/widgets/adbanner_carousel.dart';
@@ -67,7 +68,7 @@ class _UserAdsSectionState extends State<UserAdsSection> {
               visible: true,
               context: context,
               button: t?.text('add_new_ad') ?? 'إضافة إعلان جديد',
-              image: 'assets/svg/emptyads.svg',
+              image: AppIcons.emptyAds,
               title: t?.text('ads.empty') ?? 'لا توجد إعلانات بعد',
               subtitle: t?.text('ads.empty_sub') ?? 'لا توجد إعلانات بعد',
               onAddPressed: () {

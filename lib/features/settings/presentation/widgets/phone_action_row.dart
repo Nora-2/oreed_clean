@@ -67,7 +67,7 @@ class PhoneActionRow extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         SvgPicture.asset(
-          'assets/svg/phone.svg',
+          AppIcons.phone,
           color: Color(0xff557BE1),
           width: 22,
           height: 22,

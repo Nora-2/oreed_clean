@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart'; // Added
 import 'package:flutter_svg/svg.dart';
 import 'package:oreed_clean/core/routing/routes.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/shimmer.dart';
 import 'package:oreed_clean/features/banners/domain/entities/banner_entity.dart'; // Ensure this is imported
 import 'package:oreed_clean/features/banners/presentation/cubit/banners_cubit.dart'; // Path to your Cubit
@@ -198,7 +199,7 @@ class _BannerSectionState extends State<BannerSection> {
                       child: _ActionTile(
                         label: 'اتصال',
                         color: AppColors.primary,
-                        iconPath: 'assets/svg/phone.svg',
+                        iconPath: AppIcons.phone,
                         onTap: () => _callNumber(phone),
                       ),
                     ),
@@ -207,7 +208,7 @@ class _BannerSectionState extends State<BannerSection> {
                       child: _ActionTile(
                         label: 'واتساب',
                         color: const Color(0xff3AA517),
-                        iconPath: 'assets/svg/whatsapp.svg',
+                        iconPath: AppIcons.whatsapp,
                         onTap: () => _openWhatsApp(phone),
                       ),
                     ),

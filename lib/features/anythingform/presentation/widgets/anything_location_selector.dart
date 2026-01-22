@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
+import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/bottomsheets/option_sheet_register_list.dart';
 import 'package:oreed_clean/core/utils/option_item_register.dart';
 import 'package:oreed_clean/core/utils/textstyle/appfonts.dart';
 import 'package:oreed_clean/features/anythingform/presentation/cubit/create_anything_cubit.dart';
-// import 'package:oreed_clean/features/anythingform/presentation/cubit/create_anything_state.dart'; 
+// import 'package:oreed_clean/features/anythingform/presentation/cubit/create_anything_state.dart';
 // (State is implied by cubit usage, explicit import might be needed if I use state class directly)
 import 'package:oreed_clean/features/company_types_by_company/presentation/widgets/select_sheet_field_ads.dart';
 
@@ -55,7 +56,8 @@ class AnythingLocationSelector extends StatelessWidget {
               ],
             ),
           ),
-          hint: selectedCountryName ??
+          hint:
+              selectedCountryName ??
               appTrans?.text('field.state') ??
               'المحافظة / المدينة',
           onTap: () async {
@@ -79,7 +81,7 @@ class AnythingLocationSelector extends StatelessWidget {
             final options = List.generate(countries.length, (i) {
               return OptionItemregister(
                 label: countries[i].name,
-                icon: 'assets/svg/locationcontiry.svg',
+                icon: AppIcons.locationCountry,
                 colorTag: i,
               );
             });
@@ -97,9 +99,7 @@ class AnythingLocationSelector extends StatelessWidget {
             );
 
             if (chosen != null) {
-              final selected = countries.firstWhere(
-                (c) => c.name == chosen,
-              );
+              final selected = countries.firstWhere((c) => c.name == chosen);
               onCountrySelected(selected.id, selected.name);
               // Logic to clear state selection happens in parent via setState or calling logic
               await cubit.fetchStates(selected.id);
@@ -126,7 +126,8 @@ class AnythingLocationSelector extends StatelessWidget {
               ],
             ),
           ),
-          hint: selectedStateName ??
+          hint:
+              selectedStateName ??
               (appTrans?.text('select.select_city') ?? 'Select City'),
           onTap: () async {
             if (selectedCountryId == null) {
@@ -160,7 +161,7 @@ class AnythingLocationSelector extends StatelessWidget {
             final options = List.generate(states.length, (i) {
               return OptionItemregister(
                 label: states[i].name,
-                icon: 'assets/svg/location.svg',
+                icon: AppIcons.location,
                 colorTag: i,
               );
             });
@@ -178,9 +179,7 @@ class AnythingLocationSelector extends StatelessWidget {
             );
 
             if (chosen != null) {
-              final selected = states.firstWhere(
-                (s) => s.name == chosen,
-              );
+              final selected = states.firstWhere((s) => s.name == chosen);
               onStateSelected(selected.id, selected.name);
             }
           },
