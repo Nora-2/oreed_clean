@@ -6,6 +6,7 @@ import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/appicons/app_icons.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/route_observer.dart';
+import 'package:oreed_clean/features/add_ads/presentation/home_add_ads.dart';
 import 'package:oreed_clean/features/banners/presentation/cubit/banners_cubit.dart';
 import 'package:oreed_clean/features/favourite/presentation/cubit/favourite_cubit.dart';
 import 'package:oreed_clean/features/home/presentation/cubit/home_cubit.dart';
@@ -135,9 +136,19 @@ class _HomelayoutState extends State<Homelayout>
         // 2. Define Tabs [Left, Center, Right]
         final tabs = [
           const MoreTab(), // Index 0: Profile (Left)
-          // const HomeAddAds(),
-          const SizedBox(), // Add Ads tab
-          const SizedBox(),
+           MultiBlocProvider(
+    providers: [
+      BlocProvider.value(value: bannerCubit),
+      BlocProvider(
+        create: (context) => MainHomeCubit(
+          sl(),
+          sl(),
+          bannerCubit,
+        )..fetchHomeData(),
+      ),
+    ],
+    child: const HomeAddAds(),
+  ),
 
           MultiBlocProvider(
             providers: [
