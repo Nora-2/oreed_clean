@@ -7,7 +7,7 @@ import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/custom_button.dart';
 import 'package:oreed_clean/core/utils/shared_widgets/custom_form_field.dart';
 import 'package:oreed_clean/features/settings/data/repositories/profile_repo.dart';
-import 'package:oreed_clean/networking/exception.dart';
+import 'package:oreed_clean/networking/error/exception.dart';
 import 'package:oreed_clean/networking/response.dart';
 
 // -------- الخطوة 1: النوع + الآرجس --------

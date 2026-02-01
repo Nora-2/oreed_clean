@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:oreed_clean/core/error/failures.dart';
+import 'package:oreed_clean/networking/error/failures.dart';
 import 'package:oreed_clean/networking/api_provider.dart';
 import 'package:oreed_clean/networking/interceptors/auth_interceptor.dart';
 import 'package:oreed_clean/networking/interceptors/logger_interceptor.dart';

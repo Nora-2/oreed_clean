@@ -1,4 +1,4 @@
-import 'package:oreed_clean/core/error/failures.dart';
+import 'package:oreed_clean/networking/error/failures.dart';
 
 abstract class Result<T> {
   const Result();

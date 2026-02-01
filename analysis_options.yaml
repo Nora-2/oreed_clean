@@ -10,6 +10,7 @@
 analyzer:
   errors:
     deprecated_member_use: ignore
+    type_literal_in_constant_pattern: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

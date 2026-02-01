@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:oreed_clean/core/error/failures.dart';
+import 'package:oreed_clean/networking/error/failures.dart';
 import 'package:oreed_clean/features/ads/domain/usecases/delete_ad_use_case.dart';
 import 'package:oreed_clean/features/my_ads/domain/usecases/get_use_ads_usecase.dart';
 import '../../domain/entities/user_ad_entity.dart';

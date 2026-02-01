@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oreed_clean/core/network/api_services.dart';
 import 'package:oreed_clean/core/translation/appTranslations.dart';
 import 'package:oreed_clean/core/utils/appcolors/app_colors.dart';
 import 'package:oreed_clean/features/login/data/repositories/auth_repo_impl.dart';
@@ -32,7 +33,7 @@ class _NewPasswordWithOtpScreenState
   @override
   void initState() {
     super.initState();
-    _authRepo = AuthRepositoryImpl(OptimizedApiClient());
+    _authRepo = AuthRepositoryImpl(ApiService());
   }
 
   @override

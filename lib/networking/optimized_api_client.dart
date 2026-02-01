@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:oreed_clean/core/app_shared_prefs.dart';
 import 'package:oreed_clean/networking/api_provider.dart';
-import 'package:oreed_clean/networking/exception.dart';
+import 'package:oreed_clean/networking/error/exception.dart';
 import 'response.dart';
 
 /// Optimized API Client with:

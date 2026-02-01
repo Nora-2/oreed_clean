@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:oreed_clean/core/app_shared_prefs.dart';
-import 'package:oreed_clean/networking/exception.dart';
+import 'package:oreed_clean/networking/error/exception.dart';
 import 'package:oreed_clean/networking/response.dart';
 
 class ApiProvider {

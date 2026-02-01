@@ -1,134 +1,198 @@
-
 import 'package:firebase_messaging/firebase_messaging.dart';
-import '../../domain/entities/user_entity.dart';
-import '../../domain/repositories/auth_repo.dart';
-import '../models/login_response.dart';
-import '../../../../networking/optimized_api_client.dart';
+import 'package:oreed_clean/core/network/api_constants.dart';
+import 'package:oreed_clean/core/network/api_error_handler.dart';
+import 'package:oreed_clean/core/network/api_result.dart';
+import 'package:oreed_clean/core/network/api_services.dart';
+import 'package:oreed_clean/features/login/data/models/login_response.dart';
+import 'package:oreed_clean/features/login/domain/entities/user_entity.dart';
+import 'package:oreed_clean/features/login/domain/repositories/auth_repo.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final OptimizedApiClient apiProvider;
+  final ApiService _apiService;
 
-  AuthRepositoryImpl(this.apiProvider);
+  AuthRepositoryImpl(this._apiService);
 
   @override
-  Future<UserEntity> login({
+  Future<ApiResult<UserEntity>> login({
     required String phone,
     required String password,
     required String fcmToken,
   }) async {
-    // If token isn't passed, try to fetch it
     String? token = fcmToken.isEmpty 
         ? await FirebaseMessaging.instance.getToken() 
         : fcmToken;
 
-    final response = await apiProvider.post("/api/login", {
-      "phone": '965$phone', // Note: Country code prefixing
-      "password": password,
-      "fcm_token": token,
-    });
+    final result = await _apiService.post<LoginResponse>(
+      endpoint: ApiConstants.login,
+      data: {
+        "phone": '965$phone',
+        "password": password,
+        "fcm_token": token,
+      },
+      fromJson: (json) => LoginResponse.fromJson(json),
+    );
 
-    final res = LoginResponse.fromJson(response.data);
-
-    if (!res.status) {
-      throw Exception(res.msg);
-    }
-
-    return res.toEntity();
+    return result.when(
+      success: (loginResponse) {
+        if (loginResponse.status) {
+          return ApiResult.success(loginResponse.toEntity());
+        } else {
+          // Handle logic error (status is false)
+          return ApiResult.failure(ErrorHandler.handle(loginResponse.msg));
+        }
+      },
+      failure: (error) => ApiResult.failure(error),
+    );
   }
 
   @override
-  Future<void> register({
+  Future<ApiResult<void>> register({
     required String name,
     required String phone,
     required String password,
     required String accountType,
     required String fcmToken,
   }) async {
-    final response = await apiProvider.post("/api/register", {
-      "name": name,
-      "phone": phone,
-      "password": password,
-      "account_type": accountType,
-      "fcm_token": fcmToken,
-    });
-
-    if (response.data['status'] == false) {
-      throw Exception(response.data['msg'] ?? "Registration Failed");
-    }
-  }
-
-  @override
-  Future<void> completeRegistration({required String phone, required String otp}) async {
-    final response = await apiProvider.post("/api/complete_registration", {
-      "phone": phone,
-      "otp": otp,
-    });
-
-    if (response.data['status'] == false) {
-      throw Exception(response.data['msg'] ?? "OTP Verification Failed");
-    }
-  }
-
-  @override
-  Future<bool> checkUser(String phone) async {
-    final response = await apiProvider.post("/api/check_user", {"phone1": phone});
-    return response.data['status'] ?? false;
-  }
-
-  @override
-  Future<UserEntity> updateProfile(Map<String, dynamic> body) async {
-    final response = await apiProvider.post(
-      "/api/edit_profile",
-      body,
-      hasToken: true,
-      // isPut: true, // If your API client handles custom logic for PUT
+    final result = await _apiService.post<Map<String, dynamic>>(
+      endpoint: ApiConstants.register,
+      data: {
+        "name": name,
+        "phone": phone,
+        "password": password,
+        "account_type": accountType,
+        "fcm_token": fcmToken,
+      },
+      fromJson: (json) => json as Map<String, dynamic>,
     );
-    
-    final res = LoginResponse.fromJson(response.data);
-    if (!res.status) throw Exception(res.msg);
-    return res.toEntity();
-  }
 
-  @override
-  Future<UserEntity> getUserData(int id) async {
-    final response = await apiProvider.get("/api/profile/$id");
-    final res = LoginResponse.fromJson(response.data);
-    return res.toEntity();
-  }
-
-  @override
-  Future<void> changePassword(Map<String, dynamic> body) async {
-    final response = await apiProvider.post(
-      "/api/change_password",
-      body,
-      // isPut: true,
+    return result.when(
+      success: (data) {
+        if (data['status'] == true) {
+          return const ApiResult.success(null);
+        } else {
+          return ApiResult.failure(ErrorHandler.handle(data['msg'] ?? "Registration Failed"));
+        }
+      },
+      failure: (error) => ApiResult.failure(error),
     );
-    if (response.data['status'] == false) {
-      throw Exception(response.data['msg']);
-    }
   }
 
   @override
-  Future<void> resetPassword(String phone) async {
-    final response = await apiProvider.post("/api/reset_password", {"phone": phone});
-    if (response.data['status'] == false) {
-      throw Exception(response.data['msg']);
-    }
+  Future<ApiResult<void>> completeRegistration({
+    required String phone,
+    required String otp,
+  }) async {
+    final result = await _apiService.post<Map<String, dynamic>>(
+      endpoint: ApiConstants.completeRegistration,
+      data: {"phone": phone, "otp": otp},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+
+    return result.when(
+      success: (data) {
+        if (data['status'] == true) return const ApiResult.success(null);
+        return ApiResult.failure(ErrorHandler.handle(data['msg'] ?? "OTP Failed"));
+      },
+      failure: (error) => ApiResult.failure(error),
+    );
   }
 
   @override
-  Future<void> updatePasswordWithOtp({
+  Future<ApiResult<bool>> checkUser(String phone) async {
+    final result = await _apiService.post<Map<String, dynamic>>(
+      endpoint: ApiConstants.checkUser,
+      data: {"phone1": phone},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+
+    return result.when(
+      success: (data) => ApiResult.success(data['status'] ?? false),
+      failure: (error) => ApiResult.failure(error),
+    );
+  }
+
+  @override
+  Future<ApiResult<UserEntity>> updateProfile(Map<String, dynamic> body) async {
+    final result = await _apiService.post<LoginResponse>(
+      endpoint: ApiConstants.editProfile,
+      data: body,
+      fromJson: (json) => LoginResponse.fromJson(json),
+    );
+
+    return result.when(
+      success: (loginResponse) {
+        if (loginResponse.status) return ApiResult.success(loginResponse.toEntity());
+        return ApiResult.failure(ErrorHandler.handle(loginResponse.msg));
+      },
+      failure: (error) => ApiResult.failure(error),
+    );
+  }
+
+  @override
+  Future<ApiResult<UserEntity>> getUserData(int id) async {
+    final result = await _apiService.get<LoginResponse>(
+      endpoint: "/api/profile/$id",
+      fromJson: (json) => LoginResponse.fromJson(json),
+    );
+
+    return result.when(
+      success: (loginResponse) => ApiResult.success(loginResponse.toEntity()),
+      failure: (error) => ApiResult.failure(error),
+    );
+  }
+
+  @override
+  Future<ApiResult<void>> changePassword(Map<String, dynamic> body) async {
+    final result = await _apiService.post<Map<String, dynamic>>(
+      endpoint: ApiConstants.changePassword,
+      data: body,
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+
+    return result.when(
+      success: (data) {
+        if (data['status'] == true) return const ApiResult.success(null);
+        return ApiResult.failure(ErrorHandler.handle(data['msg']));
+      },
+      failure: (error) => ApiResult.failure(error),
+    );
+  }
+
+  @override
+  Future<ApiResult<void>> resetPassword(String phone) async {
+    final result = await _apiService.post<Map<String, dynamic>>(
+      endpoint: ApiConstants.resetPassword,
+      data: {"phone": phone},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+
+    return result.when(
+      success: (data) {
+        if (data['status'] == true) return const ApiResult.success(null);
+        return ApiResult.failure(ErrorHandler.handle(data['msg']));
+      },
+      failure: (error) => ApiResult.failure(error),
+    );
+  }
+
+  @override
+  Future<ApiResult<void>> updatePasswordWithOtp({
     required String phone,
     required String otp,
     required String password,
   }) async {
-    final response = await apiProvider.post("/api/update_password", {
-      "phone": phone,
-      "otp": otp,
-      "password": password,
-    });
-    if (response.data['status'] == false) {
-      throw Exception(response.data['msg']);
-    }
+    final result = await _apiService.post<Map<String, dynamic>>(
+      endpoint: ApiConstants.updatePassword,
+      data: {"phone": phone, "otp": otp, "password": password},
+      fromJson: (json) => json as Map<String, dynamic>,
+    );
+
+    return result.when(
+      success: (data) {
+        if (data['status'] == true) return const ApiResult.success(null);
+        return ApiResult.failure(ErrorHandler.handle(data['msg']));
+      },
+      failure: (error) => ApiResult.failure(error),
+    );
   }
 }
